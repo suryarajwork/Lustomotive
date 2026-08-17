@@ -35,7 +35,7 @@ export default function Navbar() {
     ];
 
     return (
-        <header className="fixed top-0 w-full z-50 transition-all duration-300">
+        <header className="fixed top-0 inset-x-0 max-w-[100vw] overflow-x-hidden z-[100] transition-all duration-300">
             {/* Top Contact Bar */}
             <div className={`hidden lg:block transition-all duration-300 overflow-hidden ${scrolled ? 'h-0 opacity-0' : 'h-10 opacity-100 bg-transparent border-b border-white/10'}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
@@ -64,30 +64,31 @@ export default function Navbar() {
             </div>
 
             {/* Main Navbar */}
+            {/* Main Navbar */}
             <nav className={`w-full transition-all duration-300 ${scrolled ? "bg-black/95 backdrop-blur-md shadow-lg shadow-black/50 py-3 border-b border-red-900/30" : "bg-transparent py-4 border-b border-transparent"}`}>
-                <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-between">
+                <div className="w-full max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex items-center justify-between w-full min-h-[45px]">
                         {/* Logo */}
-                        <div className="flex-shrink-0 flex items-center">
-                            <Link href="/" className="block">
+                        <div className="flex-shrink flex items-center z-10 min-w-0 max-w-[50%]">
+                            <Link href="/" className="block truncate">
                                 {/* Use an image fallback to matching stylized text if the image fails. Using normal img because we want native rendering directly */}
                                 <img
                                     src="/images/lustomotive_small_logo.png"
                                     alt="LUSTOMOTIVE"
-                                    className="h-[45px] w-auto object-contain hidden md:block"
+                                    className="h-[45px] w-auto max-w-full object-contain hidden md:block"
                                     onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling!.classList.remove('hidden') }}
                                 />
-                                <span className="hidden font-roboto text-2xl font-black tracking-widest text-white uppercase">
+                                <span className="hidden font-roboto text-2xl font-black tracking-widest text-white uppercase truncate">
                                     Lusto<span className="text-red-600">Motive</span>
                                 </span>
 
                                 <img
                                     src="/images/lustomotive_small_logo.png"
                                     alt="LUSTOMOTIVE"
-                                    className="h-[35px] w-auto object-contain md:hidden"
+                                    className="h-[32px] sm:h-[35px] w-auto max-w-[130px] sm:max-w-[150px] object-contain md:hidden"
                                     onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling!.classList.remove('hidden') }}
                                 />
-                                <span className="hidden font-roboto text-xl font-black tracking-widest text-white uppercase">
+                                <span className="hidden font-roboto text-lg sm:text-xl font-black tracking-widest text-white uppercase truncate">
                                     Lusto<span className="text-red-600">Motive</span>
                                 </span>
                             </Link>
@@ -150,23 +151,24 @@ export default function Navbar() {
                         </div>
 
                         {/* Mobile menu button */}
-                        <div className="flex xl:hidden items-center gap-4">
+                        <div className="flex xl:hidden items-center justify-end gap-2 sm:gap-4 flex-shrink-0 ml-auto mr-4 pr-1">
                             <a
                                 href="https://www.offers.lustomotive.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-1.5 border border-red-600/80 bg-red-950/20 text-red-500 px-3 py-1.5 rounded-full uppercase text-[0.65rem] font-bold tracking-widest"
+                                className="flex items-center gap-1 sm:gap-1.5 border border-red-600/80 bg-red-950/20 text-red-500 px-2 py-1.5 sm:px-3 rounded-full uppercase text-[0.6rem] sm:text-[0.65rem] font-bold tracking-widest whitespace-nowrap flex-shrink-0"
                             >
-                                <Tag className="w-3 h-3 rotate-90" /> OFFERS
+                                <Tag className="w-3 h-3 rotate-90" />
+                                <span className="inline">OFFERS</span>
                             </a>
                             <button
                                 onClick={() => setIsOpen(!isOpen)}
-                                className="relative flex flex-col justify-center items-center gap-[5px] w-10 h-10 rounded-full border border-red-600/30 text-red-500 bg-red-950/20 hover:text-white hover:bg-red-600 focus:outline-none transition-all duration-500 z-[70] group"
+                                className="relative flex justify-center items-center w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-red-600/30 text-red-500 bg-red-950/20 hover:text-white hover:bg-red-600 focus:outline-none transition-all duration-500 group flex-shrink-0 z-[70]"
                             >
-                                <span className="sr-only">Open main menu</span>
-                                <span className={`block h-[2px] bg-current rounded-full transition-all duration-300 origin-center ${isOpen ? 'w-5 rotate-45 translate-y-[7px]' : 'w-5 group-hover:w-6'}`}></span>
-                                <span className={`block h-[2px] bg-current rounded-full transition-all duration-300 origin-center ${isOpen ? 'w-0 opacity-0 translate-x-4' : 'w-4 group-hover:w-6'}`}></span>
-                                <span className={`block h-[2px] bg-current rounded-full transition-all duration-300 origin-center ${isOpen ? 'w-5 -rotate-45 -translate-y-[7px]' : 'w-5 group-hover:w-6'}`}></span>
+                                <span className="sr-only">{isOpen ? "Close main menu" : "Open main menu"}</span>
+                                <span className={`absolute block h-[2px] bg-current rounded-full transition-all duration-300 ${isOpen ? 'w-5 rotate-45' : 'w-4 sm:w-5 -translate-y-[5px] sm:-translate-y-[6px] group-hover:w-5 sm:group-hover:w-6'}`}></span>
+                                <span className={`absolute block h-[2px] bg-current rounded-full transition-all duration-300 ${isOpen ? 'w-0 opacity-0' : 'w-3 sm:w-4 group-hover:w-5 sm:group-hover:w-6'}`}></span>
+                                <span className={`absolute block h-[2px] bg-current rounded-full transition-all duration-300 ${isOpen ? 'w-5 -rotate-45' : 'w-4 sm:w-5 translate-y-[5px] sm:translate-y-[6px] group-hover:w-5 sm:group-hover:w-6'}`}></span>
                             </button>
                         </div>
                     </div>

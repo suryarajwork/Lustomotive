@@ -53,11 +53,21 @@ export default function Services() {
     return (
         <section id="services" className="py-12 md:py-16 bg-black relative border-t border-black">
             <style>{`
-                .random-bar-layer {
-                    clip-path: var(--clip-hide);
+                .service-card .service-image {
+                    opacity: 0;
+                    transform: scale(1.1);
+                    transition: all 0.7s ease-in-out;
                 }
-                .group:hover .random-bar-layer {
-                    clip-path: var(--clip-show);
+                .service-card:hover .service-image {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+                .service-card .service-text {
+                    opacity: 1;
+                    transition: opacity 0.4s ease-in-out;
+                }
+                .service-card:hover .service-text {
+                    opacity: 0;
                 }
             `}</style>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -80,13 +90,13 @@ export default function Services() {
                     {services.map((service, idx) => (
                         <motion.div
                             key={service.id}
-                            className="min-h-[14rem] h-full"
+                            className="min-h-[16rem] h-full"
                             initial={{ opacity: 0, y: 50 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: false, margin: "-50px" }}
                             transition={{ duration: 0.8, delay: idx * 0.1 }}
                         >
-                            <div className="relative h-full rounded-[1.25rem] border border-white/5 p-2 md:rounded-[1.5rem] md:p-3 hover:-translate-y-2 transition-transform duration-500 ease-out group/container">
+                            <div className="relative h-full rounded-[1.25rem] border border-white/5 p-2 md:rounded-[1.5rem] md:p-3 hover:-translate-y-2 transition-transform duration-500 ease-out group/container cursor-default">
                                 <GlowingEffect
                                     spread={40}
                                     glow={true}
@@ -95,61 +105,39 @@ export default function Services() {
                                     inactiveZone={0.01}
                                     borderWidth={3}
                                 />
-                                <div className="relative flex h-full flex-col overflow-hidden rounded-xl bg-[#0a0a0a] p-6 shadow-sm md:p-8 hover:bg-[#111111] transition-colors group z-10 border border-white/5 cursor-default">
-                                    {/* Hover Image */}
-                                    <div className="absolute inset-0 z-30 pointer-events-none overflow-hidden rounded-xl">
-                                        {/* Seamless base image gracefully fades in to cover any 1px hardware rendering gaps between slices.
-                                            On unhover, duration is set to 0s so it instantly vanishes, allowing the bars to visibly animate backward. */}
+                                <div className="service-card relative flex h-full flex-col overflow-hidden rounded-xl bg-[#0a0a0a] p-6 shadow-sm md:p-8 hover:bg-[#111111] transition-colors z-10 border border-white/5">
+                                    
+                                    {/* Image Layer (Fades In via CSS) */}
+                                    <div className="service-image absolute inset-0 z-30 pointer-events-none overflow-hidden rounded-xl">
                                         <img
                                             src={service.image}
-                                            alt=""
-                                            className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity ease-out duration-0 group-hover:duration-[500ms] delay-0 group-hover:delay-[300ms]"
+                                            alt={service.title}
+                                            className="absolute inset-0 w-full h-full object-cover"
                                         />
-                                        {Array.from({ length: 12 }).map((_, i) => {
-                                            const step = 100 / 12;
-                                            // Expands clip bounds by 0.5% to create a micro-overlap eliminating gap lines
-                                            const showStart = (i * step) - 0.5;
-                                            const showEnd = 100 - ((i + 1) * step) - 0.5;
-                                            const hideStart = (i * step) + (step / 2);
-                                            const hideEnd = 100 - ((i + 1) * step) + (step / 2);
-                                            const delays = [0.0, 0.2, 0.05, 0.25, 0.1, 0.3, 0.0, 0.2, 0.05, 0.25, 0.1, 0.3];
-
-                                            const isVertical = idx % 2 === 0;
-                                            const clipHide = isVertical
-                                                ? `inset(0% ${hideEnd}% 0% ${hideStart}%)`
-                                                : `inset(${hideStart}% 0% ${hideEnd}% 0%)`;
-                                            const clipShow = isVertical
-                                                ? `inset(0% ${showEnd}% 0% ${showStart}%)`
-                                                : `inset(${showStart}% 0% ${showEnd}% 0%)`;
-
-                                            return (
-                                                <img
-                                                    key={i}
-                                                    src={service.image}
-                                                    alt={service.title}
-                                                    className="absolute inset-0 w-full h-full object-cover transition-all duration-[500ms] ease-out random-bar-layer"
-                                                    style={{
-                                                        '--clip-hide': clipHide,
-                                                        '--clip-show': clipShow,
-                                                        transitionDelay: `${delays[i]}s`,
-                                                    } as React.CSSProperties}
-                                                />
-                                            );
-                                        })}
+                                        {/* Gradient and Title overlay on image */}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-6 md:p-8">
+                                            <h3 className="text-lg md:text-xl font-orbitron font-bold text-white tracking-widest uppercase drop-shadow-[0_0_15px_rgba(255,23,68,0.8)]">
+                                                {service.title}
+                                            </h3>
+                                        </div>
                                     </div>
 
-                                    <div className="absolute top-0 right-0 p-8 transform translate-x-10 -translate-y-10 opacity-5 group-hover:opacity-0 transition-opacity duration-500 z-10">
-                                        {service.icon}
+                                    {/* Text Content (Fades Out via CSS) */}
+                                    <div className="service-text flex flex-col h-full relative z-20">
+                                        <div className="absolute top-0 right-0 p-2 transform translate-x-10 -translate-y-10 opacity-5">
+                                            {service.icon}
+                                        </div>
+                                        <div className="text-[#ff1744] mb-4">
+                                            {service.icon}
+                                        </div>
+                                        <h3 className="text-xl font-orbitron font-bold text-white mb-3 tracking-widest uppercase drop-shadow-[0_0_10px_rgba(255,23,68,0.5)]">
+                                            {service.title}
+                                        </h3>
+                                        <p className="text-gray-400 font-light leading-relaxed flex-grow">
+                                            {service.description}
+                                        </p>
                                     </div>
-                                    <div className="relative z-20 transition-transform duration-500 group-hover:-translate-y-2">
-                                        {service.icon}
-                                    </div>
-                                    <h3 className="text-xl font-orbitron font-bold text-white mb-3 tracking-widest uppercase drop-shadow-[0_0_10px_rgba(255,23,68,0.5)] group-hover:text-white transition-colors relative z-20 group-hover:translate-y-0 translate-y-0">
-                                        {service.title}
-                                    </h3>
-                                    <p className="text-gray-400 font-light leading-relaxed mb-6 flex-grow relative z-20 group-hover:text-gray-200 transition-colors duration-500">
-                                        {service.description}
-                                    </p>
+
                                 </div>
                             </div>
                         </motion.div>
