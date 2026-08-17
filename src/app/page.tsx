@@ -1,6 +1,6 @@
 import Hero from "@/components/sections/Hero";
 import Services from "@/components/sections/Services";
-import ZoomParallaxSection from "@/components/sections/ZoomParallaxSection";
+import ImageBanner from "@/components/sections/ImageBanner";
 import Pricing from "@/components/sections/Pricing";
 import AboutAnimation from "@/components/sections/AboutAnimation";
 import Features from "@/components/sections/Features";
@@ -15,8 +15,8 @@ export default function Home() {
       <Hero />
       <RealTimeClock />
       <Services />
-      <ZoomParallaxSection />
       <Pricing />
+      <ImageBanner />
       <AboutAnimation />
       <Features />
       <Testimonials />

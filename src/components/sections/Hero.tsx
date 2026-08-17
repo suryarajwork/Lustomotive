@@ -1,388 +1,203 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
-import Link from "next/link";
-import { Zap } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React, { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-gsap.registerPlugin(ScrollTrigger);
-
-// ─────────────────────────────────────────────
-//  CONFIGURATION — adjust these for your video
-// ─────────────────────────────────────────────
-const VIDEO_SRC = "/car_animation.mp4"; // place your video in public/car_animation.mp4
-const SCROLL_DURATION = 6; // viewport heights to pin (≈ scroll tunnel length)
-
-// ─────────────────────────────────────────────
-//  FRAME SEQUENCE MODE (alternative)
-//  Set USE_FRAMES=true, place frames in public/frames/frame_0001.jpg … frame_XXXX.jpg
-//  Update TOTAL_FRAMES to match your extracted frame count (e.g. 150 for 5s @ 30fps)
-// ─────────────────────────────────────────────
-const USE_FRAMES = true;
-const TOTAL_FRAMES = 410;
-const FRAME_PATH = (n: number) =>
-    `/frames/frame_${String(n).padStart(4, "0")}.jpg`;
+const VIDEOS = [
+  "/videos/13643290_1080_1920_30fps.mp4",
+  "/videos/13643294_1080_1920_30fps.mp4",
+  "/videos/13643295_1080_1920_30fps.mp4",
+  "/videos/13643311_1080_1920_30fps.mp4",
+  "/videos/14974357_3840_2160_25fps.mp4",
+  "/videos/6157968-hd_1920_1080_30fps.mp4",
+  "/videos/6158070-hd_1920_1080_30fps.mp4",
+  "/videos/6158072-hd_1920_1080_30fps.mp4",
+  "/videos/6158119-hd_1920_1080_30fps.mp4",
+];
 
 export default function Hero() {
-    const wrapperRef = useRef<HTMLDivElement>(null);
-    const stickyRef = useRef<HTMLDivElement>(null);
-    const videoRef = useRef<HTMLVideoElement>(null);
-    const canvasRef = useRef<HTMLCanvasElement>(null);
-    const frameRef = useRef<HTMLCanvasElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-    // Framer scroll progress for text animations
-    const { scrollYProgress } = useScroll({
-        target: wrapperRef,
-        offset: ["start start", "end end"],
-    });
+  const startTimer = () => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % VIDEOS.length);
+    }, 5000); // 5 seconds per slide
+  };
 
-    // Smooth spring for subtle parallax
-    const springProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+  useEffect(() => {
+    startTimer();
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, []);
 
-    // ── 3D parallax bindings ──────────────────────
-    const bgY = useTransform(springProgress, [0, 1], ["0%", "15%"]);
-    const bgScale = useTransform(springProgress, [0, 1], [1.05, 1.18]);
-    const glowOpacity = useTransform(springProgress, [0, 0.3, 0.7, 1], [0.15, 0.45, 0.55, 0.2]);
-    const glowScale = useTransform(springProgress, [0, 0.5, 1], [1, 1.4, 1.1]);
-
-    // ── video depth parallax ─────────────────────
-    const videoY = useTransform(springProgress, [0, 1], ["0%", "-8%"]);
-    const videoScale = useTransform(springProgress, [0, 0.5, 1], [1, 1.06, 1.12]);
-
-    // ── NEW: Outline-to-fill + scanner bar scroll animations ────────
-
-    // Scanner bar: x moves across tagline
-    const scanX = useTransform(scrollYProgress, [0, 0.10], ["-100%", "110%"]);
-    const taglineOp = useTransform(scrollYProgress, [0, 0.04, 0.25, 0.34], [0, 1, 1, 0]);
-
-    // "Lustomotive" — outline always visible, fill clips LEFT→RIGHT
-    const lsOp = useTransform(scrollYProgress, [0.10, 0.17, 0.56, 0.64], [0, 1, 1, 0]);
-    const lsFill = useTransform(scrollYProgress, [0.10, 0.32], ["inset(0 100% 0 0)", "inset(0 0% 0 0)"]);
-    const lsY = useTransform(scrollYProgress, [0.10, 0.24], [60, 0]);
-
-    // "Automotive Studio" — outline always visible, fill clips RIGHT→LEFT
-    const asOp = useTransform(scrollYProgress, [0.22, 0.32, 0.56, 0.64], [0, 1, 1, 0]);
-    const asFill = useTransform(scrollYProgress, [0.22, 0.44], ["inset(0 0 0 100%)", "inset(0 0 0 0%)"]);
-    const asY = useTransform(scrollYProgress, [0.22, 0.36], [60, 0]);
-
-    // Description: per-word scroll stagger (6 words, each 0.04 apart)
-    const dw = (start: number) => ({
-        opacity: useTransform(scrollYProgress, [start, start + 0.06, 0.68, 0.76], [0, 1, 1, 0]),
-        y: useTransform(scrollYProgress, [start, start + 0.08], [28, 0]),
-    });
-    const d0 = dw(0.38); const d1 = dw(0.41); const d2 = dw(0.44);
-    const d3 = dw(0.47); const d4 = dw(0.50); const d5 = dw(0.53);
-
-    // CTAs: rise earlier so they are clearly visible 
-    const ctaOp = useTransform(scrollYProgress, [0.45, 0.55, 0.88, 0.96], [0, 1, 1, 0]);
-    const cta1Y = useTransform(scrollYProgress, [0.45, 0.55], [40, 0]);
-    const cta2Y = useTransform(scrollYProgress, [0.50, 0.60], [40, 0]);
-
-    // Red accent line
-    const lineWidth = useTransform(scrollYProgress, [0.02, 0.14], ["0%", "100%"]);
-
-    // ── GSAP: video scrubbing ─────────────────────
-    useEffect(() => {
-        if (USE_FRAMES || !wrapperRef.current || !videoRef.current) return;
-        const video = videoRef.current;
-        video.pause();
+  // Efficiently pause inactive videos and play the active one
+  useEffect(() => {
+    videoRefs.current.forEach((video, idx) => {
+      if (!video) return;
+      if (idx === currentIndex) {
         video.currentTime = 0;
+        video.play().catch(() => { });
+      } else {
+        video.pause();
+      }
+    });
+  }, [currentIndex]);
 
-        const ctx = gsap.context(() => {
-            ScrollTrigger.create({
-                trigger: wrapperRef.current,
-                start: "top top",
-                end: () => `+=${SCROLL_DURATION * window.innerHeight}`,
-                scrub: 1.2,
-                onUpdate: (self) => {
-                    if (video.duration) {
-                        video.currentTime = self.progress * video.duration;
-                    }
-                },
-            });
-        });
-        return () => ctx.revert();
-    }, []);
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % VIDEOS.length);
+    startTimer();
+  };
 
-    // ── GSAP: frame sequence scrubbing ───────────
-    useEffect(() => {
-        if (!USE_FRAMES || !wrapperRef.current || !canvasRef.current) return;
-        const canvas = canvasRef.current;
-        const ctx2d = canvas.getContext("2d");
-        if (!ctx2d) return;
+  const goToPrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + VIDEOS.length) % VIDEOS.length);
+    startTimer();
+  };
 
-        const images: HTMLImageElement[] = [];
-        const currentFrame = { n: 0 };
+  const handleDotClick = (index: number) => {
+    setCurrentIndex(index);
+    startTimer();
+  };
 
-        const drawFrame = (n: number) => {
-            const img = images[n];
-            if (img?.complete) ctx2d.drawImage(img, 0, 0, canvas.width, canvas.height);
-        };
+  const getVariant = (index: number) => {
+    const length = VIDEOS.length;
+    let diff = index - currentIndex;
 
-        // Preload all frames
-        for (let i = 1; i <= TOTAL_FRAMES; i++) {
-            const img = new Image();
-            img.src = FRAME_PATH(i);
-            images.push(img);
-        }
-        images[0]?.addEventListener("load", () => drawFrame(0));
+    if (diff < -length / 2) diff += length;
+    if (diff > length / 2) diff -= length;
 
-        const ctx = gsap.context(() => {
-            gsap.to(currentFrame, {
-                n: TOTAL_FRAMES - 1,
-                snap: "n",
-                ease: "none",
-                scrollTrigger: {
-                    trigger: wrapperRef.current,
-                    start: "top top",
-                    end: () => `+=${SCROLL_DURATION * window.innerHeight}`,
-                    scrub: 1,
-                },
-                onUpdate: () => drawFrame(Math.round(currentFrame.n)),
-            });
-        });
-        return () => ctx.revert();
-    }, []);
+    if (diff === 0) return "center";
+    if (diff < 0) return "left"; // Any previous video goes left
+    if (diff > 0) return "right"; // Any next video goes right
+    return "right";
+  };
 
-    // ── Canvas size sync ─────────────────────────
-    useEffect(() => {
-        if (!USE_FRAMES || !canvasRef.current) return;
-        const el = canvasRef.current;
-        const resize = () => {
-            el.width = window.innerWidth;
-            el.height = window.innerHeight;
-        };
-        resize();
-        window.addEventListener("resize", resize);
-        return () => window.removeEventListener("resize", resize);
-    }, []);
+  const variants = {
+    center: {
+      x: "0%",
+      zIndex: 10,
+      opacity: 1,
+    },
+    left: {
+      x: "-100%",
+      zIndex: 5,
+      opacity: 1,
+    },
+    right: {
+      x: "100%",
+      zIndex: 5,
+      opacity: 1,
+    },
+  };
 
-    return (
-        /*
-         * Scroll wrapper: tall enough for the full animation tunnel.
-         * The sticky inner sits at top:0 and stays pinned while the
-         * outer div's scroll drives all animations.
-         */
-        <div
-            id="hero-section"
-            ref={wrapperRef}
-            style={{ height: `${SCROLL_DURATION * 100}vh` }}
-            className="relative"
-        >
-            {/* ── Sticky viewport ─────────────────── */}
-            <div
-                ref={stickyRef}
-                className="sticky top-0 h-screen w-full overflow-hidden"
-                style={{ perspective: "1200px" }}
+  return (
+    <section className="relative w-full h-[100dvh] bg-black overflow-hidden flex flex-col items-center justify-center">
+
+      {/* Full Screen Slider Container */}
+      <div className="absolute inset-0 w-full h-full">
+        {VIDEOS.map((video, index) => {
+          const isActive = currentIndex === index;
+
+          return (
+            <motion.div
+              key={video}
+              className="absolute inset-0 w-full h-full"
+              initial={false}
+              animate={getVariant(index)}
+              variants={variants}
+              transition={{ duration: 0.8, ease: [0.32, 0.72, 0, 1] }}
             >
-                {/* ── LAYER 0: Background image (deepest) ── */}
-                {/* <motion.div
-                    className="absolute inset-0 bg-cover bg-center z-0 will-change-transform"
-                    style={{
-                        backgroundImage: "url('/hero_bg.png')",
-                        y: bgY,
-                        scale: bgScale,
-                    }}
-                /> */}
+              <video
+                ref={(el) => {
+                  if (el) videoRefs.current[index] = el;
+                }}
+                src={video}
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              />
 
-                {/* ── LAYER 1: Cinematic overlay gradient ── */}
-                <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black via-black/50 to-black/30 pointer-events-none" />
-                <div className="absolute inset-0 z-[2] bg-gradient-to-r from-black/30 via-transparent to-black/30 pointer-events-none" />
+              {/* Dark Gradient Overlay for text readability */}
+              <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/80" />
+            </motion.div>
+          );
+        })}
+      </div>
 
-                {/* ── LAYER 2: Ambient glow orb ─────────── */}
-                <motion.div
-                    className="absolute inset-0 z-[3] pointer-events-none flex items-center justify-center"
-                    style={{ opacity: glowOpacity }}
-                >
-                    <motion.div
-                        className="w-[700px] h-[700px] rounded-full"
-                        style={{
-                            scale: glowScale,
-                            background:
-                                "radial-gradient(circle, rgba(255,23,68,0.28) 0%, rgba(255,23,68,0.08) 40%, transparent 70%)",
-                            filter: "blur(30px)",
-                        }}
-                    />
-                </motion.div>
+      {/* Hero Title Overlay - Centered and Responsive */}
+      <div className="absolute z-40 flex flex-col items-center justify-center text-center px-6 w-full h-full pointer-events-none">
 
-                {/* ── LAYER 3: Car animation (video or canvas) ── */}
-                <motion.div
-                    className="absolute inset-0 z-[4] will-change-transform flex items-center justify-center"
-                    style={{ y: videoY, scale: videoScale }}
-                >
-                    {USE_FRAMES ? (
-                        /* Frame sequence canvas */
-                        <canvas
-                            ref={canvasRef}
-                            className="w-full h-full object-cover"
-                            style={{ display: "block" }}
-                        />
-                    ) : (
-                        /* Video scrubbing */
-                        <video
-                            ref={videoRef}
-                            className="w-full h-full object-cover"
-                            src={VIDEO_SRC}
-                            muted
-                            playsInline
-                            preload="auto"
-                        />
-                    )}
-                </motion.div>
+        <style>{`
+          @keyframes slide-gold {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+          }
+          @keyframes scroll-down {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+          }
+        `}</style>
 
-                {/* ── LAYER 4: Foreground vignette ──────── */}
-                <div className="absolute inset-0 z-[5] pointer-events-none"
-                    style={{
-                        background: "radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.6) 100%)"
-                    }}
-                />
-
-
-
-                {/* ── LAYER 6: TEXT CONTENT ─────────────── */}
-                <div
-                    className="absolute inset-0 z-[10] flex flex-col items-center justify-center px-4 text-center"
-                    style={{ perspective: "1000px" }}
-                >
-                    {/* ── TAGLINE: fade in + bottom line only ── */}
-                    <motion.div
-                        className="mb-6"
-                        style={{ opacity: taglineOp }}
-                    >
-                        <p className="text-yellow-500 text-[0.5rem] sm:text-[0.68rem] md:text-[0.75rem] tracking-[0.2em] sm:tracking-[0.55em] uppercase font-orbitron font-bold whitespace-nowrap overflow-hidden text-ellipsis">
-                            Panagarh&apos;s Trusted Automotive Studio
-                        </p>
-                        {/* Divider line below only */}
-                        <div className="flex justify-center mt-3">
-                            <motion.div
-                                className="h-[1.5px] bg-gradient-to-r from-transparent via-red-600 to-transparent"
-                                style={{ width: lineWidth }}
-                            />
-                        </div>
-                    </motion.div>
-
-                    {/* ── "LUSTOMOTIVE" — glass + fill wipe LEFT→RIGHT ── */}
-                    <motion.div
-                        className="relative will-change-transform"
-                        style={{ opacity: lsOp, y: lsY, filter: "drop-shadow(0 0 15px rgba(255,255,255,0.2))" }}
-                    >
-                        {/* Glass outline layer — frosted backdrop */}
-                        <h1
-                            aria-hidden="true"
-                            className="font-orbitron font-black tracking-[.06em] leading-none select-none"
-                            style={{
-                                fontSize: "clamp(2rem, 6.5vw, 5.5rem)",
-                                color: "transparent",
-                                WebkitTextStroke: "1px rgba(255,255,255,0.18)",
-                            }}
-                        >
-                            Lustomotive
-                        </h1>
-                        {/* Glass fill — transparent gradient, clips L→R */}
-                        <motion.h1
-                            className="absolute inset-0 font-orbitron font-black tracking-[.06em] leading-none will-change-transform"
-                            style={{
-                                fontSize: "clamp(2rem, 6.5vw, 5.5rem)",
-                                clipPath: lsFill,
-                                color: "transparent",
-                                backgroundImage: "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.2) 100%)",
-                                WebkitBackgroundClip: "text",
-                                WebkitTextStroke: "1px rgba(255,255,255,0.4)",
-                            }}
-                        >
-                            Lustomotive
-                        </motion.h1>
-                    </motion.div>
-
-                    {/* ── "AUTOMOTIVE STUDIO" — glass + fill wipe RIGHT→LEFT ── */}
-                    <motion.div
-                        className="relative will-change-transform mt-1"
-                        style={{ opacity: asOp, y: asY, filter: "drop-shadow(0 0 20px rgba(255,23,68,0.4))" }}
-                    >
-                        {/* Glass outline — ghost red stroke */}
-                        <h2
-                            aria-hidden="true"
-                            className="font-orbitron font-black tracking-[.06em] leading-none select-none"
-                            style={{
-                                fontSize: "clamp(1.4rem, 4.5vw, 4rem)",
-                                color: "transparent",
-                                WebkitTextStroke: "1px rgba(255,23,68,0.2)",
-                            }}
-                        >
-                            Automotive Studio
-                        </h2>
-                        {/* Glass fill — transparent red gradient, clips R→L */}
-                        <motion.h2
-                            className="absolute inset-0 font-orbitron font-black tracking-[.06em] leading-none will-change-transform"
-                            style={{
-                                fontSize: "clamp(1.4rem, 4.5vw, 4rem)",
-                                clipPath: asFill,
-                                color: "transparent",
-                                backgroundImage: "linear-gradient(180deg, rgba(255,23,68,1) 0%, rgba(200,0,0,0.3) 100%)",
-                                WebkitBackgroundClip: "text",
-                                WebkitTextStroke: "1px rgba(255,23,68,0.5)",
-                            }}
-                        >
-                            Automotive Studio
-                        </motion.h2>
-                    </motion.div>
-
-                    {/* ── DESCRIPTION: per-word scroll stagger ── */}
-                    <p className="text-sm md:text-base text-gray-300 font-light leading-relaxed mt-8 max-w-xl mx-auto">
-                        {[
-                            { text: "Premium", d: d0 },
-                            { text: "detailing,", d: d1 },
-                            { text: "restoration", d: d2 },
-                            { text: "&amp; ceramic", d: d3 },
-                            { text: "coating —", d: d4 },
-                            { text: "perfection.", d: d5 },
-                        ].map(({ text, d }, i) => (
-                            <motion.span
-                                key={i}
-                                className="inline-block mr-[0.35em]"
-                                style={{ opacity: d.opacity, y: d.y }}
-                                dangerouslySetInnerHTML={{ __html: text }}
-                            />
-                        ))}
-                    </p>
-
-                    {/* ── CTA BUTTONS: bright fade + rise ── */}
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-5 mt-10">
-                        <motion.div style={{ opacity: ctaOp, y: cta1Y }}>
-                            <Link
-                                href="#services"
-                                className="relative flex items-center justify-center px-9 py-4 bg-[#ff1744] hover:bg-red-500 text-white font-bold uppercase tracking-widest transition-all hover:-translate-y-1 active:scale-95 shadow-[0_0_15px_rgba(255,23,68,0.35)] hover:shadow-[0_0_25px_rgba(255,23,68,0.55)] rounded-full overflow-hidden group"
-                            >
-                                <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/25 to-transparent" />
-                                <Zap className="w-5 h-5 mr-2 relative z-10" />
-                                <span className="relative z-10">Our Services</span>
-                            </Link>
-                        </motion.div>
-                        <motion.div style={{ opacity: ctaOp, y: cta2Y }}>
-                            <Link
-                                href="#about"
-                                className="px-9 py-4 bg-white/10 border border-white/60 hover:border-red-500 text-white hover:text-red-400 font-bold uppercase tracking-widest transition-all hover:bg-white/15 hover:-translate-y-1 rounded-full shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,23,68,0.4)]"
-                            >
-                                Learn More
-                            </Link>
-                        </motion.div>
-                    </div>
-                </div>
-                {/* ── Floor fade to seamlessly blend into next component (#050505) ── */}
-                <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-[#050505] via-black/80 to-transparent z-[15] pointer-events-none" />
-
-
-                {/* ── Scroll progress bar (bottom edge) ─── */}
-                <motion.div
-                    className="absolute bottom-0 left-0 h-[3px] bg-red-600 z-[20] origin-left"
-                    style={{
-                        scaleX: scrollYProgress,
-                        boxShadow: "0 0 12px rgba(255,23,68,0.8)",
-                    }}
-                />
-            </div>
+        <div className="relative mb-4 sm:mb-6 mt-10 sm:mt-0">
+          <span className="text-[#ff1744] font-orbitron font-bold tracking-[0.15em] sm:tracking-[0.3em] uppercase text-xs sm:text-sm md:text-lg drop-shadow-lg">
+            West Bengal's #1 Auto Solution
+          </span>
+          <div className="absolute -bottom-1.5 sm:-bottom-2.5 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#d4af37] to-transparent overflow-hidden">
+            <div
+              className="w-full h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-80"
+              style={{ animation: "slide-gold 2.5s ease-in-out infinite" }}
+            />
+          </div>
         </div>
-    );
+
+        <h1 className="font-orbitron text-[clamp(1.5rem,8vw,3rem)] min-[600px]:text-5xl sm:text-6xl md:text-8xl lg:text-[10rem] font-black text-white uppercase tracking-wider sm:tracking-widest drop-shadow-[0_0_30px_rgba(255,23,68,0.7)] leading-tight sm:leading-none max-w-full w-full">
+          Lustomotive
+        </h1>
+        <h2 className="text-gray-100 mt-2 sm:mt-5 tracking-widest sm:tracking-[0.4em] md:tracking-[0.6em] text-xs sm:text-sm md:text-xl lg:text-2xl uppercase font-semibold drop-shadow-lg text-balance">
+          Lust for your Automotive
+        </h2>
+      </div>
+
+      {/* Bottom Description & Scroll Indicator */}
+      <div className="absolute bottom-6 md:bottom-8 z-50 flex flex-col items-center text-center px-6 w-full pointer-events-none">
+        <p className="text-gray-300 mb-6 text-[clamp(0.85rem,2.5vw,1.1rem)] font-light max-w-2xl text-balance drop-shadow-md leading-relaxed hidden sm:block">
+          Experience premium detailing, advanced ceramic coating, and meticulous restoration. We bring unparalleled shine and ultimate protection to your vehicle.
+        </p>
+        <p className="text-gray-300 mb-6 text-[clamp(0.8rem,4vw,1rem)] font-light max-w-sm text-balance drop-shadow-md leading-relaxed sm:hidden">
+          Premium detailing & ceramic coating for the ultimate shine and protection.
+        </p>
+
+        {/* Scroll Indicator */}
+        <div className="flex flex-col items-center gap-3">
+          <span className="text-white/60 text-[0.65rem] tracking-[0.3em] uppercase font-bold">Scroll to Explore</span>
+          <div className="w-[2px] h-12 sm:h-16 bg-white/10 relative overflow-hidden">
+            <div
+              className="w-full h-full bg-[#ff1744] absolute top-0 left-0"
+              style={{ animation: "scroll-down 2s cubic-bezier(0.77, 0, 0.175, 1) infinite" }}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation Arrows (Hidden on very small mobile to save space, but visible on tablets/desktops) */}
+      <button
+        onClick={goToPrev}
+        className="absolute left-4 md:left-10 z-50 p-2 rounded-full bg-black/20 hover:bg-black/50 text-white backdrop-blur-sm border border-white/10 transition-all hidden sm:block"
+      >
+        <ChevronLeft className="w-8 h-8 md:w-12 md:h-12" />
+      </button>
+      <button
+        onClick={goToNext}
+        className="absolute right-4 md:right-10 z-50 p-2 rounded-full bg-black/20 hover:bg-black/50 text-white backdrop-blur-sm border border-white/10 transition-all hidden sm:block"
+      >
+        <ChevronRight className="w-8 h-8 md:w-12 md:h-12" />
+      </button>
+    </section>
+  );
 }
