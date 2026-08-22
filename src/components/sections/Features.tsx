@@ -105,7 +105,7 @@ export default function Features() {
 
 
             {/* Our Vision */}
-            <div id="vision" className="scroll-mt-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-neutral-900 pt-12 md:pt-16 mt-12 md:mt-16">
+            <div id="vision" className="scroll-mt-28 w-full max-w-[1920px] mx-auto px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 border-t border-neutral-900 pt-12 md:pt-16 mt-12 md:mt-16">
                 <motion.div
                     className="text-center mb-16"
                     initial={{ opacity: 0, y: 50 }}
@@ -126,43 +126,42 @@ export default function Features() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-12 mt-8">
                     {[
                         {
-                            icon: <Brush className="w-8 h-8 md:w-10 md:h-10 text-red-500 md:text-gray-600 transition-colors duration-500" />,
+                            icon: <Brush className="w-8 h-8 md:w-10 md:h-10 transition-colors duration-500" />,
                             title: "Excellence in Every Detail",
                             description: "We strive to deliver perfection in every service, ensuring your vehicle looks and feels like new."
                         },
                         {
-                            icon: <Lightbulb className="w-8 h-8 md:w-10 md:h-10 text-red-500 md:text-gray-600 transition-colors duration-500" />,
+                            icon: <Lightbulb className="w-8 h-8 md:w-10 md:h-10 transition-colors duration-500" />,
                             title: "Innovation & Technology",
                             description: "Constantly evolving with the latest automotive care technologies and techniques."
                         },
                         {
-                            icon: <Heart className="w-8 h-8 md:w-10 md:h-10 text-red-500 md:text-gray-600 transition-colors duration-500" />,
+                            icon: <Heart className="w-8 h-8 md:w-10 md:h-10 transition-colors duration-500" />,
                             title: "Customer Satisfaction",
                             description: "Your satisfaction is our priority. We go above and beyond to exceed your expectations."
                         },
                         {
-                            icon: <Leaf className="w-8 h-8 md:w-10 md:h-10 text-red-500 md:text-gray-600 transition-colors duration-500" />,
+                            icon: <Leaf className="w-8 h-8 md:w-10 md:h-10 transition-colors duration-500" />,
                             title: "Sustainable Practices",
                             description: "Committed to eco-friendly detailing solutions that protect both your vehicle and the environment."
                         }
                     ].map((vision, index) => (
                         <motion.div
                             key={index}
-                            className="group flex flex-col items-center text-center relative z-10 p-8 md:p-0 bg-[#050505] md:bg-transparent border border-white/5 md:border-transparent rounded-2xl md:rounded-none transition-all duration-300"
+                            className="flex flex-col items-center text-center relative z-10 py-6 sm:py-8"
                             initial={{ opacity: 0, y: 50 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ duration: 0.8, delay: index * 0.1 }}
                         >
-                            <div className="flex-shrink-0 flex items-center justify-center w-20 h-20 md:w-auto md:h-auto rounded-full md:rounded-none border border-red-600/20 md:border-transparent bg-red-600/5 md:bg-transparent transition-all duration-300 mb-6 relative">
-                                <div className="hidden md:block absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 w-24 h-24 bg-[#ff1744]/50 blur-2xl rounded-full"></div>
-                                <div className="hidden md:block absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-12 h-12 bg-[#ff1744]/80 blur-lg rounded-full"></div>
-                                <div className="group-hover:text-[#ff1744] group-hover:scale-110 md:group-hover:-translate-y-2 transition-all duration-500 md:group-hover:drop-shadow-[0_0_25px_rgba(255,23,68,1)] z-10 filter">
+                            <div className="flex-shrink-0 flex items-center justify-center w-auto h-auto mb-6 relative">
+                                {/* Static icon wrapper */}
+                                <div className="text-[#ff1744] z-10 filter">
                                     {vision.icon}
                                 </div>
                             </div>
-                            <h3 className="uppercase text-lg font-orbitron font-bold text-white tracking-widest drop-shadow-[0_0_10px_rgba(255,23,68,0.5)] md:drop-shadow-[0_0_10px_rgba(0,0,0,0.5)] md:group-hover:text-white group-hover:text-[#ff1744] transition-colors mb-4">{vision.title}</h3>
-                            <p className="text-gray-500 text-sm leading-relaxed group-hover:text-gray-300 transition-colors">
+                            <h3 className="uppercase text-lg font-orbitron font-bold text-white tracking-widest drop-shadow-[0_0_10px_rgba(0,0,0,0.5)] mb-4">{vision.title}</h3>
+                            <p className="text-gray-500 text-sm leading-relaxed">
                                 {vision.description}
                             </p>
                         </motion.div>
