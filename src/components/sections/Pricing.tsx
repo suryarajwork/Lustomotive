@@ -55,12 +55,14 @@ export default function Offers() {
     ];
 
     const [ticketWidth, setTicketWidth] = useState(400);
+    const [isMobile, setIsMobile] = useState(false);
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
         setIsClient(true);
         const handleResize = () => {
             let screenW = window.innerWidth;
+            setIsMobile(screenW < 768);
             // The container has max-w-[1920px], so the available width never exceeds 1920px.
             if (screenW > 1920) {
                 screenW = 1920;
@@ -107,7 +109,7 @@ export default function Offers() {
             {/* Responsive cards container */}
             <div className="w-full">
                 <div className="flex flex-col md:flex-row flex-wrap gap-8 md:gap-12 pb-12 pt-4 px-4 sm:px-6 lg:px-8 items-center justify-center mx-auto max-w-[1920px]">
-                    {isClient && packages.map((pkg, idx) => {
+                    {packages.map((pkg, idx) => {
                         const scale = ticketWidth / 741;
 
                         return (
@@ -124,14 +126,15 @@ export default function Offers() {
                                     <div className="absolute inset-0 bg-[#ff1744]/20 blur-[40px] -z-10 rounded-full group-hover:bg-[#ff1744]/40 transition-colors duration-500" />
                                 )} */}
 
-                                <AdmitOneTicket
-                                    name={pkg.name}
-                                    event={pkg.badge}
-                                    // stubText="ENQUIRE NOW"
-                                    watermark="LUSTOMOTIVE"
-                                    width={ticketWidth}
-                                    tilt={{ scale: 1.05, maxTilt: 12, glare: 0.2 }}
-                                >
+                                    <AdmitOneTicket
+                                        name={pkg.name}
+                                        event={pkg.badge}
+                                        // stubText="ENQUIRE NOW"
+                                        watermark="LUSTOMOTIVE"
+                                        width={ticketWidth}
+                                        tilt={isMobile ? false : { scale: 1.05, maxTilt: 12, glare: 0.2 }}
+                                        disableShader={isMobile}
+                                    >
                                     <div className="flex flex-col gap-1.5 md:gap-2" style={{ width: '100%', paddingRight: '20px' }}>
                                         {/* Price Section directly below header */}
                                         <div className="flex items-baseline gap-2 mb-1 md:mb-5">

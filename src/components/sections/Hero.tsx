@@ -166,11 +166,11 @@ export default function Hero() {
 
       {/* Bottom Description & Scroll Indicator */}
       <div className="absolute bottom-6 md:bottom-8 z-50 flex flex-col items-center text-center px-6 w-full pointer-events-none">
-        <p className="text-gray-300 mb-6 text-[clamp(0.85rem,2.5vw,1.1rem)] font-light max-w-2xl text-balance drop-shadow-md leading-relaxed hidden sm:block">
-          Experience premium detailing, advanced ceramic coating, and meticulous restoration. We bring unparalleled shine and ultimate protection to your vehicle.
+        <p className="text-gray-300 mb-6 text-[clamp(0.85rem,1.5vw,1.1rem)] font-light max-w-none whitespace-nowrap drop-shadow-md hidden sm:block">
+          From premium detailing and car care to mechanical repairs, maintenance, diagnostics, and customization, Lustomotive brings every automotive solution under one roof.
         </p>
-        <p className="text-gray-300 mb-6 text-[clamp(0.8rem,4vw,1rem)] font-light max-w-sm text-balance drop-shadow-md leading-relaxed sm:hidden">
-          Premium detailing & ceramic coating for the ultimate shine and protection.
+        <p className="text-gray-300 mb-6 text-[clamp(0.8rem,4vw,1rem)] font-light max-w-none whitespace-nowrap drop-shadow-md sm:hidden">
+          Every solution your car needs, under one roof.
         </p>
 
         {/* Scroll Indicator */}

@@ -9,7 +9,7 @@ export default function Contact() {
 
     return (
         <section id="contact" className="pt-12 md:pt-16 pb-20 md:pb-28 bg-transparent relative overflow-hidden">
-            <div 
+            <div
                 className="absolute inset-0 z-0 pointer-events-none"
                 style={{
                     backgroundImage: "url('/images/strive.png')",
@@ -32,7 +32,7 @@ export default function Contact() {
                         Contact <span className="text-[#ff1744]">&amp; Location</span>
                     </h2>
                     <div className="w-[60px] h-[2px] bg-gradient-to-r from-transparent via-red-600 to-transparent mx-auto mt-3 mb-4"></div>
-                    <p className="text-gray-400 font-light text-sm text-center">Get in touch with us and visit our premium automotive detailing studio</p>
+                    <p className="text-gray-400 font-light text-sm text-center">Get in touch with Lustomotive and discover complete automotive solutions, all under one roof.</p>
                 </motion.div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
