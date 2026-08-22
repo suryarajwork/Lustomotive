@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 export default function RealTimeClock() {
     const [time, setTime] = useState({ h: "00", m: "00", s: "00", ampm: "AM" });
     const [mounted, setMounted] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
 
     useEffect(() => {
         // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -78,17 +79,30 @@ export default function RealTimeClock() {
                 <div className="mt-8 sm:mt-12 flex justify-center w-full">
                     <a 
                         href="#contact" 
-                        className="relative inline-flex items-center justify-center px-6 py-3 sm:px-10 sm:py-4 bg-black hover:bg-[#ff1744] border border-white/10 hover:border-[#ff1744] rounded-full gap-2 transition-all duration-300 hover:scale-[1.05] group cursor-pointer"
+                        onMouseEnter={() => setIsHovered(true)}
+                        onMouseLeave={() => setIsHovered(false)}
+                        className={`relative isolate inline-flex items-center justify-center px-6 py-3 sm:px-10 sm:py-4 rounded-full gap-2 transition-all duration-300 cursor-pointer ${
+                            isHovered 
+                                ? 'bg-[#ff1744] border-[#ff1744] scale-[1.05] border shadow-[0_0_30px_rgba(255,23,68,0.8)]' 
+                                : 'bg-black border-white/10 border shadow-[0_0_15px_rgba(255,23,68,0.3)]'
+                        }`}
+                        style={{ pointerEvents: 'auto' }}
                     >
-                        {/* Glowing Background that pulses continuously (placed behind the button via -z-10) */}
-                        <div className="absolute -inset-1 bg-gradient-to-r from-red-600 to-[#ff1744] rounded-full blur-md opacity-60 animate-pulse -z-10 group-hover:opacity-100 group-hover:blur-lg transition-all duration-500"></div>
+                        {/* Glowing Background that pulses on hover */}
+                        <div className={`absolute -inset-1 bg-gradient-to-r from-red-600 to-[#ff1744] rounded-full -z-10 transition-all duration-500 ${
+                            isHovered ? 'opacity-100 blur-lg animate-pulse' : 'opacity-0 blur-md'
+                        }`}></div>
                         
                         <span className="text-white font-orbitron font-bold tracking-[0.15em] sm:tracking-[0.2em] text-xs sm:text-sm uppercase drop-shadow-[0_0_8px_rgba(0,0,0,0.5)]">
                             Book Your Slot
                         </span>
                         
-                        {/* Blinking dot turns solid white on hover */}
-                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#ff1744] group-hover:bg-white animate-ping group-hover:animate-none ml-1 sm:ml-2 shadow-[0_0_5px_rgba(255,23,68,0.5)] group-hover:shadow-[0_0_10px_white]"></div>
+                        {/* Blinking dot */}
+                        <div className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all duration-300 ml-1 sm:ml-2 ${
+                            isHovered 
+                                ? 'bg-white shadow-[0_0_10px_white]' 
+                                : 'bg-[#ff1744] animate-ping shadow-[0_0_5px_rgba(255,23,68,0.5)]'
+                        }`}></div>
                     </a>
                 </div>
             </motion.div>
