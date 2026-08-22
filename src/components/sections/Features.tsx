@@ -9,23 +9,23 @@ export default function Features() {
     const features = [
         {
             icon: <Award className="w-8 h-8 text-red-500" />,
-            title: "Premium Quality",
-            description: "We use only the finest products and techniques to ensure your vehicle receives the best care possible. Every step is calibrated to perfection.",
+            title: "COMPLETE AUTO SOLUTIONS",
+            description: "From detailing and maintenance to mechanical repairs, diagnostics, and customization, we bring your vehicle's essential services together under one roof.",
         },
         {
             icon: <Users className="w-8 h-8 text-red-500" />,
-            title: "Expert Craftsmanship",
-            description: "Our certified professionals bring years of hands-on experience in high-end automotive detailing from The Detailing Mafia's proven standards.",
+            title: "QUALITY YOU CAN TRUST",
+            description: "We use quality products, modern tools, and proven techniques to deliver reliable results while treating every vehicle with the care it deserves.",
         },
         {
             icon: <ShieldCheck className="w-8 h-8 text-red-500" />,
-            title: "Advanced Protection",
-            description: "State-of-the-art PPF, ceramic coatings, and paint protection solutions that lock in your car's value for years to come.",
+            title: "EXPERT SERVICE",
+            description: "Our skilled professionals combine hands-on experience with attention to detail to ensure every service is performed with precision and professionalism.",
         },
         {
             icon: <Target className="w-8 h-8 text-red-500" />,
-            title: "Attention to Detail",
-            description: "Every inch of your vehicle is meticulously cared for with precision, dedication, and a relentless pursuit of perfection.",
+            title: "CUSTOMER-FIRST APPROACH",
+            description: "Transparent service, honest recommendations, and a hassle-free experience. We focus on solving the right problem—not selling you unnecessary services.",
         },
     ];
 
@@ -36,7 +36,7 @@ export default function Features() {
             {/* Why Choose Us */}
             <div id="why-choose-us" className="scroll-mt-28 max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12 pt-16 md:pt-20">
                 <div className="flex flex-col lg:flex-row lg:items-start gap-12 lg:gap-16 xl:gap-24">
-                    
+
                     {/* Left Side: Sticky Header */}
                     <motion.div
                         className="w-full lg:w-1/2 xl:w-[45%] text-center lg:text-left lg:sticky lg:top-32 shrink-0"
@@ -52,7 +52,7 @@ export default function Features() {
                         </h2>
                         <div className="mx-auto lg:mx-0 mt-5 mb-5 w-16 h-[2px] bg-gradient-to-r from-transparent via-red-600 to-transparent lg:bg-gradient-to-r lg:from-red-600 lg:to-transparent rounded-full"></div>
                         <p className="text-gray-500 text-sm md:text-base max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                            Four reasons why Panagarh trusts Lustomotive above all others for their prized vehicles.
+                            Complete automotive care, built around your vehicle.
                         </p>
                     </motion.div>
 
@@ -79,18 +79,18 @@ export default function Features() {
                             >
                                 {/* Subtle hover background highlight - no boxes */}
                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#ff1744]/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none -z-10"></div>
-                                
+
                                 {/* Left Side: Number, Title */}
                                 <div className="flex items-center gap-6 md:gap-8 w-full md:w-[55%]">
                                     <span className="text-5xl md:text-6xl font-orbitron font-black stroke-text transition-all duration-700">
                                         0{index + 1}
                                     </span>
-                                    
+
                                     <h3 className="text-xl md:text-2xl font-orbitron font-bold text-white tracking-widest uppercase group-hover:translate-x-3 transition-transform duration-700 md:ml-4">
                                         {feature.title}
                                     </h3>
                                 </div>
-                                
+
                                 {/* Right Side: Description */}
                                 <div className="w-full md:w-[45%] mt-4 md:mt-0 md:pl-8">
                                     <p className="text-gray-400 text-sm md:text-base leading-relaxed font-light group-hover:text-gray-200 transition-colors duration-700 text-justify">
@@ -106,7 +106,7 @@ export default function Features() {
 
             {/* Our Valued Partners */}
             <div id="collabs" className="scroll-mt-28 w-full pt-24 md:pt-32 pb-20 md:pb-28 mt-12 md:mt-16 relative">
-                <div 
+                <div
                     className="absolute inset-0 z-0 pointer-events-none"
                     style={{
                         backgroundImage: "url('/images/partners.png')",
@@ -115,7 +115,7 @@ export default function Features() {
                         backgroundRepeat: "no-repeat"
                     }}
                 ></div>
-                
+
                 <motion.div
                     className="text-center mb-12 md:mb-16 px-4 relative z-10"
                     initial={{ opacity: 0, y: 50 }}
@@ -143,7 +143,7 @@ export default function Features() {
                             animation: marquee 35s linear infinite;
                         }
                     `}</style>
-                    
+
                     {/* Gradient Masks */}
                     <div className="absolute inset-y-0 left-0 w-24 md:w-48 bg-gradient-to-r from-black to-transparent z-20 pointer-events-none"></div>
                     <div className="absolute inset-y-0 right-0 w-24 md:w-48 bg-gradient-to-l from-black to-transparent z-20 pointer-events-none"></div>

@@ -16,10 +16,12 @@ const FRAME_PATH = (n: number) =>
 // ── Cinematic Text Component ───────────────────────────────────────────────
 const CinematicText = memo(function CinematicText({ 
     title, 
+    subtitle,
     text, 
     delayVal 
 }: { 
     title?: string, 
+    subtitle?: string,
     text: string, 
     delayVal: number 
 }) {
@@ -43,7 +45,13 @@ const CinematicText = memo(function CinematicText({
                 </div>
             )}
             
-            <div className="text-gray-100 font-light leading-[1.8] text-[0.95rem] tracking-wide text-center drop-shadow-xl">
+            {subtitle && (
+                <p className="text-white text-center font-orbitron uppercase tracking-widest font-bold mb-4 text-[0.8rem] drop-shadow-md">
+                    {subtitle}
+                </p>
+            )}
+            
+            <div className="text-gray-100 font-light leading-[1.8] text-[0.95rem] tracking-wide text-justify drop-shadow-xl">
                 <BlurText
                     text={text}
                     delay={20}
@@ -191,10 +199,11 @@ export default function AboutAnimation() {
                         {/* Description */}
                         <motion.div
                             style={{ opacity: desc1Opacity, y: desc1Y, fontSize: "clamp(0.8rem, 1.4vw, 1.05rem)" }}
-                            className="text-gray-200 font-light leading-relaxed mb-6"
+                            className="text-gray-200 font-light leading-relaxed mb-6 text-justify"
                         >
+                            <p className="text-white font-orbitron uppercase tracking-widest font-bold mb-3" style={{ fontSize: "0.95rem" }}>More Than Just an Auto Workshop.</p>
                             <BlurText
-                                text="Lustomotive Automotive Studio is Panagarh's premium automotive care hub, proudly powered by Amar Bharat Company and home to The Detailing Mafia Panagarh. We combine craftsmanship with cutting-edge technology to deliver unmatched detailing services."
+                                text="Lustomotive is a complete automotive solution dedicated to keeping your vehicle looking great and performing at its best. From professional detailing and maintenance to mechanical repairs, diagnostics, and customization, we bring everything your vehicle needs under one roof. With quality workmanship and customer-focused service, we aim to make every visit reliable and hassle-free."
                                 delay={15}
                                 stepDuration={0.15}
                                 animateBy="words"
@@ -206,9 +215,10 @@ export default function AboutAnimation() {
                         {/* Mission */}
                         <motion.div style={{ opacity: desc2Opacity, y: desc2Y }}>
                             <p className="text-[#ff1744] font-orbitron uppercase tracking-widest font-bold mb-2" style={{ fontSize: "0.75rem" }}>Our Mission</p>
-                            <div className="text-gray-300 font-light leading-relaxed" style={{ fontSize: "clamp(0.8rem, 1.4vw, 1.05rem)" }}>
+                            <p className="text-white font-orbitron uppercase tracking-widest font-bold mb-3" style={{ fontSize: "0.95rem" }}>Driven by Quality. Built on Trust.</p>
+                            <div className="text-gray-300 font-light leading-relaxed text-justify" style={{ fontSize: "clamp(0.8rem, 1.4vw, 1.05rem)" }}>
                                 <BlurText
-                                    text="To protect, enhance, and preserve every vehicle with the finest products, techniques, and attention to detail. Quality, integrity, and customer satisfaction drive everything we do — ensuring every car leaves looking absolutely its best."
+                                    text="Our mission is to deliver reliable, professional, and transparent automotive services that our customers can trust. We strive to combine skilled expertise, modern solutions, and quality products to provide the right care for every vehicle. At Lustomotive, we're committed to making vehicle ownership easier, safer, and better—one vehicle at a time."
                                     delay={15}
                                     stepDuration={0.15}
                                     animateBy="words"
@@ -257,13 +267,15 @@ export default function AboutAnimation() {
                     {/* Cinematic Text Flow */}
                     <div className="mt-8">
                         <CinematicText 
-                            text="Lustomotive Automotive Studio is Panagarh's premium automotive care hub, proudly powered by Amar Bharat Company and home to The Detailing Mafia Panagarh. We combine craftsmanship with cutting-edge technology to deliver unmatched detailing services."
+                            subtitle="More Than Just an Auto Workshop."
+                            text="Lustomotive is a complete automotive solution dedicated to keeping your vehicle looking great and performing at its best. From professional detailing and maintenance to mechanical repairs, diagnostics, and customization, we bring everything your vehicle needs under one roof. With quality workmanship and customer-focused service, we aim to make every visit reliable and hassle-free."
                             delayVal={0.2}
                         />
 
                         <CinematicText 
                             title="Our Mission"
-                            text="To protect, enhance, and preserve every vehicle with the finest products, techniques, and attention to detail. Quality, integrity, and customer satisfaction drive everything we do — ensuring every car leaves looking absolutely its best."
+                            subtitle="Driven by Quality. Built on Trust."
+                            text="Our mission is to deliver reliable, professional, and transparent automotive services that our customers can trust. We strive to combine skilled expertise, modern solutions, and quality products to provide the right care for every vehicle. At Lustomotive, we're committed to making vehicle ownership easier, safer, and better—one vehicle at a time."
                             delayVal={0.4}
                         />
                     </div>

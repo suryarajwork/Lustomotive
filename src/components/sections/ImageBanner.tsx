@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const galleryItems = [
@@ -38,11 +39,21 @@ const galleryItems = [
 ];
 
 export default function ImageBanner() {
-    // Default to the center image (footerX.jpg) which is index 2
     const [hoveredIndex, setHoveredIndex] = useState<number>(2);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth < 768);
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     return (
-        <section className="relative w-full bg-black py-16 md:py-24 overflow-hidden">
+        <section 
+            className="relative w-full bg-black py-16 md:py-24 overflow-hidden"
+            onClick={() => setHoveredIndex(2)}
+        >
             <div className="max-w-[1600px] mx-auto px-4 md:px-8">
                 <div className="text-center mb-10 md:mb-16">
                     <motion.h2 
@@ -65,10 +76,9 @@ export default function ImageBanner() {
                     </motion.p>
                 </div>
                 
-                {/* Animated Accordion Gallery */}
                 <div 
                     className="flex flex-col md:flex-row gap-2 md:gap-4 h-[75vh] md:h-[65vh] w-full"
-                    onMouseLeave={() => setHoveredIndex(2)} // Revert to brand image when mouse leaves container
+                    onMouseLeave={isMobile ? undefined : () => setHoveredIndex(2)} // Revert to brand image when mouse leaves container
                 >
                     {galleryItems.map((item, index) => {
                         const isActive = hoveredIndex === index;
@@ -81,14 +91,20 @@ export default function ImageBanner() {
                                         ? "flex-[4] md:flex-[5] shadow-[0_0_30px_rgba(220,38,38,0.2)] border-red-900/50 z-10" 
                                         : "flex-1 border-white/10 z-0"
                                 } border`}
-                                onMouseEnter={() => setHoveredIndex(index)}
-                                onClick={() => setHoveredIndex(index)}
+                                onMouseEnter={isMobile ? undefined : () => setHoveredIndex(index)}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setHoveredIndex(index);
+                                }}
                             >
                                 {/* Background Image */}
-                                <img 
+                                <Image 
                                     src={item.src} 
                                     alt={item.title} 
-                                    className={`absolute inset-0 w-full h-full object-cover transition-transform duration-1000 ${isActive ? 'scale-105' : 'scale-100'}`}
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, 33vw"
+                                    priority
+                                    className={`object-cover transition-transform duration-1000 ${isActive ? 'scale-105' : 'scale-100'}`}
                                 />
                                 
                                 {/* Overlay Gradient (minimal gradient only at the very bottom for text readability) */}

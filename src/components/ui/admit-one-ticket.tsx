@@ -1871,6 +1871,7 @@ function TicketCard({
   texture = TICKET_TEXTURE,
   gradient = TICKET_GRADIENT,
   className,
+  disableShader = false,
   children
 }: any) {
   const height = width / geometry.aspect;
@@ -1901,36 +1902,46 @@ function TicketCard({
       style={{ width, height, clipPath: `path('${ticketClipPath(width, height, geometry)}')` }}
     >
       <div className="absolute inset-0" style={{ background: texture.colorBack }} />
-      {texture.engine === "image" && sourceImage ? (
-        <ImageDithering
-          image={sourceImage}
-          colorBack={texture.colorBack}
-          colorFront={texture.colorFront}
-          colorHighlight={texture.colorHighlight}
-          type={texture.type}
-          size={texture.size}
-          colorSteps={texture.colorSteps}
-          originalColors={texture.originalColors}
-          scale={texture.scale}
-          rotation={texture.rotation}
-          offsetX={texture.offsetX + drift.x}
-          offsetY={texture.offsetY + drift.y}
-          fit="cover"
-          style={shaderStyle}
-        />
+      {!disableShader ? (
+        texture.engine === "image" && sourceImage ? (
+          <ImageDithering
+            image={sourceImage}
+            colorBack={texture.colorBack}
+            colorFront={texture.colorFront}
+            colorHighlight={texture.colorHighlight}
+            type={texture.type}
+            size={texture.size}
+            colorSteps={texture.colorSteps}
+            originalColors={texture.originalColors}
+            scale={texture.scale}
+            rotation={texture.rotation}
+            offsetX={texture.offsetX + drift.x}
+            offsetY={texture.offsetY + drift.y}
+            fit="cover"
+            style={shaderStyle}
+          />
+        ) : (
+          <Dithering
+            colorBack={texture.colorBack}
+            colorFront={texture.colorFront}
+            shape={texture.shape}
+            type={texture.type}
+            size={texture.size}
+            scale={texture.scale}
+            rotation={texture.rotation}
+            offsetX={texture.offsetX}
+            offsetY={texture.offsetY}
+            speed={reduced ? 0 : texture.speed}
+            style={shaderStyle}
+          />
+        )
       ) : (
-        <Dithering
-          colorBack={texture.colorBack}
-          colorFront={texture.colorFront}
-          shape={texture.shape}
-          type={texture.type}
-          size={texture.size}
-          scale={texture.scale}
-          rotation={texture.rotation}
-          offsetX={texture.offsetX}
-          offsetY={texture.offsetY}
-          speed={reduced ? 0 : texture.speed}
-          style={shaderStyle}
+        <div 
+          className="absolute inset-0" 
+          style={{ 
+            background: `linear-gradient(135deg, ${texture.colorBack}, ${texture.colorFront})`,
+            opacity: 0.8
+          }} 
         />
       )}
       <div
@@ -2105,16 +2116,16 @@ function TiltCard({
     </div>
   );
 }
-function AdmitOneTicket({ tilt, children, ...props }: any) {
+function AdmitOneTicket({ tilt, disableShader, children, ...props }: any) {
   const width = props.width ?? REF;
   const geometry = props.geometry ?? TICKET_GEOMETRY;
-  if (tilt === false) return <TicketCard {...props}>{children}</TicketCard>;
+  if (tilt === false) return <TicketCard {...props} disableShader={disableShader}>{children}</TicketCard>;
   return (
     <TiltCard
       clipPath={`path('${ticketClipPath(width, width / geometry.aspect, geometry)}')`}
       {...tilt}
     >
-      <TicketCard {...props}>{children}</TicketCard>
+      <TicketCard {...props} disableShader={disableShader}>{children}</TicketCard>
     </TiltCard>
   );
 }

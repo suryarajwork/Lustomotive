@@ -1,5 +1,5 @@
 import { motion, Transition } from 'framer-motion';
-import { useEffect, useRef, useState, useMemo } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 
 const buildKeyframes = (from: object, steps: object[]): object => {
     const keys = new Set([
@@ -125,7 +125,6 @@ export const BlurText = ({
         <p
             ref={ref}
             className={className}
-            style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}
         >
             {elements.map((segment, index) => {
                 const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
@@ -138,19 +137,20 @@ export const BlurText = ({
                 };
 
                 return (
-                    <motion.span
-                        className="inline-block will-change-[transform,filter,opacity]"
-                        key={index}
-                        initial={fromSnapshot as any}
-                        animate={(inView ? animateKeyframes : fromSnapshot) as any}
-                        transition={spanTransition}
-                        onAnimationComplete={
-                            index === elements.length - 1 && inView ? onAnimationComplete : undefined
-                        }
-                        style={animateBy === 'words' ? { marginRight: '0.3em' } : {}}
-                    >
-                        {segment === ' ' ? '\u00A0' : segment}
-                    </motion.span>
+                    <React.Fragment key={index}>
+                        <motion.span
+                            className="inline-block will-change-[transform,filter,opacity]"
+                            initial={fromSnapshot as any}
+                            animate={(inView ? animateKeyframes : fromSnapshot) as any}
+                            transition={spanTransition}
+                            onAnimationComplete={
+                                index === elements.length - 1 && inView ? onAnimationComplete : undefined
+                            }
+                        >
+                            {segment}
+                        </motion.span>
+                        {animateBy === 'words' && index < elements.length - 1 && ' '}
+                    </React.Fragment>
                 );
             })}
         </p>
