@@ -9,13 +9,18 @@ import Image from "next/image";
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
 // ─────────────────────────────────────────────────────────────────────────────
-type BotReply = { text: string; chips: string[] };
+type BotReply = {
+    text: string;
+    chips: string[];
+    a?: { href: string; target?: string; rel?: string; className?: string; text?: string };
+};
 
 type Message = {
     id: string;
     sender: "bot" | "user";
     text: string;
     chips?: string[]; // contextual follow-up chips attached to bot messages
+    a?: { href: string; target?: string; rel?: string; className?: string; text?: string };
     timestamp: Date;
 };
 
@@ -34,7 +39,7 @@ const getBotReply = (raw: string): BotReply => {
     // ── Greetings ──────────────────────────────────────────────────────────────
     if (match(q, "hi", "hello", "hey", "hii", "greet", "namaste", "hlo", "sup", "start", "begin"))
         return {
-            text: "Hey there! 👋 Welcome to Lustomotive Detailing Studio — Panagarh's most trusted premium car care destination. How can I assist you today?",
+            text: "Hey there! 👋 Welcome to Lustomotive Auto Solutions — West Bengal's #1 Auto Care destination. How can I assist you today?",
             chips: ["Services", "Pricing", "Book Appointment", "Location"],
         };
 
@@ -55,7 +60,7 @@ const getBotReply = (raw: string): BotReply => {
     // ── About / Who ───────────────────────────────────────────────────────────
     if (match(q, "about", "who are you", "who is lustomotive", "company", "brand", "studio", "amar bharat", "what is this", "tell me about", "detailing studio"))
         return {
-            text: "Lustomotive Detailing Studio is a premium automotive care studio located in Panagarh, West Bengal. We are a proud sub-brand of Amar Bharat Company, offering world-class car detailing, PPF, ceramic coatings, interior restoration, and paint correction — all rooted in The Detailing Mafia's proven excellence standards.",
+            text: "Lustomotive Detailing Studio is a premium auto care solution located in Panagarh, West Bengal. We are a proud sub-brand of Amar Bharat Company, offering world-class car detailing, PPF, ceramic coatings, interior restoration, and paint correction — all rooted in The Detailing Mafia's proven excellence standards.",
             chips: ["Our Services", "Why Choose Us", "Our Partners", "Location"],
         };
 
@@ -211,19 +216,21 @@ const getBotReply = (raw: string): BotReply => {
         return {
             text: "📍 We are located in Panagarh, West Bengal, India.\n\nSearch 'Lustomotive By AmarBharatCompany' on Google Maps, or click the map on our Contact section for direct directions!",
             chips: ["Hours", "Contact Us", "Book Appointment", "Nearby Areas"],
+            a: { href: "https://maps.app.goo.gl/QEgLTb45cyx8QbW58", target: "_blank", rel: "noopener noreferrer", className: "text-white bg-black px-4 py-2 rounded-full inline-block mt-3", text: "Open in Google Maps" }
         };
 
     // ── Nearby Areas ──────────────────────────────────────────────────────────
     if (match(q, "nearby", "durgapur", "asansol", "bardhaman", "burdwan", "kolkata", "far", "distance"))
         return {
             text: "Our studio in Panagarh, West Bengal is conveniently accessible from nearby cities:\n\n📍 Durgapur — ~30 mins\n📍 Asansol — ~45 mins\n📍 Bardhaman — ~40 mins\n📍 Kolkata — ~2.5 hrs\n\nMany clients travel from across West Bengal for our premium services!",
+            a: { href: "https://maps.app.goo.gl/QEgLTb45cyx8QbW58", target: "_blank", rel: "noopener noreferrer", className: "text-white bg-black px-4 py-2 rounded-full inline-block mt-3", text: "Open in Google Maps" },
             chips: ["Location on Map", "Book Appointment", "Contact Us", "Services"],
         };
 
     // ── Working Hours ─────────────────────────────────────────────────────────
     if (match(q, "hours", "timing", "time", "open", "close", "working", "when are you", "available", "sunday", "monday", "saturday", "weekday", "weekend", "what time"))
         return {
-            text: "🕘 We are open:\n• Monday to Saturday: 9:00 AM – 7:00 PM\n\nSundays may be available by appointment only — contact us to confirm. We recommend booking in advance for busy weekend slots!",
+            text: "🕘 We are open:\n• Tuesday to Sunday: 9:00 AM – 7:00 PM\n\nMondays may be available by appointment only — contact us to confirm. We recommend booking in advance for busy weekend slots!",
             chips: ["Book Appointment", "Contact Us", "Location", "Services"],
         };
 
@@ -265,7 +272,7 @@ const getBotReply = (raw: string): BotReply => {
     // ── Cashless / Insurance ──────────────────────────────────────────────────
     if (match(q, "cashless", "insurance", "claim", "accident", "damage"))
         return {
-            text: "We have successfully handled 100+ cashless insurance claims! If your vehicle has sustained damage covered under insurance, we guide you through the entire cashless repair & restoration process.\n\nContact us for details on how to get started.",
+            text: "We have successfully handled 60+ cashless insurance claims! If your vehicle has sustained damage covered under insurance, we guide you through the entire cashless repair & restoration process.\n\nContact us for details on how to get started.",
             chips: ["Contact Us", "Book Appointment", "Services", "Location"],
         };
 
@@ -328,6 +335,7 @@ const getBotReply = (raw: string): BotReply => {
     // ── Default Fallback ──────────────────────────────────────────────────────
     return {
         text: "Hmm, I didn't quite catch that! 🤔 Here are some things I can help with:\n\n• Services (PPF, Ceramic, Detailing, etc.)\n• Pricing & Packages\n• Location & Hours\n• Booking an appointment\n• Our partners & values",
+        a: { href: "https://maps.app.goo.gl/QEgLTb45cyx8QbW58", target: "_blank", rel: "noopener noreferrer", className: "text-white bg-black px-4 py-2 rounded-full inline-block mt-3", text: "Open in Google Maps" },
         chips: ["Services", "Pricing", "Book Appointment", "Location", "Contact Us"],
     };
 };
@@ -412,6 +420,7 @@ export default function Chatbot() {
                 sender: "bot",
                 text: reply.text,
                 chips: reply.chips,
+                a: reply.a,
                 timestamp: new Date(),
             };
             setMessages((prev) => [...prev, botMsg]);
@@ -517,6 +526,16 @@ export default function Chatbot() {
                                                 }`}
                                         >
                                             {msg.text}
+                                            {msg.a && (
+                                                <a
+                                                    href={msg.a.href}
+                                                    target={msg.a.target}
+                                                    rel={msg.a.rel}
+                                                    className={msg.a.className || "text-red-400 underline mt-2 block"}
+                                                >
+                                                    {msg.a.text || "Click here"}
+                                                </a>
+                                            )}
                                         </div>
                                         {msg.sender === "user" && (
                                             <div className="w-7 h-7 rounded-full bg-[#1a1a1a] border border-[#2a2a2a] flex-shrink-0 flex items-center justify-center mb-0.5 overflow-hidden">
