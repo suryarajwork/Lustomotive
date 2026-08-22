@@ -33,53 +33,73 @@ export default function Features() {
         <section id="features" className="scroll-mt-28 pb-12 md:pb-16 bg-[#0a0a0a]">
 
             {/* Why Choose Us */}
-            <div id="why-choose-us" className="scroll-mt-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 md:pt-20">
-                <motion.div
-                    className="text-center mb-16"
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, margin: "-50px" }}
-                    transition={{ duration: 0.8 }}
-                >
-                    <p className="text-red-600 text-xs font-semibold tracking-[0.4em] uppercase mb-3">The Lustomotive Edge</p>
-                    <h2 className="text-4xl md:text-6xl font-orbitron font-bold tracking-widest text-white leading-tight drop-shadow-[0_0_15px_rgba(255,23,68,0.5)] mb-2">
-                        Why Choose <span className="text-[#ff1744]">Us?</span>
-                    </h2>
-                    <div className="mx-auto mt-5 mb-5 w-16 h-[2px] bg-gradient-to-r from-transparent via-red-600 to-transparent rounded-full"></div>
-                    <p className="text-gray-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
-                        Four reasons why Panagarh trusts Lustomotive above all others for their prized vehicles.
-                    </p>
-                </motion.div>
+            {/* Why Choose Us */}
+            <div id="why-choose-us" className="scroll-mt-28 max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12 pt-16 md:pt-20">
+                <div className="flex flex-col lg:flex-row lg:items-start gap-12 lg:gap-16 xl:gap-24">
+                    
+                    {/* Left Side: Sticky Header */}
+                    <motion.div
+                        className="w-full lg:w-1/2 xl:w-[45%] text-center lg:text-left lg:sticky lg:top-32 shrink-0"
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: false, margin: "-50px" }}
+                        transition={{ duration: 0.8 }}
+                    >
+                        <p className="text-red-600 text-xs font-semibold tracking-[0.4em] uppercase mb-3">The Lustomotive Edge</p>
+                        <h2 className="text-[2.5rem] sm:text-5xl md:text-6xl lg:text-5xl xl:text-[4rem] font-orbitron font-bold tracking-widest text-white leading-none drop-shadow-[0_0_15px_rgba(255,23,68,0.5)] mb-2 flex flex-col gap-2">
+                            <span className="whitespace-nowrap">Why Choose</span>
+                            <span className="text-[#ff1744]">Us?</span>
+                        </h2>
+                        <div className="mx-auto lg:mx-0 mt-5 mb-5 w-16 h-[2px] bg-gradient-to-r from-transparent via-red-600 to-transparent lg:bg-gradient-to-r lg:from-red-600 lg:to-transparent rounded-full"></div>
+                        <p className="text-gray-500 text-sm md:text-base max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                            Four reasons why Panagarh trusts Lustomotive above all others for their prized vehicles.
+                        </p>
+                    </motion.div>
 
-                <div className="flex flex-col md:flex-row flex-wrap justify-center items-center gap-6 max-w-[80rem] mx-auto mt-12 px-4 sm:px-0 h-auto md:h-32">
-                    {features.map((feature, index) => (
-                        <motion.div
-                            key={index}
-                            className="group relative flex items-center h-20 w-20 md:h-24 md:w-24 lg:hover:w-[600px] md:hover:w-[500px] hover:w-[85vw] sm:hover:w-[350px] hover:h-24 md:hover:h-[110px] sm:max-w-none max-w-[85vw] rounded-full bg-[#0a0a0a] border border-white/10 hover:border-red-600/40 transition-all duration-[600ms] ease-[cubic-bezier(0.25,1,0.5,1)] overflow-hidden cursor-pointer shadow-xl hover:shadow-[0_0_30px_rgba(255,23,68,0.15)] z-10 hover:z-20"
-                            initial={{ opacity: 0, scale: 0.5 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true, margin: "-50px" }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                        >
-                            <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/5 transition-colors duration-700 pointer-events-none" />
-                            <div className="min-w-[5rem] min-h-[5rem] md:min-w-[6rem] md:min-h-[6rem] w-[5rem] h-[5rem] md:w-[6rem] md:h-[6rem] flex items-center justify-center relative z-10 transition-transform duration-500 group-hover:scale-110 shrink-0 group-hover:ml-2">
-                                <div className="text-red-500 drop-shadow-[0_0_10px_rgba(255,23,68,0.3)] group-hover:drop-shadow-[0_0_15px_rgba(255,23,68,0.8)] mt-1 transition-all duration-500">
-                                    {feature.icon}
-                                </div>
-                            </div>
-                            <div className="flex flex-col justify-center absolute left-[5rem] md:left-[6.5rem] w-[260px] md:w-[400px] lg:w-[480px] opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 transition-all duration-[600ms] pointer-events-none pr-4 md:pr-6">
-                                <div className="flex items-center gap-3">
-                                    <span className="text-red-500 text-xs font-black font-orbitron shrink-0">0{index + 1}</span>
-                                    <h3 className="uppercase text-[0.85rem] sm:text-[0.9rem] md:text-[1.1rem] font-orbitron font-bold text-white tracking-[0.1em] truncate">
+                    {/* Right Side: Features List */}
+                    <div className="w-full lg:w-1/2 xl:w-[55%] flex flex-col">
+                        <style>{`
+                            .stroke-text {
+                                color: transparent;
+                                -webkit-text-stroke: 1px rgba(255, 23, 68, 0.4);
+                            }
+                            .group:hover .stroke-text {
+                                -webkit-text-stroke: 1px rgba(255, 23, 68, 1);
+                                text-shadow: 0 0 15px rgba(255, 23, 68, 0.3);
+                            }
+                        `}</style>
+                        {features.map((feature, index) => (
+                            <motion.div
+                                key={index}
+                                className="group relative flex flex-col md:flex-row items-start md:items-center py-10 md:py-12 lg:py-14 border-b border-white/10 last:border-none first:pt-0 lg:first:pt-4"
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: "-50px" }}
+                                transition={{ duration: 0.7, delay: index * 0.1, ease: "easeOut" }}
+                            >
+                                {/* Subtle hover background highlight - no boxes */}
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#ff1744]/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none -z-10"></div>
+                                
+                                {/* Left Side: Number, Title */}
+                                <div className="flex items-center gap-6 md:gap-8 w-full md:w-[55%]">
+                                    <span className="text-5xl md:text-6xl font-orbitron font-black stroke-text transition-all duration-700">
+                                        0{index + 1}
+                                    </span>
+                                    
+                                    <h3 className="text-xl md:text-2xl font-orbitron font-bold text-white tracking-widest uppercase group-hover:translate-x-3 transition-transform duration-700 md:ml-4">
                                         {feature.title}
                                     </h3>
                                 </div>
-                                <p className="text-[#a1a1aa] text-[0.7rem] sm:text-[0.75rem] md:text-[0.85rem] lg:text-[0.9rem] leading-[1.6] mt-2 whitespace-normal break-words">
-                                    {feature.description}
-                                </p>
-                            </div>
-                        </motion.div>
-                    ))}
+                                
+                                {/* Right Side: Description */}
+                                <div className="w-full md:w-[45%] mt-4 md:mt-0 md:pl-8">
+                                    <p className="text-gray-400 text-sm md:text-base leading-relaxed font-light group-hover:text-gray-200 transition-colors duration-700 text-justify">
+                                        {feature.description}
+                                    </p>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
             </div>
 
