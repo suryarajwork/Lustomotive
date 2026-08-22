@@ -1,85 +1,122 @@
-import Image from "next/image";
+"use client";
 
-const row1Images = [
-    "/images/mp1.jpg",
-    "/images/mp2.jpg",
-    "/images/mp3.jpg",
-    "/images/mp4.jpg",
-    "/images/mp5.jpg",
-    "/images/1.jpg",
-    "/images/Image1.jpeg",
-    "/images/Image2.jpeg",
-];
+import { useState } from "react";
+import { motion } from "framer-motion";
 
-const row2Images = [
-    "/images/mp6.jpg",
-    "/images/mp7.jpg",
-    "/images/mp8.jpg",
-    "/images/mp9.jpg",
-    "/images/bike1.jpg",
-    "/images/2.jpg",
-    "/images/Image3.jpeg",
-    "/images/Image4.jpeg",
+const galleryItems = [
+    {
+        id: 1,
+        src: "/images/mp1.jpg",
+        title: "Precision Polish",
+        subtitle: "Flawless mirror finish that turns heads",
+    },
+    {
+        id: 2,
+        src: "/images/mp8.jpg",
+        title: "Ceramic Coating",
+        subtitle: "Ultimate protection and hydrophobic shine",
+    },
+    {
+        id: 3,
+        src: "/images/footerX.jpg",
+        title: "The Finish",
+        subtitle: "Experience the ultimate perfection in automotive detailing.",
+        isBrand: true,
+    },
+    {
+        id: 4,
+        src: "/images/mp3.jpg",
+        title: "Interior Restoration",
+        subtitle: "Luxurious detail in every stitch and surface",
+    },
+    {
+        id: 5,
+        src: "/images/mp9.jpg",
+        title: "Paint Correction",
+        subtitle: "Restoring the original glory of your vehicle",
+    }
 ];
 
 export default function ImageBanner() {
+    // Default to the center image (footerX.jpg) which is index 2
+    const [hoveredIndex, setHoveredIndex] = useState<number>(2);
+
     return (
-        <section className="relative w-full overflow-hidden bg-black py-4 md:py-6">
-            <style>{`
-                @keyframes marquee-left {
-                    0% { transform: translateX(0); }
-                    100% { transform: translateX(-50%); }
-                }
-                @keyframes marquee-right {
-                    0% { transform: translateX(-50%); }
-                    100% { transform: translateX(0); }
-                }
-                .animate-marquee-left {
-                    animation: marquee-left 35s linear infinite;
-                }
-                .animate-marquee-right {
-                    animation: marquee-right 35s linear infinite;
-                }
-            `}</style>
-
-            <div className="flex flex-col gap-2 md:gap-4">
-                {/* Top Row: Scrolling Left */}
-                <div className="relative w-full overflow-hidden marquee-container flex">
-                    <div className="flex animate-marquee-left w-max">
-                        {/* Duplicate the array to create an infinite seamless loop */}
-                        {[...row1Images, ...row1Images].map((src, i) => (
-                            <div key={`top-${i}`} className="relative h-[15vh] sm:h-[20vh] md:h-[25vh] w-[25vh] sm:w-[30vh] md:w-[40vh] flex-shrink-0 mx-2 md:mx-4 overflow-hidden rounded-xl border border-white/10 group">
-                                <img src={src} alt="Detailing Masterpiece" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                            </div>
-                        ))}
-                    </div>
+        <section className="relative w-full bg-black py-16 md:py-24 overflow-hidden">
+            <div className="max-w-[1600px] mx-auto px-4 md:px-8">
+                <div className="text-center mb-10 md:mb-16">
+                    <motion.h2 
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                        viewport={{ once: true }}
+                        className="font-orbitron text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-wider uppercase"
+                    >
+                        Our <span className="text-[#ff1744]">Masterpieces</span>
+                    </motion.h2>
+                    <motion.p 
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        viewport={{ once: true }}
+                        className="text-zinc-400 max-w-2xl mx-auto text-lg"
+                    >
+                        Interact with our curated gallery of automotive excellence.
+                    </motion.p>
                 </div>
-
-                {/* Center Row: The Main Banner (footerX.jpg) */}
-                <div className="relative w-full h-[20vh] sm:h-[25vh] md:h-[30vh] lg:h-[40vh] border-y border-red-900/30 overflow-hidden group shadow-[0_0_50px_rgba(220,38,38,0.15)] z-10">
-                    <img
-                        src="/images/footerX.jpg"
-                        alt="Lustomotive Auto Detailing"
-                        className="w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-[1.03]"
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                        <div className="absolute inset-0 bg-black/50"></div>
-                        <h2 className="relative font-orbitron text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-widest drop-shadow-[0_0_15px_rgba(255,23,68,0.8)] uppercase translate-y-10 group-hover:translate-y-0 transition-all duration-700">
-                            The <span className="text-[#ff1744]">Finish</span>
-                        </h2>
-                    </div>
-                </div>
-
-                {/* Bottom Row: Scrolling Right */}
-                <div className="relative w-full overflow-hidden marquee-container flex">
-                    <div className="flex animate-marquee-right w-max">
-                        {/* Duplicate the array to create an infinite seamless loop */}
-                        {[...row2Images, ...row2Images].map((src, i) => (
-                            <div key={`bottom-${i}`} className="relative h-[15vh] sm:h-[20vh] md:h-[25vh] w-[25vh] sm:w-[30vh] md:w-[40vh] flex-shrink-0 mx-2 md:mx-4 overflow-hidden rounded-xl border border-white/10 group">
-                                <img src={src} alt="Detailing Masterpiece" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                
+                {/* Animated Accordion Gallery */}
+                <div 
+                    className="flex flex-col md:flex-row gap-2 md:gap-4 h-[75vh] md:h-[65vh] w-full"
+                    onMouseLeave={() => setHoveredIndex(2)} // Revert to brand image when mouse leaves container
+                >
+                    {galleryItems.map((item, index) => {
+                        const isActive = hoveredIndex === index;
+                        
+                        return (
+                            <div 
+                                key={item.id}
+                                className={`relative overflow-hidden rounded-2xl cursor-pointer transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${
+                                    isActive 
+                                        ? "flex-[4] md:flex-[5] shadow-[0_0_30px_rgba(220,38,38,0.2)] border-red-900/50 z-10" 
+                                        : "flex-1 border-white/10 opacity-60 hover:opacity-100 z-0"
+                                } border`}
+                                onMouseEnter={() => setHoveredIndex(index)}
+                                onClick={() => setHoveredIndex(index)}
+                            >
+                                {/* Background Image */}
+                                <img 
+                                    src={item.src} 
+                                    alt={item.title} 
+                                    className={`absolute inset-0 w-full h-full object-cover transition-transform duration-1000 ${isActive ? 'scale-105' : 'scale-100'}`}
+                                />
+                                
+                                {/* Overlay Gradient */}
+                                <div className={`absolute inset-0 transition-opacity duration-700 ${isActive ? 'bg-gradient-to-t from-black/90 via-black/20 to-transparent' : 'bg-black/50'}`}></div>
+                                
+                                {/* Text Content */}
+                                {!item.isBrand && (
+                                    <div className={`absolute bottom-0 left-0 p-6 md:p-8 w-full flex flex-col justify-end h-full transition-all duration-700 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0 pointer-events-none'}`}>
+                                        <h3 className="font-orbitron font-bold text-white mb-2 uppercase whitespace-nowrap drop-shadow-md text-xl md:text-3xl">
+                                            {item.title}
+                                        </h3>
+                                        <p className="text-zinc-300 text-sm md:text-base font-light w-full max-w-lg md:whitespace-nowrap overflow-hidden text-ellipsis">
+                                            {item.subtitle}
+                                        </p>
+                                    </div>
+                                )}
+                                
+                                {/* Vertical Text for inactive state (Optional, looks cool on desktop) */}
+                                {!item.isBrand && (
+                                    <div className={`absolute inset-0 hidden md:flex items-center justify-center transition-opacity duration-700 pointer-events-none ${isActive ? 'opacity-0' : 'opacity-100'}`}>
+                                        <h4 className="text-white font-orbitron text-xl font-bold tracking-widest uppercase -rotate-90 whitespace-nowrap">
+                                            {item.title}
+                                        </h4>
+                                    </div>
+                                )}
                             </div>
-                        ))}
-                    </div>
+                        );
+                    })}
                 </div>
             </div>
         </section>
