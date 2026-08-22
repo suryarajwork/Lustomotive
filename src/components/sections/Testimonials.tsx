@@ -63,9 +63,9 @@ export default function Testimonials() {
 
     return (
         <section id="testimonials" className="scroll-mt-28 py-12 md:py-16 bg-black overflow-hidden relative">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="w-full mx-auto">
                 <motion.div
-                    className="text-center mb-16 relative"
+                    className="text-center mb-16 relative px-4 sm:px-6 lg:px-8"
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: false, margin: "-50px" }}
@@ -78,8 +78,20 @@ export default function Testimonials() {
                     <p className="text-gray-400 font-light text-sm text-center">Hear from our satisfied customers about their experience</p>
                 </motion.div>
 
-                <div className="flex overflow-hidden pt-12 pb-16 relative w-full [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] px-2">
-                    <div className="flex w-max animate-marquee">
+                <div className="flex overflow-hidden pt-12 pb-16 relative w-full">
+                    <style>{`
+                        @keyframes testimonials-marquee {
+                            0% { transform: translateX(0); }
+                            100% { transform: translateX(-50%); }
+                        }
+                        .animate-testimonials-marquee {
+                            animation: testimonials-marquee 45s linear infinite;
+                        }
+                        .animate-testimonials-marquee:hover {
+                            animation-play-state: paused;
+                        }
+                    `}</style>
+                    <div className="flex w-max animate-testimonials-marquee">
                         {[0, 1].map((setIndex) => (
                             <div key={setIndex} className="flex gap-6 pr-6 w-max">
                                 {reviews.map((review, idx) => (
