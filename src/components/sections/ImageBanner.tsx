@@ -79,7 +79,7 @@ export default function ImageBanner() {
                                 className={`relative overflow-hidden rounded-2xl cursor-pointer transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${
                                     isActive 
                                         ? "flex-[4] md:flex-[5] shadow-[0_0_30px_rgba(220,38,38,0.2)] border-red-900/50 z-10" 
-                                        : "flex-1 border-white/10 opacity-60 hover:opacity-100 z-0"
+                                        : "flex-1 border-white/10 z-0"
                                 } border`}
                                 onMouseEnter={() => setHoveredIndex(index)}
                                 onClick={() => setHoveredIndex(index)}
@@ -91,8 +91,8 @@ export default function ImageBanner() {
                                     className={`absolute inset-0 w-full h-full object-cover transition-transform duration-1000 ${isActive ? 'scale-105' : 'scale-100'}`}
                                 />
                                 
-                                {/* Overlay Gradient */}
-                                <div className={`absolute inset-0 transition-opacity duration-700 ${isActive ? 'bg-gradient-to-t from-black/90 via-black/20 to-transparent' : 'bg-black/50'}`}></div>
+                                {/* Overlay Gradient (minimal gradient only at the very bottom for text readability) */}
+                                <div className={`absolute inset-0 transition-all duration-700 ${isActive ? 'bg-gradient-to-t from-black/80 to-transparent to-40%' : 'bg-transparent'}`}></div>
                                 
                                 {/* Text Content */}
                                 {!item.isBrand && (

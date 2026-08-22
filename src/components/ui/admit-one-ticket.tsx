@@ -1774,7 +1774,7 @@ function ticketClipPath(width: any, height: any, geometry = TICKET_GEOMETRY) {
 function splitName(name: any, max = 2) {
   const clean = name.trim().replace(/\s+/g, " ").toUpperCase();
   if (!clean) return [];
-  const lines = [];
+  const lines: string[] = [];
   for (const word of clean.split(" ")) {
     if (lines.length < max) lines.push(word);
     else lines[lines.length - 1] = `${lines[lines.length - 1]} ${word}`;
