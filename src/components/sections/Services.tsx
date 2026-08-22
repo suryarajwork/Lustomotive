@@ -70,7 +70,7 @@ export default function Services() {
                     opacity: 0;
                 }
             `}</style>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12">
                 <motion.div
                     className="text-center mb-16"
                     initial={{ opacity: 0, y: 50 }}
@@ -86,7 +86,7 @@ export default function Services() {
                     </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 lg:gap-16">
                     {services.map((service, idx) => (
                         <motion.div
                             key={service.id}
