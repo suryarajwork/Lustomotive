@@ -8,8 +8,18 @@ export default function Contact() {
     const [isWaHovered, setIsWaHovered] = useState(false);
 
     return (
-        <section id="contact" className="py-12 md:py-16 bg-black relative border-t border-black overflow-hidden">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <section id="contact" className="pt-12 md:pt-16 pb-20 md:pb-28 bg-transparent relative overflow-hidden">
+            <div 
+                className="absolute inset-0 z-0 pointer-events-none"
+                style={{
+                    backgroundImage: "url('/images/strive.png')",
+                    backgroundSize: "100% 100%",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                    transform: "scaleY(-1)"
+                }}
+            ></div>
+            <div className="max-w-[1920px] mx-auto px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 relative z-10">
                 <motion.div
                     className="text-center mb-16"
                     initial={{ opacity: 0, y: 50 }}
@@ -25,21 +35,21 @@ export default function Contact() {
                     <p className="text-gray-400 font-light text-sm text-center">Get in touch with us and visit our premium automotive detailing studio</p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
                     {/* Contact Details */}
                     <motion.div
-                        className="flex flex-col gap-4"
+                        className="flex flex-col gap-4 lg:col-span-5 xl:col-span-4 h-full"
                         initial={{ opacity: 0, y: 50 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: false, margin: "-50px" }}
                         transition={{ duration: 0.8 }}
                     >
                         {/* Unified 4-Box Bento Layout with WhatsApp Cutout */}
-                        <div className="relative w-full aspect-[5/6] sm:aspect-[4/3] bg-black p-2 sm:p-2.5 rounded-[2.5rem] sm:rounded-[4rem] shadow-[0_0_40px_rgba(255,23,68,0.05)] overflow-hidden">
+                        <div className="relative w-full h-full min-h-[400px] bg-transparent p-2 sm:p-2.5 rounded-[2.5rem] sm:rounded-[4rem] overflow-hidden">
                             {/* The 4 Quadrants Container */}
                             <div className="grid grid-cols-2 grid-rows-2 gap-1 sm:gap-2 h-full relative z-0">
                                 {/* Box 1: Location */}
-                                <div className={`bg-[#0f0f0f] rounded-[2rem] sm:rounded-[3.5rem] p-4 sm:p-8 flex flex-col items-start justify-start transition-all duration-500 overflow-hidden relative group/box hover:bg-[#111111]`}>
+                                <div className={`bg-white/5 rounded-[2rem] sm:rounded-[3.5rem] p-4 sm:p-8 flex flex-col items-center justify-center text-center transition-all duration-500 overflow-hidden relative group/box hover:bg-white/10`}>
                                     <div className="absolute top-0 right-0 w-32 h-32 bg-[#25D366]/5 rounded-full blur-[40px] opacity-0 group-has-[:hover]:opacity-100 transition-opacity"></div>
                                     <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full mb-2 sm:mb-4 bg-black flex items-center justify-center relative z-10 transition-colors">
                                         <MapPin className="text-gray-400 group-hover/box:text-[#ff1744] w-4 h-4 sm:w-5 sm:h-5 transition-colors" />
@@ -50,7 +60,7 @@ export default function Contact() {
                                 </div>
 
                                 {/* Box 2: Call Us */}
-                                <a href="tel:+919475414545" className={`bg-[#0f0f0f] rounded-[2rem] sm:rounded-[3.5rem] p-4 sm:p-8 flex flex-col items-end justify-start text-right transition-all duration-500 overflow-hidden relative group/box hover:bg-[#111111]`}>
+                                <a href="tel:+919475414545" className={`bg-white/5 rounded-[2rem] sm:rounded-[3.5rem] p-4 sm:p-8 flex flex-col items-center justify-center text-center transition-all duration-500 overflow-hidden relative group/box hover:bg-white/10`}>
                                     <div className="absolute top-0 left-0 w-32 h-32 bg-[#25D366]/5 rounded-full blur-[40px] opacity-0 group-has-[:hover]:opacity-100 transition-opacity"></div>
                                     <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full mb-2 sm:mb-4 bg-black flex items-center justify-center relative z-10 transition-colors">
                                         <Phone className="text-gray-400 group-hover/box:text-[#ff1744] w-4 h-4 sm:w-5 sm:h-5 transition-colors" />
@@ -61,9 +71,9 @@ export default function Contact() {
                                 </a>
 
                                 {/* Box 3: Email */}
-                                <a href="mailto:Lustomotive@gmail.com" className={`bg-[#0f0f0f] rounded-[2rem] sm:rounded-[3.5rem] p-4 sm:p-8 flex flex-col items-start justify-end transition-all duration-500 overflow-hidden relative group/box hover:bg-[#111111]`}>
+                                <a href="mailto:Lustomotive@gmail.com" className={`bg-white/5 rounded-[2rem] sm:rounded-[3.5rem] p-4 sm:p-8 flex flex-col items-center justify-center text-center transition-all duration-500 overflow-hidden relative group/box hover:bg-white/10`}>
                                     <div className="absolute bottom-0 right-0 w-32 h-32 bg-[#25D366]/5 rounded-full blur-[40px] opacity-0 group-has-[:hover]:opacity-100 transition-opacity"></div>
-                                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full mt-auto mb-2 sm:mb-4 bg-black flex items-center justify-center relative z-10 transition-colors">
+                                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full mb-2 sm:mb-4 bg-black flex items-center justify-center relative z-10 transition-colors">
                                         <Mail className="text-gray-400 group-hover/box:text-[#ff1744] w-4 h-4 sm:w-5 sm:h-5 transition-colors" />
                                     </div>
                                     <h3 className="font-orbitron font-bold text-white text-[0.85rem] sm:text-base mb-1 relative z-10">Email</h3>
@@ -72,9 +82,9 @@ export default function Contact() {
                                 </a>
 
                                 {/* Box 4: Hours */}
-                                <div className={`bg-[#0f0f0f] rounded-[2rem] sm:rounded-[3.5rem] p-4 sm:p-8 flex flex-col items-end justify-end text-right transition-all duration-500 overflow-hidden relative group/box hover:bg-[#111111]`}>
+                                <div className={`bg-white/5 rounded-[2rem] sm:rounded-[3.5rem] p-4 sm:p-8 flex flex-col items-center justify-center text-center transition-all duration-500 overflow-hidden relative group/box hover:bg-white/10`}>
                                     <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#25D366]/5 rounded-full blur-[40px] opacity-0 group-has-[:hover]:opacity-100 transition-opacity"></div>
-                                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full mt-auto mb-2 sm:mb-4 bg-black flex items-center justify-center relative z-10 transition-colors">
+                                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full mb-2 sm:mb-4 bg-black flex items-center justify-center relative z-10 transition-colors">
                                         <Clock className="text-gray-400 group-hover/box:text-[#ff1744] w-4 h-4 sm:w-5 sm:h-5 transition-colors" />
                                     </div>
                                     <h3 className="font-orbitron font-bold text-white text-[0.85rem] sm:text-base mb-1 relative z-10">Hours</h3>
@@ -86,7 +96,7 @@ export default function Contact() {
                             {/* CENTER WHATSAPP CUTOUT */}
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
                                 {/* The outer wrapper applies the exact background color to blend perfectly as a spherical cutout into the 4 boxes */}
-                                <div className="bg-black rounded-full flex items-center justify-center p-2 sm:p-2.5 transition-all duration-[600ms] ease-[cubic-bezier(0.25,1,0.5,1)]">
+                                <div className="bg-black/60 backdrop-blur-xl rounded-full flex items-center justify-center p-2 sm:p-2.5 transition-all duration-[600ms] ease-[cubic-bezier(0.25,1,0.5,1)]">
                                     <a
                                         href="https://wa.me/919475414545?text=Hi%20Lustomotive%20team%2C%20I'm%20contacting%20you%20via%20your%20website."
                                         target="_blank"
@@ -116,7 +126,7 @@ export default function Contact() {
 
                     {/* Map */}
                     <motion.div
-                        className="relative rounded-[2.5rem] overflow-hidden border border-white/5 bg-[#0a0a0a] p-2 hover:border-white/10 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] transition-all duration-500 h-[400px] lg:h-auto group"
+                        className="relative rounded-[2.5rem] overflow-hidden bg-transparent p-2 transition-all duration-500 h-[400px] lg:h-auto lg:col-span-7 xl:col-span-8 group"
                         initial={{ opacity: 0, y: 50 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: false, margin: "-50px" }}

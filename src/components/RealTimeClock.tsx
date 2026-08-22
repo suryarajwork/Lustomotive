@@ -62,15 +62,34 @@ export default function RealTimeClock() {
                 </div>
 
                 {/* The Tagline */}
-                <div className="relative inline-flex items-center justify-center mt-2 group cursor-default max-w-full">
+                <div className="flex items-center justify-center gap-2 sm:gap-4 mt-2 group cursor-default w-full overflow-hidden">
                     {/* Glowing lines beside tagline */}
-                    <div className="absolute top-1/2 -left-6 min-[400px]:-left-10 sm:-left-32 w-4 min-[400px]:w-8 sm:w-24 h-[1.5px] sm:h-[2px] bg-gradient-to-r from-transparent to-[#ff1744]/70 group-hover:to-[#ff1744] transition-colors duration-500"></div>
-                    <div className="absolute top-1/2 -right-6 min-[400px]:-right-10 sm:-right-32 w-4 min-[400px]:w-8 sm:w-24 h-[1.5px] sm:h-[2px] bg-gradient-to-l from-transparent to-[#ff1744]/70 group-hover:to-[#ff1744] transition-colors duration-500"></div>
+                    <div className="flex-grow h-[1.5px] sm:h-[2px] bg-gradient-to-r from-transparent to-[#ff1744]/70 group-hover:to-[#ff1744] transition-colors duration-500 max-w-[40px] sm:max-w-[100px]"></div>
 
-                    <p className="font-orbitron italic text-[0.6rem] min-[400px]:text-[0.75rem] sm:text-2xl md:text-3xl lg:text-4xl text-white font-black tracking-widest sm:tracking-[0.15em] lg:tracking-[0.25em] select-none uppercase transition-opacity duration-500 whitespace-nowrap flex items-center justify-center gap-1 sm:gap-2 lg:gap-3">
-                        <span className="text-gray-600 font-light group-hover:text-gray-400 transition-colors duration-500">Lust for </span>
-                        <span className="text-[#ff1744] drop-shadow-[0_0_10px_rgba(255,23,68,0.4)] group-hover:drop-shadow-[0_0_20px_rgba(255,23,68,0.8)] transition-all duration-500">your automotive</span>
+                    <p className="shrink-0 font-orbitron italic text-[0.5rem] min-[400px]:text-[0.6rem] sm:text-lg md:text-xl lg:text-2xl text-white font-black tracking-widest sm:tracking-[0.1em] lg:tracking-[0.15em] select-none uppercase transition-opacity duration-500 whitespace-nowrap flex items-center justify-center gap-1 sm:gap-2">
+                        <span className="text-gray-600 font-light group-hover:text-gray-400 transition-colors duration-500">Don’t Wait for the Perfect Time. </span>
+                        <span className="text-[#ff1744] drop-shadow-[0_0_10px_rgba(255,23,68,0.4)] group-hover:drop-shadow-[0_0_20px_rgba(255,23,68,0.8)] transition-all duration-500">Make It Now!</span>
                     </p>
+                    
+                    <div className="flex-grow h-[1.5px] sm:h-[2px] bg-gradient-to-l from-transparent to-[#ff1744]/70 group-hover:to-[#ff1744] transition-colors duration-500 max-w-[40px] sm:max-w-[100px]"></div>
+                </div>
+
+                {/* Book Your Slot Button */}
+                <div className="mt-8 sm:mt-12 flex justify-center w-full">
+                    <a 
+                        href="#contact" 
+                        className="relative inline-flex items-center justify-center px-6 py-3 sm:px-10 sm:py-4 bg-black hover:bg-[#ff1744] border border-white/10 hover:border-[#ff1744] rounded-full gap-2 transition-all duration-300 hover:scale-[1.05] group cursor-pointer"
+                    >
+                        {/* Glowing Background that pulses continuously (placed behind the button via -z-10) */}
+                        <div className="absolute -inset-1 bg-gradient-to-r from-red-600 to-[#ff1744] rounded-full blur-md opacity-60 animate-pulse -z-10 group-hover:opacity-100 group-hover:blur-lg transition-all duration-500"></div>
+                        
+                        <span className="text-white font-orbitron font-bold tracking-[0.15em] sm:tracking-[0.2em] text-xs sm:text-sm uppercase drop-shadow-[0_0_8px_rgba(0,0,0,0.5)]">
+                            Book Your Slot
+                        </span>
+                        
+                        {/* Blinking dot turns solid white on hover */}
+                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#ff1744] group-hover:bg-white animate-ping group-hover:animate-none ml-1 sm:ml-2 shadow-[0_0_5px_rgba(255,23,68,0.5)] group-hover:shadow-[0_0_10px_white]"></div>
+                    </a>
                 </div>
             </motion.div>
         </div>
