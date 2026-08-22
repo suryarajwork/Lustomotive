@@ -104,6 +104,60 @@ export default function Features() {
             </div>
 
 
+            {/* Our Valued Partners */}
+            <div id="collabs" className="scroll-mt-28 w-full border-t border-neutral-900 pt-12 md:pt-16 mt-12 md:mt-16">
+                <motion.div
+                    className="text-center mb-12 md:mb-16 px-4"
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: false, margin: "-50px" }}
+                    transition={{ duration: 0.8 }}
+                >
+                    <p className="text-red-600 text-xs font-semibold tracking-[0.4em] uppercase mb-3">Premium Alliances</p>
+                    <h2 className="text-3xl md:text-5xl font-orbitron font-bold tracking-widest text-white leading-tight drop-shadow-[0_0_15px_rgba(255,23,68,0.5)] mb-2">
+                        Our Valued <span className="text-[#ff1744]">Partners</span>
+                    </h2>
+                    <div className="mx-auto mt-5 mb-5 w-16 h-[2px] bg-gradient-to-r from-transparent via-red-600 to-transparent rounded-full"></div>
+                    <p className="text-gray-500 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+                        We collaborate with industry-leading brands to bring you the finest automotive care products and services available.
+                    </p>
+                </motion.div>
+
+                <div className="relative w-full overflow-hidden group border-y border-white/5 bg-[#050505] py-8 md:py-12">
+                    <style>{`
+                        @keyframes marquee {
+                            0% { transform: translateX(-50%); }
+                            100% { transform: translateX(0); }
+                        }
+                        .animate-partners-marquee {
+                            animation: marquee 35s linear infinite;
+                        }
+                    `}</style>
+                    
+                    {/* Gradient Masks */}
+                    <div className="absolute inset-y-0 left-0 w-24 md:w-48 bg-gradient-to-r from-[#0a0a0a] to-transparent z-20 pointer-events-none"></div>
+                    <div className="absolute inset-y-0 right-0 w-24 md:w-48 bg-gradient-to-l from-[#0a0a0a] to-transparent z-20 pointer-events-none"></div>
+
+                    {(() => {
+                        const partners = ["3M Automotive", "The Detailing Mafia", "XPEL", "Modesta", "CarPro", "Gyeon", "Koch Chemie", "Gtechnic"];
+                        return (
+                            <div className="flex w-max animate-partners-marquee items-center">
+                                {[...partners, ...partners].map((partner, index) => (
+                                    <div
+                                        key={index}
+                                        className="flex items-center justify-center px-10 md:px-20"
+                                    >
+                                        <span className="font-orbitron font-bold md:font-black text-gray-500 hover:text-[#ff1744] md:hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,23,68,0.8)] md:hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.6)] transition-all duration-500 uppercase tracking-wider md:tracking-widest text-sm md:text-xl text-center cursor-default whitespace-nowrap">
+                                            {partner}
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
+                        );
+                    })()}
+                </div>
+            </div>
+
             {/* Our Vision */}
             <div id="vision" className="scroll-mt-28 w-full max-w-[1920px] mx-auto px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 border-t border-neutral-900 pt-12 md:pt-16 mt-12 md:mt-16">
                 <motion.div
@@ -164,44 +218,6 @@ export default function Features() {
                             <p className="text-gray-500 text-sm leading-relaxed">
                                 {vision.description}
                             </p>
-                        </motion.div>
-                    ))}
-                </div>
-            </div>
-
-            {/* Our Valued Partners */}
-            <div id="collabs" className="scroll-mt-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-neutral-900 pt-12 md:pt-16 mt-12 md:mt-16">
-                <motion.div
-                    className="text-center mb-16"
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, margin: "-50px" }}
-                    transition={{ duration: 0.8 }}
-                >
-                    <p className="text-red-600 text-xs font-semibold tracking-[0.4em] uppercase mb-3">Premium Alliances</p>
-                    <h2 className="text-3xl md:text-5xl font-orbitron font-bold tracking-widest text-white leading-tight drop-shadow-[0_0_15px_rgba(255,23,68,0.5)] mb-2">
-                        Our Valued <span className="text-[#ff1744]">Partners</span>
-                    </h2>
-                    <div className="mx-auto mt-5 mb-5 w-16 h-[2px] bg-gradient-to-r from-transparent via-red-600 to-transparent rounded-full"></div>
-                    <p className="text-gray-500 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-                        We collaborate with industry-leading brands to bring you the finest automotive care products and services available.
-                    </p>
-                </motion.div>
-
-                <div className="flex flex-wrap justify-center items-center gap-4 md:gap-12 mt-8">
-                    {["3M Automotive", "The Detailing Mafia", "XPEL", "Modesta", "CarPro", "Gyeon", "Koch Chemie", "Gtechnic"].map((partner, index) => (
-                        <motion.div
-                            key={index}
-                            className="relative flex items-center justify-center min-w-[140px] md:min-w-[160px] group px-6 md:px-0 py-4 md:py-2 bg-neutral-900/40 md:bg-transparent border border-white/5 md:border-transparent rounded-lg md:rounded-none transition-all duration-300"
-                            initial={{ opacity: 0, y: 50 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-50px" }}
-                            transition={{ duration: 0.8, delay: index * 0.05 }}
-                        >
-                            <span className="font-orbitron font-bold md:font-black text-gray-400 md:text-gray-500 group-hover:text-[#ff1744] md:group-hover:text-white md:group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.4)] transition-all duration-500 uppercase tracking-wider md:tracking-widest text-sm md:text-base text-center relative z-10">
-                                {partner}
-                            </span>
-                            <div className="hidden md:block absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-[#ff1744] group-hover:w-full transition-all duration-500 shadow-[0_0_10px_rgba(255,23,68,0.8)]"></div>
                         </motion.div>
                     ))}
                 </div>
