@@ -42,7 +42,7 @@ function AnimatedStat({ value, suffix, label }: { value: number; suffix: string;
 
 export default function StatsStrip() {
     return (
-        <div className="w-full border-y border-neutral-900 py-10 sm:py-16 bg-black/40">
+        <div className="w-full border-y border-red-950/50 py-10 sm:py-16 bg-gradient-to-r from-[#0a0000] via-[#1a0505] to-[#0a0000]">
             <motion.div
                 className="flex flex-row justify-between items-start sm:items-center max-w-[100rem] mx-auto px-2 sm:px-12 lg:px-24 w-full gap-2 sm:gap-4 md:gap-8"
                 initial={{ opacity: 0, y: 50 }}

@@ -16,11 +16,11 @@ export default function Home() {
       <RealTimeClock />
       <Services />
       <Pricing />
+      <StatsStrip />
       <ImageBanner />
       <AboutAnimation />
       <Features />
       <Testimonials />
-      <StatsStrip />
       <Contact />
     </>
   );

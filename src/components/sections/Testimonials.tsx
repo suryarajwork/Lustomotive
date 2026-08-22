@@ -62,8 +62,17 @@ export default function Testimonials() {
     ];
 
     return (
-        <section id="testimonials" className="scroll-mt-28 py-12 md:py-16 bg-black overflow-hidden relative">
-            <div className="w-full mx-auto">
+        <section id="testimonials" className="scroll-mt-28 pt-32 md:pt-40 pb-12 md:pb-16 bg-black overflow-hidden relative">
+            <div 
+                className="absolute inset-0 z-0 pointer-events-none"
+                style={{
+                    backgroundImage: "url('/images/strive.png')",
+                    backgroundSize: "100% 100%",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat"
+                }}
+            ></div>
+            <div className="w-full mx-auto relative z-10">
                 <motion.div
                     className="text-center mb-16 relative px-4 sm:px-6 lg:px-8"
                     initial={{ opacity: 0, y: 50 }}

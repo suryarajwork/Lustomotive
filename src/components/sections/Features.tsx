@@ -105,9 +105,19 @@ export default function Features() {
 
 
             {/* Our Valued Partners */}
-            <div id="collabs" className="scroll-mt-28 w-full border-t border-neutral-900 pt-12 md:pt-16 mt-12 md:mt-16">
+            <div id="collabs" className="scroll-mt-28 w-full pt-24 md:pt-32 pb-20 md:pb-28 mt-12 md:mt-16 relative">
+                <div 
+                    className="absolute inset-0 z-0 pointer-events-none"
+                    style={{
+                        backgroundImage: "url('/images/partners.png')",
+                        backgroundSize: "100% 100%",
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat"
+                    }}
+                ></div>
+                
                 <motion.div
-                    className="text-center mb-12 md:mb-16 px-4"
+                    className="text-center mb-12 md:mb-16 px-4 relative z-10"
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: false, margin: "-50px" }}
@@ -123,7 +133,7 @@ export default function Features() {
                     </p>
                 </motion.div>
 
-                <div className="relative w-full overflow-hidden group border-y border-white/5 bg-[#050505] py-8 md:py-12">
+                <div className="relative w-full overflow-hidden group bg-transparent py-8 md:py-12 z-10">
                     <style>{`
                         @keyframes marquee {
                             0% { transform: translateX(-50%); }
@@ -135,8 +145,8 @@ export default function Features() {
                     `}</style>
                     
                     {/* Gradient Masks */}
-                    <div className="absolute inset-y-0 left-0 w-24 md:w-48 bg-gradient-to-r from-[#0a0a0a] to-transparent z-20 pointer-events-none"></div>
-                    <div className="absolute inset-y-0 right-0 w-24 md:w-48 bg-gradient-to-l from-[#0a0a0a] to-transparent z-20 pointer-events-none"></div>
+                    <div className="absolute inset-y-0 left-0 w-24 md:w-48 bg-gradient-to-r from-black to-transparent z-20 pointer-events-none"></div>
+                    <div className="absolute inset-y-0 right-0 w-24 md:w-48 bg-gradient-to-l from-black to-transparent z-20 pointer-events-none"></div>
 
                     {(() => {
                         const partners = ["3M Automotive", "The Detailing Mafia", "XPEL", "Modesta", "CarPro", "Gyeon", "Koch Chemie", "Gtechnic"];
@@ -159,7 +169,7 @@ export default function Features() {
             </div>
 
             {/* Our Vision */}
-            <div id="vision" className="scroll-mt-28 w-full max-w-[1920px] mx-auto px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 border-t border-neutral-900 pt-12 md:pt-16 mt-12 md:mt-16">
+            <div id="vision" className="scroll-mt-28 w-full max-w-[1920px] mx-auto px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 pt-12 md:pt-16">
                 <motion.div
                     className="text-center mb-16"
                     initial={{ opacity: 0, y: 50 }}
