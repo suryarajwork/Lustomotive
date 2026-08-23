@@ -7,9 +7,13 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const VIDEOS = [
   "/videos/13643290_1080_1920_30fps.mp4",
+  "/videos/8469674-uhd_3840_2160_25fps.mp4",
+  "/videos/Untitled design(1).mp4",
+  "/videos/Untitled design.mp4",
   "/videos/13643294_1080_1920_30fps.mp4",
   "/videos/13643295_1080_1920_30fps.mp4",
   "/videos/13643311_1080_1920_30fps.mp4",
+  "/videos/18101989-uhd_3840_2160_30fps.mp4",
   "/videos/14974357_3840_2160_25fps.mp4",
   "/videos/6157968-hd_1920_1080_30fps.mp4",
   "/videos/6158070-hd_1920_1080_30fps.mp4",
