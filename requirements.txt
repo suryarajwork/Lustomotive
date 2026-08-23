@@ -1,11 +1,11 @@
 MAIN CHANGES:
-1. replace text with Partners Images in OUR VALUED PARTNERS SECTION
-1. change flat icon(tab)
-2. add mechanical work related video and Bike related video in HERO section
+1. replace text with Partners Images in OUR VALUED PARTNERS SECTION --Done
+1. change flat icon(tab) --Done
+2. add mechanical work related video and Bike related video in HERO section --Done
 3. in every buttons or links for booking should redirect to whatsApp with default templates
-4. Replace text from maintance to MECHANICAL in SERVICES section
+4. Replace text from maintance to MECHANICAL in SERVICES section --Done
 5. in OFFERS section button should redirect to whatsApp with default template and likewise Cards should redirect with specific templates
-6. in GALLERY section replace above two images with mechanical rrelated work (try with bike pics)
+6. in GALLERY section replace above two images with mechanical rrelated work (try with bike pics) --Done
 7. Change date as Tue-Sun with same time in FOOTER section
 8. Change logo for Bot including 'L'(logo of our website) and replace the robot face with our logo
 

@@ -18,9 +18,12 @@ const orbitron = Orbitron({
 });
 
 export const metadata: Metadata = {
-  title: "Lustomotive | Premium Car Care in Panagarh, West Bengal",
+  title: "Lustomotive",
   description: "Premium car wash, detailing, PPF, ceramic coatings, and paint correction services in Panagarh by Lustomotive Detailing Studio, a sub-brand of Amar Bharat Company.",
   keywords: ["car detailing Panagarh", "car wash Panagarh", "paint protection film", "PPF", "ceramic coating", "Amar Bharat Company", "The Detailing Mafia", "premium detailing West Bengal"],
+  icons: {
+    icon: "/images/lustomotive_small_logo.png",
+  },
 };
 
 export default function RootLayout({
