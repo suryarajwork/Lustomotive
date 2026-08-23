@@ -149,17 +149,31 @@ export default function Features() {
                     <div className="absolute inset-y-0 right-0 w-24 md:w-48 bg-gradient-to-l from-black to-transparent z-20 pointer-events-none"></div>
 
                     {(() => {
-                        const partners = ["3M Automotive", "The Detailing Mafia", "XPEL", "Modesta", "CarPro", "Gyeon", "Koch Chemie", "Gtechnic"];
+                        const partners = [
+                            { name: "Labocosmetica", src: "/images/brands/Labocosmetica.png", type: "png" },
+                            { name: "Castrol", src: "/images/brands/castrol.png", type: "png" },
+                            { name: "Detailing Mafia", src: "/images/brands/detailing_mafia.png", type: "png" },
+                            { name: "Manmachine", src: "/images/brands/manmachine.png", type: "png" },
+                            { name: "myTVS", src: "/images/brands/myTVS.png", type: "png" },
+                            { name: "Ultrashield", src: "/images/brands/ultrashield.jpg", type: "jpg" },
+                            { name: "Vinfast", src: "/images/brands/vinfast.png", type: "png" },
+                            { name: "Wurth", src: "/images/brands/wurth.png", type: "png" },
+                        ];
                         return (
-                            <div className="flex w-max animate-partners-marquee items-center">
+                            <div className="flex w-max animate-partners-marquee items-center py-6">
                                 {[...partners, ...partners].map((partner, index) => (
                                     <div
                                         key={index}
-                                        className="flex items-center justify-center px-10 md:px-20"
+                                        className="mx-8 md:mx-12 flex items-center justify-center w-[120px] md:w-[180px] h-[60px] md:h-[80px] group cursor-pointer"
                                     >
-                                        <span className="font-orbitron font-bold md:font-black text-gray-500 hover:text-[#ff1744] md:hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,23,68,0.8)] md:hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.6)] transition-all duration-500 uppercase tracking-wider md:tracking-widest text-sm md:text-xl text-center cursor-default whitespace-nowrap">
-                                            {partner}
-                                        </span>
+                                        <img
+                                            src={partner.src}
+                                            alt={partner.name}
+                                            className={`max-h-full max-w-full object-contain transition-all duration-500 group-hover:scale-110 ${partner.type === 'jpg'
+                                                    ? "invert grayscale contrast-200 mix-blend-screen opacity-50 group-hover:opacity-100 group-hover:drop-shadow-[0_0_20px_rgba(255,23,68,0.6)]"
+                                                    : "brightness-0 invert opacity-50 group-hover:opacity-100 group-hover:drop-shadow-[0_0_20px_rgba(255,23,68,0.6)]"
+                                                }`}
+                                        />
                                     </div>
                                 ))}
                             </div>
