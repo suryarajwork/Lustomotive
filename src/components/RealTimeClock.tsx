@@ -71,38 +71,37 @@ export default function RealTimeClock() {
                         <span className="text-gray-600 font-light group-hover:text-gray-400 transition-colors duration-500">Don’t Wait for the Perfect Time. </span>
                         <span className="text-[#ff1744] drop-shadow-[0_0_10px_rgba(255,23,68,0.4)] group-hover:drop-shadow-[0_0_20px_rgba(255,23,68,0.8)] transition-all duration-500">Make It Now!</span>
                     </p>
-                    
+
                     <div className="flex-grow h-[1.5px] sm:h-[2px] bg-gradient-to-l from-transparent to-[#ff1744]/70 group-hover:to-[#ff1744] transition-colors duration-500 max-w-[40px] sm:max-w-[100px]"></div>
                 </div>
 
                 {/* Book Your Slot Button */}
                 <div className="mt-8 sm:mt-12 flex justify-center w-full">
-                    <a 
-                        href="#contact" 
+                    <a
+                        href="https://wa.me/918340129864?text=Hi%20Lustomotive%20Team!%0A%0AI%E2%80%99d%20like%20to%20book%20an%20appointment%20for%20my%20vehicle.%0A%0APlease%20let%20me%20know%20the%20available%20slots%20and%20the%20details%20you%20need%20from%20me.%0A%0AThank%20you!"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         onMouseEnter={() => setIsHovered(true)}
                         onMouseLeave={() => setIsHovered(false)}
-                        className={`relative isolate inline-flex items-center justify-center px-6 py-3 sm:px-10 sm:py-4 rounded-full gap-2 transition-all duration-300 cursor-pointer ${
-                            isHovered 
-                                ? 'bg-[#ff1744] border-[#ff1744] scale-[1.05] border shadow-[0_0_30px_rgba(255,23,68,0.8)]' 
+                        className={`relative isolate inline-flex items-center justify-center px-6 py-3 sm:px-10 sm:py-4 rounded-full gap-2 transition-all duration-300 cursor-pointer ${isHovered
+                                ? 'bg-[#ff1744] border-[#ff1744] scale-[1.05] border shadow-[0_0_30px_rgba(255,23,68,0.8)]'
                                 : 'bg-black border-white/10 border shadow-[0_0_15px_rgba(255,23,68,0.3)]'
-                        }`}
+                            }`}
                         style={{ pointerEvents: 'auto' }}
                     >
                         {/* Glowing Background that pulses on hover */}
-                        <div className={`absolute -inset-1 bg-gradient-to-r from-red-600 to-[#ff1744] rounded-full -z-10 transition-all duration-500 ${
-                            isHovered ? 'opacity-100 blur-lg animate-pulse' : 'opacity-0 blur-md'
-                        }`}></div>
-                        
+                        <div className={`absolute -inset-1 bg-gradient-to-r from-red-600 to-[#ff1744] rounded-full -z-10 transition-all duration-500 ${isHovered ? 'opacity-100 blur-lg animate-pulse' : 'opacity-0 blur-md'
+                            }`}></div>
+
                         <span className="text-white font-orbitron font-bold tracking-[0.15em] sm:tracking-[0.2em] text-xs sm:text-sm uppercase drop-shadow-[0_0_8px_rgba(0,0,0,0.5)]">
                             Book Your Slot
                         </span>
-                        
+
                         {/* Blinking dot */}
-                        <div className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all duration-300 ml-1 sm:ml-2 ${
-                            isHovered 
-                                ? 'bg-white shadow-[0_0_10px_white]' 
+                        <div className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all duration-300 ml-1 sm:ml-2 ${isHovered
+                                ? 'bg-white shadow-[0_0_10px_white]'
                                 : 'bg-[#ff1744] animate-ping shadow-[0_0_5px_rgba(255,23,68,0.5)]'
-                        }`}></div>
+                            }`}></div>
                     </a>
                 </div>
             </motion.div>
