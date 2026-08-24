@@ -151,29 +151,43 @@ export default function Features() {
                     {(() => {
                         const partners = [
                             { name: "Labocosmetica", src: "/images/brands/Labocosmetica.png", type: "png" },
+                            { name: "Bimbra", src: "/images/brands/bimbra.png", type: "png" },
                             { name: "Castrol", src: "/images/brands/castrol.png", type: "png" },
                             { name: "Detailing Mafia", src: "/images/brands/detailing_mafia.png", type: "png" },
+                            { name: "Filtron", src: "/images/brands/filtron.png", type: "png" },
                             { name: "Manmachine", src: "/images/brands/manmachine.png", type: "png" },
-                            { name: "myTVS", src: "/images/brands/myTVS.png", type: "png" },
-                            { name: "Ultrashield", src: "/images/brands/ultrashield.jpg", type: "jpg" },
+                            { name: "myTVS", src: "/images/brands/mytvs.png", type: "png" },
+                            { name: "Petronas", src: "/images/brands/petronas.png", type: "png" },
+                            { name: "PPG Paints", src: "/images/brands/ppg_paints.png", type: "png" },
+                            { name: "Roger", src: "/images/brands/roger.png", type: "png" },
+                            { name: "Solarpro", src: "/images/brands/solarpro.png", type: "png" },
+                            { name: "Ultrashield", src: "/images/brands/ultrashield.png", type: "png" },
                             { name: "Vinfast", src: "/images/brands/vinfast.png", type: "png" },
                             { name: "Wurth", src: "/images/brands/wurth.png", type: "png" },
                         ];
                         return (
-                            <div className="flex w-max animate-partners-marquee items-center py-6">
+                            <div className="flex w-max animate-partners-marquee hover:[animation-play-state:paused] items-center py-6">
                                 {[...partners, ...partners].map((partner, index) => (
                                     <div
                                         key={index}
-                                        className="mx-8 md:mx-12 flex items-center justify-center w-[120px] md:w-[180px] h-[60px] md:h-[80px] group cursor-pointer"
+                                        className="relative mx-6 md:mx-10 rounded-2xl p-[2px] group cursor-pointer transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_0_25px_rgba(255,23,68,0.6)] overflow-hidden"
                                     >
-                                        <img
-                                            src={partner.src}
-                                            alt={partner.name}
-                                            className={`max-h-full max-w-full object-contain transition-all duration-500 group-hover:scale-110 ${partner.type === 'jpg'
-                                                    ? "invert grayscale contrast-200 mix-blend-screen opacity-50 group-hover:opacity-100 group-hover:drop-shadow-[0_0_20px_rgba(255,23,68,0.6)]"
-                                                    : "brightness-0 invert opacity-50 group-hover:opacity-100 group-hover:drop-shadow-[0_0_20px_rgba(255,23,68,0.6)]"
+                                        {/* Animated Sweeping Border */}
+                                        <div className="absolute inset-[-100%] animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#ff1744_50%,transparent_100%)] opacity-70 group-hover:opacity-100 transition-opacity duration-2000"></div>
+
+                                        {/* Inner Card */}
+                                        <div
+                                            className={`relative flex items-center justify-center w-[140px] md:w-[200px] h-[80px] md:h-[100px] rounded-[14px] p-4 md:p-6 ${index % 2 === 0
+                                                ? "bg-gradient-to-br from-black via-red-900 to-white"
+                                                : "bg-gradient-to-br from-white via-red-900 to-black"
                                                 }`}
-                                        />
+                                        >
+                                            <img
+                                                src={partner.src}
+                                                alt={partner.name}
+                                                className="max-h-full max-w-full object-contain transition-all duration-500 opacity-90 group-hover:opacity-100 group-hover:scale-110"
+                                            />
+                                        </div>
                                     </div>
                                 ))}
                             </div>

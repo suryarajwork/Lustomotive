@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Send, Loader2 } from "lucide-react";
+import { X, Send, Loader2, RotateCcw } from "lucide-react";
 
 import Image from "next/image";
 
@@ -30,6 +30,15 @@ type Message = {
 const match = (input: string, ...keywords: string[]): boolean =>
     keywords.some((k) => input.includes(k));
 
+const renderTextWithStrikethrough = (text: string) => {
+    return text.split(/(~~.*?~~)/).map((part, i) => {
+        if (part.startsWith('~~') && part.endsWith('~~')) {
+            return <s key={i} className="opacity-70 text-[11px]">{part.slice(2, -2)}</s>;
+        }
+        return part;
+    });
+};
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Knowledge Base — returns text + contextual follow-up chips
 // ─────────────────────────────────────────────────────────────────────────────
@@ -39,7 +48,7 @@ const getBotReply = (raw: string): BotReply => {
     // ── Greetings ──────────────────────────────────────────────────────────────
     if (match(q, "hi", "hello", "hey", "hii", "greet", "namaste", "hlo", "sup", "start", "begin"))
         return {
-            text: "Hey there! 👋 Welcome to Lustomotive Auto Solutions — West Bengal's #1 Auto Care destination. How can I assist you today?",
+            text: "Hey there! 👋 Welcome to Lustomotive Auto Solution — West Bengal's #1 Auto Care destination. How can I assist you today?",
             chips: ["Services", "Pricing", "Book Appointment", "Location"],
         };
 
@@ -58,9 +67,9 @@ const getBotReply = (raw: string): BotReply => {
         };
 
     // ── About / Who ───────────────────────────────────────────────────────────
-    if (match(q, "about", "who are you", "who is lustomotive", "company", "brand", "studio", "amar bharat", "what is this", "tell me about", "detailing studio"))
+    if (match(q, "about", "who are you", "who is lustomotive", "company", "brand", "studio", "amar bharat", "what is this", "tell me about", "Auto Solution", "Detailing Studio"))
         return {
-            text: "Lustomotive Detailing Studio is a premium auto care solution located in Panagarh, West Bengal. We are a proud sub-brand of Amar Bharat Company, offering world-class car detailing, PPF, ceramic coatings, interior restoration, and paint correction — all rooted in The Detailing Mafia's proven excellence standards.",
+            text: "Lustomotive Auto Solution is a premium auto care solution located in Panagarh, West Bengal. We are a proud sub-brand of Amar Bharat Company, offering world-class car detailing, PPF, ceramic coatings, interior restoration, and paint correction — all rooted in The Detailing Mafia's proven excellence standards.",
             chips: ["Our Services", "Why Choose Us", "Our Partners", "Location"],
         };
 
@@ -130,7 +139,7 @@ const getBotReply = (raw: string): BotReply => {
     // ── All Pricing ───────────────────────────────────────────────────────────
     if (match(q, "package", "plan", "bundle", "pricing", "price", "cost", "rate", "fee", "charge", "how much", "tariff", "rupee", "affordable", "₹") && !match(q, "complete", "ceramic special", "maintenance package", "ppf price", "ceramic price", "interior"))
         return {
-            text: "We have 3 Special Offer Packages:\n\n🔵 Complete Detailing — ₹12,500 (was ₹15,000)\n   Exterior wash, interior deep clean, paint decontamination, leather conditioning, engine bay\n\n🔴 Ceramic Coating Special — ₹29,999 (was ₹35,000) — Best Value\n   3-year ceramic, 2-step paint correction, glass & wheel protection\n\n🟡 Maintenance Package — ₹6,500 (was ₹8,000)\n   Exterior wash, vacuum, tyre dressing, window & dashboard cleaning\n\n🎁 First-time booking? Get an extra 10% discount!\nVisit: offers.lustomotive.com",
+            text: "We have 3 Special Offer Packages:\n\n🔵 Complete Detailing — ₹12,500 ~~₹15,000~~\n   Exterior wash, interior deep clean, paint decontamination, leather conditioning, engine bay\n\n🔴 Ceramic Coating Special — ₹29,999 ~~₹35,000~~ — Best Value\n   3-year ceramic, 2-step paint correction, glass & wheel protection\n\n🟡 Maintenance Package — ₹6,500 ~~₹8,000~~\n   Exterior wash, vacuum, tyre dressing, window & dashboard cleaning\n\n🎁 First-time booking? Get an extra 10% discount!\nVisit: offers.lustomotive.com",
             chips: ["Complete Detailing Package", "Ceramic Coating Special", "Maintenance Package", "Discounts"],
         };
 
@@ -144,21 +153,21 @@ const getBotReply = (raw: string): BotReply => {
     // ── Ceramic Price ─────────────────────────────────────────────────────────
     if (match(q, "ceramic price", "ceramic cost", "price of ceramic", "cost of ceramic", "how much ceramic", "ceramic coating price", "ceramic coating special"))
         return {
-            text: "The Ceramic Coating Special Package is priced at ₹29,999 (originally ₹35,000) — Best Value!\n\nThis includes:\n✅ 3-year ceramic coating\n✅ 2-step paint correction\n✅ Glass treatment\n✅ Wheel & interior protection",
+            text: "The Ceramic Coating Special Package is priced at ₹29,999 ~~₹35,000~~ — Best Value!\n\nThis includes:\n✅ 3-year ceramic coating\n✅ 2-step paint correction\n✅ Glass treatment\n✅ Wheel & interior protection",
             chips: ["Book Appointment", "PPF vs Ceramic", "Complete Package", "Discounts"],
         };
 
     // ── Complete Detailing Package ────────────────────────────────────────────
     if (match(q, "complete detailing", "full detailing", "complete package", "full package", "exterior interior"))
         return {
-            text: "The Complete Detailing Package (₹12,500, was ₹15,000) includes:\n✅ Full exterior wash & wax\n✅ Interior deep cleaning\n✅ Paint decontamination\n✅ Leather conditioning\n✅ Engine bay cleaning\n\nPerfect for a head-to-toe rejuvenation of your vehicle!",
+            text: "The Complete Detailing Package (₹12,500, ~~₹15,000~~) includes:\n✅ Full exterior wash & wax\n✅ Interior deep cleaning\n✅ Paint decontamination\n✅ Leather conditioning\n✅ Engine bay cleaning\n\nPerfect for a head-to-toe rejuvenation of your vehicle!",
             chips: ["Book Appointment", "Ceramic Coating Special", "Maintenance Package", "Discounts"],
         };
 
     // ── Maintenance Package ───────────────────────────────────────────────────
     if (match(q, "maintenance package", "basic package", "regular package", "cheapest package"))
         return {
-            text: "The Maintenance Package (₹6,500, was ₹8,000) keeps your car fresh regularly:\n✅ Full exterior wash\n✅ Interior vacuum & wipe down\n✅ Tyre dressing\n✅ Window cleaning\n✅ Dashboard polishing\n\nGreat for monthly or bi-monthly scheduled visits!",
+            text: "The Maintenance Package (₹6,500, ~~₹8,000~~) keeps your car fresh regularly:\n✅ Full exterior wash\n✅ Interior vacuum & wipe down\n✅ Tyre dressing\n✅ Window cleaning\n✅ Dashboard polishing\n\nGreat for monthly or bi-monthly scheduled visits!",
             chips: ["Book Appointment", "Complete Package", "Discounts", "Hours"],
         };
 
@@ -179,7 +188,7 @@ const getBotReply = (raw: string): BotReply => {
     // ── Book / Appointment ────────────────────────────────────────────────────
     if (match(q, "book", "appointment", "slot", "reservation", "when can i", "how to book", "walk in", "walk-in", "visit us"))
         return {
-            text: "To book an appointment:\n\n📱 WhatsApp us at +91 94754 14545 (green button on screen)\n📞 Call us at +91 94754 14545\n📧 Email: Lustomotive@gmail.com\n\nWe're open Mon–Sat, 9:00 AM to 7:00 PM. Walk-ins are welcome but we recommend booking in advance for your preferred slot!",
+            text: "To book an appointment:\n\n📱 WhatsApp us at +91 94754 14545 (green button on screen)\n📞 Call us at +91 94754 14545\n📧 Email: Lustomotive@gmail.com\n\nWe're open Tue-Sun, 9:00 AM to 7:00 PM. Walk-ins are welcome but we recommend booking in advance for your preferred slot!",
             chips: ["Hours", "Location", "All Packages", "Discounts"],
         };
 
@@ -193,7 +202,7 @@ const getBotReply = (raw: string): BotReply => {
     // ── Phone ─────────────────────────────────────────────────────────────────
     if (match(q, "phone", "mobile", "landline", "phone number") || (match(q, "call", "number") && !match(q, "how long", "time")))
         return {
-            text: "📞 Our contact numbers:\n• +91 94754 14545\n• +91 94754 24545\n\nYou can call or WhatsApp us anytime during business hours (Mon–Sat, 9 AM – 7 PM).",
+            text: "📞 Our contact numbers:\n• +91 94754 14545\n• +91 94754 24545\n\nYou can call or WhatsApp us anytime during business hours (Tue-Sun, 9 AM – 7 PM).",
             chips: ["WhatsApp", "Email", "Book Appointment", "Hours"],
         };
 
@@ -258,14 +267,14 @@ const getBotReply = (raw: string): BotReply => {
     // ── Testimonials / Reviews ────────────────────────────────────────────────
     if (match(q, "review", "testimonial", "feedback", "rating", "customer say", "client say", "happy customer", "what people say", "star", "experience"))
         return {
-            text: "Our clients love us! ⭐⭐⭐⭐⭐\n\n💬 R. Singh (Panagarh): \"My car looks brand new! The attention to detail is truly unmatched.\"\n\n💬 A. Das (Durgapur): \"Ceramic coating is incredible — water beads right off!\"\n\n💬 P. Ghosh (Panagarh): \"Got PPF on my Creta — flawless finish!\"\n\n💬 N. Paul (Asansol): \"Best detailing studio in West Bengal!\"\n\nScroll to our Testimonials section to see all reviews!",
+            text: "Our clients love us! ⭐⭐⭐⭐⭐\n\n💬 R. Singh (Panagarh): \"My car looks brand new! The attention to detail is truly unmatched.\"\n\n💬 A. Das (Durgapur): \"Ceramic coating is incredible — water beads right off!\"\n\n💬 P. Ghosh (Panagarh): \"Got PPF on my Creta — flawless finish!\"\n\n💬 N. Paul (Asansol): \"Best Auto Solution in West Bengal!\"\n\nScroll to our Testimonials section to see all reviews!",
             chips: ["Services", "Pricing", "Book Appointment", "Why Choose Us"],
         };
 
     // ── Stats / Achievements ──────────────────────────────────────────────────
     if (match(q, "how many", "vehicles", "statistic", "achievement", "track record", "how long in business", "years", "stat"))
         return {
-            text: "Our achievements speak for themselves:\n\n🚗 1,000+ Vehicles Detailed\n🏆 2+ Years of Excellence\n😊 92% Customer Satisfaction Rate\n🔑 100+ Cashless Insurance Claims Handled\n\nAnd we're growing faster than ever!",
+            text: "Our achievements speak for themselves:\n\n🚗 799+ Vehicles Detailed\n🏆 3+ Years of Excellence\n😊 96% Customer Satisfaction Rate\n🔑60+ Cashless Insurance Claims Handled\n\nAnd we're growing faster than ever!",
             chips: ["Testimonials", "Why Choose Us", "Services", "Book Appointment"],
         };
 
@@ -346,7 +355,7 @@ const getBotReply = (raw: string): BotReply => {
 const INITIAL_MESSAGE: Message = {
     id: "1",
     sender: "bot",
-    text: "Hello! 👋 Welcome to Lustomotive Detailing Studio — Panagarh's premium car care destination. I can answer anything about our services, pricing, location, packages, and more. How can I help?",
+    text: "Hello! 👋 Welcome to Lustomotive Auto Solution — West Bengal's premium vehicle care destination. I can answer anything about our services, pricing, location, packages, and more. How can I help?",
     chips: ["Services", "Pricing", "Book Appointment", "Location", "Why Choose Us", "Discounts"],
     timestamp: new Date(),
 };
@@ -372,7 +381,7 @@ function SuggestionChips({
                 <button
                     key={chip}
                     onClick={() => onSelect(chip)}
-                    className="text-[11px] px-2.5 py-1 rounded-full border border-red-600/40 text-red-400 hover:bg-red-600/20 hover:border-red-500 hover:text-red-200 transition-all duration-150 font-medium"
+                    className="text-[11px] px-2.5 py-1 rounded-full border border-red-600/40 text-red-400 hover:bg-red-600/20 hover:border-red-500 hover:text-red-200 transition-all duration-150 font-medium cursor-pointer"
                 >
                     {chip}
                 </button>
@@ -458,13 +467,18 @@ export default function Chatbot() {
                         <motion.button
                             whileHover={{ scale: 1.12 }}
                             whileTap={{ scale: 0.9 }}
-                            onClick={() => setIsOpen(true)}
-                            className="relative w-14 h-14 bg-gradient-to-br from-red-600 to-red-900 text-white rounded-full shadow-[0_0_24px_rgba(220,38,38,0.45)] flex items-center justify-center"
+                            onClick={() => {
+                                setIsOpen(true);
+                                setMessages([INITIAL_MESSAGE]);
+                                setInputValue("");
+                                setIsTyping(false);
+                            }}
+                            className="relative w-14 h-14 rounded-full shadow-[0_0_24px_rgba(220,38,38,0.45)] flex items-center justify-center overflow-hidden bg-transparent cursor-pointer"
                             aria-label="Open LustoBot — Your Friendly Assistant"
                         >
                             {/* Pulsing ring */}
                             <span className="absolute inset-0 rounded-full animate-ping bg-red-600/30" />
-                            <Image src="/images/chatbot.png" alt="LustoBot" width={32} height={32} className="relative z-10 drop-shadow-sm pointer-events-none object-contain brightness-0 invert" />
+                            <Image src="/images/Lustomotive_small_logo1.png" alt="LustoBot" width={56} height={56} className="relative z-10 w-full h-full object-cover pointer-events-none rounded-full" />
                         </motion.button>
                     </motion.div>
                 )}
@@ -486,8 +500,8 @@ export default function Chatbot() {
                             <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-red-600/60 to-transparent" />
                             <div className="flex items-center gap-3">
                                 <div className="relative">
-                                    <div className="w-9 h-9 rounded-full bg-red-600/20 border border-red-500/50 flex items-center justify-center overflow-hidden">
-                                        <Image src="/images/chatbot.png" alt="LustoBot" width={22} height={22} className="object-contain brightness-0 invert" />
+                                    <div className="w-9 h-9 rounded-full flex items-center justify-center overflow-hidden bg-transparent">
+                                        <Image src="/images/Lustomotive_small_logo1.png" alt="LustoBot" width={36} height={36} className="w-full h-full object-cover rounded-full" />
                                     </div>
                                     <span className="absolute top-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-black" />
                                 </div>
@@ -496,12 +510,26 @@ export default function Chatbot() {
                                     <p className="text-[0.63rem] text-green-400/80 tracking-widest uppercase">Online · Always here to help</p>
                                 </div>
                             </div>
-                            <button
-                                onClick={() => setIsOpen(false)}
-                                className="p-1.5 text-white/40 hover:text-white hover:bg-white/10 rounded-full transition-colors"
-                            >
-                                <X size={18} />
-                            </button>
+                            <div className="flex items-center gap-1">
+                                <button
+                                    onClick={() => {
+                                        setMessages([INITIAL_MESSAGE]);
+                                        setInputValue("");
+                                        setIsTyping(false);
+                                    }}
+                                    className="p-1.5 text-white/40 hover:text-white hover:bg-white/10 rounded-full transition-colors cursor-pointer"
+                                    title="Restart Conversation"
+                                >
+                                    <RotateCcw size={16} />
+                                </button>
+                                <button
+                                    onClick={() => setIsOpen(false)}
+                                    className="p-1.5 text-white/40 hover:text-white hover:bg-white/10 rounded-full transition-colors cursor-pointer"
+                                    title="Close Chat"
+                                >
+                                    <X size={18} />
+                                </button>
+                            </div>
                         </div>
 
                         {/* Messages */}
@@ -515,23 +543,23 @@ export default function Chatbot() {
                                         className={`flex items-end gap-2 ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
                                     >
                                         {msg.sender === "bot" && (
-                                            <div className="w-7 h-7 rounded-full bg-red-600/10 border border-red-500/30 flex-shrink-0 flex items-center justify-center mb-0.5 overflow-hidden">
-                                                <Image src="/images/chatbot.png" alt="LustoBot" width={16} height={16} className="object-contain brightness-0 invert" />
+                                            <div className="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center mb-0.5 overflow-hidden bg-transparent">
+                                                <Image src="/images/Lustomotive_small_logo1.png" alt="LustoBot" width={28} height={28} className="w-full h-full object-cover rounded-full" />
                                             </div>
                                         )}
                                         <div
-                                            className={`px-3.5 py-2.5 max-w-[82%] rounded-2xl text-[13px] leading-relaxed whitespace-pre-line ${msg.sender === "user"
+                                            className={`px-3.5 py-2.5 max-w-[82%] rounded-2xl text-[13px] leading-relaxed whitespace-pre-line text-justify ${msg.sender === "user"
                                                 ? "bg-red-600 text-white rounded-br-sm"
                                                 : "bg-white/[0.08] text-white/90 rounded-bl-sm border border-white/[0.06]"
                                                 }`}
                                         >
-                                            {msg.text}
+                                            {renderTextWithStrikethrough(msg.text)}
                                             {msg.a && (
                                                 <a
                                                     href={msg.a.href}
                                                     target={msg.a.target}
                                                     rel={msg.a.rel}
-                                                    className={msg.a.className || "text-red-400 underline mt-2 block"}
+                                                    className={msg.a.className ? `${msg.a.className} cursor-pointer` : "text-red-400 underline mt-2 block cursor-pointer"}
                                                 >
                                                     {msg.a.text || "Click here"}
                                                 </a>
@@ -570,8 +598,8 @@ export default function Chatbot() {
                                     animate={{ opacity: 1, y: 0 }}
                                     className="flex items-end gap-2 justify-start"
                                 >
-                                    <div className="w-7 h-7 rounded-full bg-red-600/10 border border-red-500/30 flex-shrink-0 flex items-center justify-center overflow-hidden">
-                                        <Image src="/images/chatbot.png" alt="LustoBot" width={16} height={16} className="object-contain brightness-0 invert" />
+                                    <div className="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center overflow-hidden bg-transparent">
+                                        <Image src="/images/Lustomotive_small_logo1.png" alt="LustoBot" width={28} height={28} className="w-full h-full object-cover rounded-full" />
                                     </div>
                                     <div className="px-4 py-3 rounded-2xl rounded-bl-sm bg-white/[0.08] border border-white/[0.06] flex items-center gap-1">
                                         {[0, 0.18, 0.36].map((delay, i) => (
@@ -602,7 +630,7 @@ export default function Chatbot() {
                                 <button
                                     type="submit"
                                     disabled={!inputValue.trim() || isTyping}
-                                    className="absolute right-1.5 p-2 bg-red-600 hover:bg-red-500 text-white rounded-full transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                                    className="absolute right-1.5 p-2 bg-red-600 hover:bg-red-500 text-white rounded-full transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
                                 >
                                     {isTyping ? <Loader2 size={15} className="animate-spin" /> : <Send size={15} />}
                                 </button>
