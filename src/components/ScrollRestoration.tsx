@@ -1,13 +1,15 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
+
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 export default function ScrollRestoration() {
   const pathname = usePathname();
   const isInitialMount = useRef(true);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     // Tell the browser not to attempt its own scroll restoration
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
