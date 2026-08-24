@@ -17,5 +17,6 @@ MAIN CHANGES:
 
 
 LOW-PRIORITY
-#1. Review Pricing for each section --Done
-#2. go through BOT throuroughly, check and correct the conversation flow if needed --Done
+#1. Add Loader --Done
+#2. Review Pricing for each section --Done
+#3. go through BOT throuroughly, check and correct the conversation flow if needed --Done

@@ -106,3 +106,37 @@ html::-webkit-scrollbar {
 .animate-marquee:hover {
   animation-play-state: paused;
 }
+
+/* Preloader Animations */
+@keyframes spin-slow {
+  100% { transform: rotate(360deg); }
+}
+@keyframes spin-slow-reverse {
+  100% { transform: rotate(-360deg); }
+}
+@keyframes slide-right {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+@keyframes pulse-custom {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+.animate-spin-slow {
+  animation: spin-slow 3s linear infinite;
+}
+.animate-spin-slow-reverse {
+  animation: spin-slow-reverse 2s linear infinite;
+}
+.animate-slide-right {
+  animation: slide-right 1.5s ease-in-out infinite;
+}
+.animate-dot-1 {
+  animation: pulse-custom 1.5s infinite;
+}
+.animate-dot-2 {
+  animation: pulse-custom 1.5s infinite 0.2s;
+}
+.animate-dot-3 {
+  animation: pulse-custom 1.5s infinite 0.4s;
+}

@@ -20,28 +20,21 @@ export default function Preloader() {
     <AnimatePresence>
       {isLoading && (
         <motion.div
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0, scale: 1.05, filter: "blur(10px)" }}
+          initial={{ opacity: 1, backgroundColor: "rgba(5, 5, 5, 1)" }}
+          animate={{ backgroundColor: "rgba(5, 5, 5, 0.3)" }}
+          exit={{ opacity: 0, scale: 1.05 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="fixed inset-0 z-[9999] bg-[#050505] flex flex-col items-center justify-center overflow-hidden"
+          className="fixed inset-0 z-[9999] backdrop-blur-md md:backdrop-blur-2xl flex flex-col items-center justify-center overflow-hidden"
         >
-          {/* Background Ambient Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#ff1744]/20 blur-[100px] rounded-full pointer-events-none"></div>
+          {/* Background Ambient Glow (Optimized for Mobile) */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] md:w-[300px] md:h-[300px] bg-[radial-gradient(circle,_rgba(255,23,68,0.25)_0%,_transparent_70%)] rounded-full pointer-events-none"></div>
 
           {/* Loader container */}
           <div className="relative flex items-center justify-center">
             {/* Outer Spinning Ring */}
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
-              className="absolute w-32 h-32 md:w-40 md:h-40 rounded-full border border-white/5 border-t-[#ff1744] shadow-[0_0_20px_rgba(255,23,68,0.3)]"
-            />
+            <div className="absolute w-32 h-32 md:w-40 md:h-40 rounded-full border border-white/5 border-t-[#ff1744] shadow-[0_0_20px_rgba(255,23,68,0.3)] animate-spin-slow" />
             {/* Inner Spinning Ring */}
-            <motion.div
-              animate={{ rotate: -360 }}
-              transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
-              className="absolute w-24 h-24 md:w-32 md:h-32 rounded-full border border-white/5 border-b-[#ff1744] border-l-[#ff1744]/30"
-            />
+            <div className="absolute w-24 h-24 md:w-32 md:h-32 rounded-full border border-white/5 border-b-[#ff1744] border-l-[#ff1744]/30 animate-spin-slow-reverse" />
 
             {/* Center Logo */}
             <motion.div
@@ -72,20 +65,15 @@ export default function Preloader() {
 
               {/* Pulsing dots */}
               <span className="flex gap-1 ml-2 text-[#ff1744]">
-                <motion.span animate={{ opacity: [0, 1, 0] }} transition={{ repeat: Infinity, duration: 1.5, delay: 0 }}>.</motion.span>
-                <motion.span animate={{ opacity: [0, 1, 0] }} transition={{ repeat: Infinity, duration: 1.5, delay: 0.2 }}>.</motion.span>
-                <motion.span animate={{ opacity: [0, 1, 0] }} transition={{ repeat: Infinity, duration: 1.5, delay: 0.4 }}>.</motion.span>
+                <span className="animate-dot-1">.</span>
+                <span className="animate-dot-2">.</span>
+                <span className="animate-dot-3">.</span>
               </span>
             </div>
 
             {/* Progress line */}
             <div className="w-48 sm:w-64 h-[1.5px] bg-white/5 mt-5 rounded-full overflow-hidden relative">
-              <motion.div
-                initial={{ left: "-100%" }}
-                animate={{ left: "100%" }}
-                transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-                className="absolute top-0 bottom-0 w-1/2 bg-gradient-to-r from-transparent via-[#ff1744] to-transparent shadow-[0_0_10px_rgba(255,23,68,1)]"
-              />
+              <div className="absolute top-0 bottom-0 w-1/2 bg-gradient-to-r from-transparent via-[#ff1744] to-transparent shadow-[0_0_10px_rgba(255,23,68,1)] animate-slide-right" />
             </div>
           </motion.div>
 
