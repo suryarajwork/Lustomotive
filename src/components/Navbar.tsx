@@ -143,7 +143,7 @@ export default function Navbar() {
                                 </a>
 
                                 {/* WhatsApp Brand Logo */}
-                                <a href="https://wa.me/919475424545?text=Hi%20Lustomotive%20team%2C%20I'm%20contacting%20you%20via%20your%20website."
+                                <a href="https://wa.me/918340129864?text=Hi%20Lustomotive%20Team!%0A%0AI%E2%80%99d%20like%20to%20book%20an%20appointment%20for%20my%20vehicle.%0A%0APlease%20let%20me%20know%20the%20available%20slots%20and%20the%20details%20you%20need%20from%20me.%0A%0AThank%20you!"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-white hover:text-[#25D366] transition-colors relative group"
@@ -280,7 +280,7 @@ export default function Navbar() {
                             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#ff1744] hover:drop-shadow-[0_0_10px_rgba(255,23,68,0.8)] transition-all hover:-translate-y-2">
                                 <FaInstagram className="w-6 h-6 sm:w-8 sm:h-8" />
                             </a>
-                            <a href="https://wa.me/919475424545" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#ff1744] hover:drop-shadow-[0_0_10px_rgba(255,23,68,0.8)] transition-all hover:-translate-y-2">
+                            <a href="https://wa.me/918340129864?text=Hi%20Lustomotive%20Team!%0A%0AI%E2%80%99d%20like%20to%20book%20an%20appointment%20for%20my%20vehicle.%0A%0APlease%20let%20me%20know%20the%20available%20slots%20and%20the%20details%20you%20need%20from%20me.%0A%0AThank%20you!" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#ff1744] hover:drop-shadow-[0_0_10px_rgba(255,23,68,0.8)] transition-all hover:-translate-y-2">
                                 <FaWhatsapp className="w-6 h-6 sm:w-8 sm:h-8" />
                             </a>
                             <a href="https://maps.app.goo.gl/QEgLTb45cyx8QbW58" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#ff1744] hover:drop-shadow-[0_0_10px_rgba(255,23,68,0.8)] transition-all hover:-translate-y-2">

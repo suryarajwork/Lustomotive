@@ -214,10 +214,7 @@ export default function Services() {
                                     onMouseEnter={() => setIsBtnHovered(true)}
                                     onMouseLeave={() => setIsBtnHovered(false)}
                                     onClick={() => {
-                                        setSelectedService(null);
-                                        setTimeout(() => {
-                                            document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                                        }, 300);
+                                        window.open(`https://wa.me/918340129864?text=${encodeURIComponent(`Hi Lustomotive Team!\n\nI’d like to book an appointment for the ${selectedService.title} service.\n\nPlease let me know the available slots and the next steps to confirm my booking.\n\nThank you!`)}`, '_blank');
                                     }}
                                     className="mt-auto px-8 py-4 border border-[#ff1744] font-orbitron font-bold uppercase tracking-wider rounded-lg transition-all duration-300 w-full cursor-pointer"
                                     style={{

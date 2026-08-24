@@ -113,13 +113,16 @@ export default function Offers() {
                         const scale = ticketWidth / 741;
 
                         return (
-                            <motion.div
+                            <motion.a
+                                href={`https://wa.me/918340129864?text=${encodeURIComponent(`Hi Lustomotive Team!\n\nI’d like to book an appointment for the ${pkg.name} special offer package.\n\nPlease let me know the available slots and the next steps to confirm my booking.\n\nThank you!`)}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 key={pkg.name}
                                 initial={{ opacity: 0, y: 50 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: false, margin: "-50px" }}
                                 transition={{ duration: 0.8, delay: idx * 0.1 }}
-                                className="relative group cursor-pointer shrink-0"
+                                className="relative group cursor-pointer shrink-0 block"
                             >
                                 {/* Glowing effect for popular items behind the ticket */}
                                 {/* {pkg.popular && (
@@ -153,7 +156,7 @@ export default function Offers() {
                                         </ul>
                                     </div>
                                 </AdmitOneTicket>
-                            </motion.div>
+                            </motion.a>
                         );
                     })}
                 </div>
@@ -175,7 +178,9 @@ export default function Offers() {
                         <span className="text-gray-400">- Book your slot today and get an extra 10% discount!</span>
                     </p>
                     <a
-                        href="#contact"
+                        href="https://wa.me/918340129864?text=Hi%20Lustomotive%20Team!%0A%0AI%E2%80%99d%20like%20to%20book%20an%20appointment%20for%20my%20vehicle.%0A%0APlease%20let%20me%20know%20the%20available%20slots%20and%20the%20details%20you%20need%20from%20me.%0A%0AThank%20you!"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="inline-flex items-center text-white border border-[#ff1744] bg-[#ff1744]/5 hover:bg-[#ff1744]/20 uppercase font-bold text-sm tracking-[0.2em] py-4 px-10 rounded-full transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,23,68,0.3)] hover:shadow-[0_0_30px_rgba(255,23,68,0.6)] group"
                     >
                         <Tag className="w-5 h-5 mr-3 group-hover:-rotate-12 transition-transform" /> Unlock Exclusive Deals
