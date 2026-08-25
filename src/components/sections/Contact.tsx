@@ -1,11 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useState, MouseEvent } from "react";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Phone, Clock } from "lucide-react";
 
 export default function Contact() {
     const [isWaHovered, setIsWaHovered] = useState(false);
+
+    const handleMouseMove = (e: MouseEvent<HTMLDivElement | HTMLAnchorElement>) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const glow = e.currentTarget.querySelector('.mouse-glow') as HTMLElement | null;
+        if (glow) {
+            glow.style.background = `radial-gradient(350px circle at ${x}px ${y}px, rgba(255, 23, 68, 0.4), transparent 70%)`;
+        }
+    };
 
     return (
         <section id="contact" className="pt-12 md:pt-16 pb-20 md:pb-28 bg-transparent relative overflow-hidden">
@@ -49,48 +59,82 @@ export default function Contact() {
                             {/* The 4 Quadrants Container */}
                             <div className="grid grid-cols-2 grid-rows-2 gap-1 sm:gap-2 h-full relative z-0">
                                 {/* Box 1: Location */}
-                                <div className={`bg-white/5 rounded-[2rem] sm:rounded-[3.5rem] p-4 sm:p-8 flex flex-col items-center justify-center text-center transition-all duration-500 overflow-hidden relative group/box hover:bg-white/10`}>
-                                    <div className="absolute top-0 right-0 w-32 h-32 bg-[#25D366]/5 rounded-full blur-[40px] opacity-0 group-has-[:hover]:opacity-100 transition-opacity"></div>
-                                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full mb-2 sm:mb-4 bg-black flex items-center justify-center relative z-10 transition-colors">
-                                        <MapPin className="text-gray-400 group-hover/box:text-[#ff1744] w-4 h-4 sm:w-5 sm:h-5 transition-colors" />
-                                    </div>
-                                    <h3 className="font-orbitron font-bold text-white text-[0.85rem] sm:text-base mb-1 relative z-10">Location</h3>
+                                <motion.div
+                                    onMouseMove={handleMouseMove}
+                                    onMouseEnter={(e) => { const g = e.currentTarget.querySelector('.mouse-glow') as HTMLElement; if (g) g.style.opacity = '1'; }}
+                                    onMouseLeave={(e) => { const g = e.currentTarget.querySelector('.mouse-glow') as HTMLElement; if (g) g.style.opacity = '0'; }}
+                                    whileHover={{ scale: 1.02, y: -2 }}
+                                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                                    className="group relative bg-white/5 rounded-[2rem] sm:rounded-[3.5rem] p-4 sm:p-8 flex flex-col items-center justify-center text-center overflow-hidden border border-transparent cursor-pointer z-10"
+                                >
+                                    <div className="mouse-glow absolute inset-0 opacity-0 transition-opacity duration-300 pointer-events-none z-0"></div>
+                                    <div className={`absolute -bottom-16 -right-16 w-48 h-48 bg-[#25D366]/30 rounded-full blur-[60px] transition-all duration-700 ease-in-out pointer-events-none ${isWaHovered ? "opacity-100 scale-150" : "opacity-0 scale-50"}`}></div>
+                                    <motion.div whileHover={{ scale: 1.1, backgroundColor: "rgba(255,23,68,0.1)" }} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full mb-2 sm:mb-4 bg-black flex items-center justify-center relative z-10 transition-colors shadow-lg group-hover:shadow-red-500/20">
+                                        <MapPin className="text-gray-400 group-hover:text-[#ff1744] w-4 h-4 sm:w-5 sm:h-5 transition-colors" />
+                                    </motion.div>
+                                    <h3 className="font-orbitron font-bold text-white text-[0.85rem] sm:text-base mb-1 relative z-10 transition-colors group-hover:text-[#ff1744]">Location</h3>
                                     <p className="text-gray-400 font-light text-[0.65rem] sm:text-xs relative z-10 hidden sm:block">Panagarh, West Bengal</p>
                                     <p className="text-gray-400 font-light text-[0.65rem] sm:text-xs relative z-10 sm:hidden max-w-[80px]">Panagarh</p>
-                                </div>
+                                </motion.div>
 
                                 {/* Box 2: Call Us */}
-                                <a href="tel:+919475414545" className={`bg-white/5 rounded-[2rem] sm:rounded-[3.5rem] p-4 sm:p-8 flex flex-col items-center justify-center text-center transition-all duration-500 overflow-hidden relative group/box hover:bg-white/10`}>
-                                    <div className="absolute top-0 left-0 w-32 h-32 bg-[#25D366]/5 rounded-full blur-[40px] opacity-0 group-has-[:hover]:opacity-100 transition-opacity"></div>
-                                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full mb-2 sm:mb-4 bg-black flex items-center justify-center relative z-10 transition-colors">
-                                        <Phone className="text-gray-400 group-hover/box:text-[#ff1744] w-4 h-4 sm:w-5 sm:h-5 transition-colors" />
-                                    </div>
-                                    <h3 className="font-orbitron font-bold text-white text-[0.85rem] sm:text-base mb-1 relative z-10">Call Us</h3>
+                                <motion.a
+                                    href="tel:+919475414545"
+                                    onMouseMove={handleMouseMove}
+                                    onMouseEnter={(e) => { const g = e.currentTarget.querySelector('.mouse-glow') as HTMLElement; if (g) g.style.opacity = '1'; }}
+                                    onMouseLeave={(e) => { const g = e.currentTarget.querySelector('.mouse-glow') as HTMLElement; if (g) g.style.opacity = '0'; }}
+                                    whileHover={{ scale: 1.02, y: -2 }}
+                                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                                    className="group relative bg-white/5 rounded-[2rem] sm:rounded-[3.5rem] p-4 sm:p-8 flex flex-col items-center justify-center text-center overflow-hidden border border-transparent cursor-pointer z-10"
+                                >
+                                    <div className="mouse-glow absolute inset-0 opacity-0 transition-opacity duration-300 pointer-events-none z-0"></div>
+                                    <div className={`absolute -bottom-16 -left-16 w-48 h-48 bg-[#25D366]/30 rounded-full blur-[60px] transition-all duration-700 ease-in-out pointer-events-none ${isWaHovered ? "opacity-100 scale-150" : "opacity-0 scale-50"}`}></div>
+                                    <motion.div whileHover={{ scale: 1.1, backgroundColor: "rgba(255,23,68,0.1)" }} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full mb-2 sm:mb-4 bg-black flex items-center justify-center relative z-10 transition-colors shadow-lg group-hover:shadow-red-500/20">
+                                        <Phone className="text-gray-400 group-hover:text-[#ff1744] w-4 h-4 sm:w-5 sm:h-5 transition-colors" />
+                                    </motion.div>
+                                    <h3 className="font-orbitron font-bold text-white text-[0.85rem] sm:text-base mb-1 relative z-10 transition-colors group-hover:text-[#ff1744]">Call Us</h3>
                                     <p className="text-gray-400 font-light text-[0.65rem] sm:text-xs relative z-10 hidden sm:block">+91 94754 14545</p>
                                     <p className="text-gray-400 font-light text-[0.65rem] sm:text-xs relative z-10 sm:hidden">+91 94754...</p>
-                                </a>
+                                </motion.a>
 
                                 {/* Box 3: Email */}
-                                <a href="mailto:Lustomotive@gmail.com" className={`bg-white/5 rounded-[2rem] sm:rounded-[3.5rem] p-4 sm:p-8 flex flex-col items-center justify-center text-center transition-all duration-500 overflow-hidden relative group/box hover:bg-white/10`}>
-                                    <div className="absolute bottom-0 right-0 w-32 h-32 bg-[#25D366]/5 rounded-full blur-[40px] opacity-0 group-has-[:hover]:opacity-100 transition-opacity"></div>
-                                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full mb-2 sm:mb-4 bg-black flex items-center justify-center relative z-10 transition-colors">
-                                        <Mail className="text-gray-400 group-hover/box:text-[#ff1744] w-4 h-4 sm:w-5 sm:h-5 transition-colors" />
-                                    </div>
-                                    <h3 className="font-orbitron font-bold text-white text-[0.85rem] sm:text-base mb-1 relative z-10">Email</h3>
+                                <motion.a
+                                    href="mailto:Lustomotive@gmail.com"
+                                    onMouseMove={handleMouseMove}
+                                    onMouseEnter={(e) => { const g = e.currentTarget.querySelector('.mouse-glow') as HTMLElement; if (g) g.style.opacity = '1'; }}
+                                    onMouseLeave={(e) => { const g = e.currentTarget.querySelector('.mouse-glow') as HTMLElement; if (g) g.style.opacity = '0'; }}
+                                    whileHover={{ scale: 1.02, y: -2 }}
+                                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                                    className="group relative bg-white/5 rounded-[2rem] sm:rounded-[3.5rem] p-4 sm:p-8 flex flex-col items-center justify-center text-center overflow-hidden border border-transparent cursor-pointer z-10"
+                                >
+                                    <div className="mouse-glow absolute inset-0 opacity-0 transition-opacity duration-300 pointer-events-none z-0"></div>
+                                    <div className={`absolute -top-16 -right-16 w-48 h-48 bg-[#25D366]/30 rounded-full blur-[60px] transition-all duration-700 ease-in-out pointer-events-none ${isWaHovered ? "opacity-100 scale-150" : "opacity-0 scale-50"}`}></div>
+                                    <motion.div whileHover={{ scale: 1.1, backgroundColor: "rgba(255,23,68,0.1)" }} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full mb-2 sm:mb-4 bg-black flex items-center justify-center relative z-10 transition-colors shadow-lg group-hover:shadow-red-500/20">
+                                        <Mail className="text-gray-400 group-hover:text-[#ff1744] w-4 h-4 sm:w-5 sm:h-5 transition-colors" />
+                                    </motion.div>
+                                    <h3 className="font-orbitron font-bold text-white text-[0.85rem] sm:text-base mb-1 relative z-10 transition-colors group-hover:text-[#ff1744]">Email</h3>
                                     <p className="text-gray-400 font-light text-[0.65rem] sm:text-xs relative z-10 max-w-[100%] truncate hidden sm:block">Lustomotive@gmail.com</p>
                                     <p className="text-gray-400 font-light text-[0.65rem] sm:text-xs relative z-10 max-w-[80px] truncate sm:hidden">Lustom...</p>
-                                </a>
+                                </motion.a>
 
                                 {/* Box 4: Hours */}
-                                <div className={`bg-white/5 rounded-[2rem] sm:rounded-[3.5rem] p-4 sm:p-8 flex flex-col items-center justify-center text-center transition-all duration-500 overflow-hidden relative group/box hover:bg-white/10`}>
-                                    <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#25D366]/5 rounded-full blur-[40px] opacity-0 group-has-[:hover]:opacity-100 transition-opacity"></div>
-                                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full mb-2 sm:mb-4 bg-black flex items-center justify-center relative z-10 transition-colors">
-                                        <Clock className="text-gray-400 group-hover/box:text-[#ff1744] w-4 h-4 sm:w-5 sm:h-5 transition-colors" />
-                                    </div>
-                                    <h3 className="font-orbitron font-bold text-white text-[0.85rem] sm:text-base mb-1 relative z-10">Hours</h3>
+                                <motion.div
+                                    onMouseMove={handleMouseMove}
+                                    onMouseEnter={(e) => { const g = e.currentTarget.querySelector('.mouse-glow') as HTMLElement; if (g) g.style.opacity = '1'; }}
+                                    onMouseLeave={(e) => { const g = e.currentTarget.querySelector('.mouse-glow') as HTMLElement; if (g) g.style.opacity = '0'; }}
+                                    whileHover={{ scale: 1.02, y: -2 }}
+                                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                                    className="group relative bg-white/5 rounded-[2rem] sm:rounded-[3.5rem] p-4 sm:p-8 flex flex-col items-center justify-center text-center overflow-hidden border border-transparent cursor-pointer z-10"
+                                >
+                                    <div className="mouse-glow absolute inset-0 opacity-0 transition-opacity duration-300 pointer-events-none z-0"></div>
+                                    <div className={`absolute -top-16 -left-16 w-48 h-48 bg-[#25D366]/30 rounded-full blur-[60px] transition-all duration-700 ease-in-out pointer-events-none ${isWaHovered ? "opacity-100 scale-150" : "opacity-0 scale-50"}`}></div>
+                                    <motion.div whileHover={{ scale: 1.1, backgroundColor: "rgba(255,23,68,0.1)" }} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full mb-2 sm:mb-4 bg-black flex items-center justify-center relative z-10 transition-colors shadow-lg group-hover:shadow-red-500/20">
+                                        <Clock className="text-gray-400 group-hover:text-[#ff1744] w-4 h-4 sm:w-5 sm:h-5 transition-colors" />
+                                    </motion.div>
+                                    <h3 className="font-orbitron font-bold text-white text-[0.85rem] sm:text-base mb-1 relative z-10 transition-colors group-hover:text-[#ff1744]">Hours</h3>
                                     <p className="text-gray-400 font-light text-[0.65rem] sm:text-xs relative z-10 hidden sm:block">Mon-Sat: 9AM – 7PM</p>
                                     <p className="text-gray-400 font-light text-[0.65rem] sm:text-xs relative z-10 sm:hidden">9AM – 7PM</p>
-                                </div>
+                                </motion.div>
                             </div>
 
                             {/* CENTER WHATSAPP CUTOUT */}
