@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from 
 import { BlurText } from "@/components/ui/blur-text";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Shield, Zap, Settings, Crosshair } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -65,6 +66,115 @@ const CinematicText = memo(function CinematicText({
     );
 });
 
+// ── Hyper-Engine Reactor Component ───────────────────────────────────────
+const HyperReactor = memo(function HyperReactor({ opacity, scale }: { opacity: any, scale: any }) {
+    return (
+        <motion.div style={{ opacity, scale }} className="relative flex items-center justify-center w-[250px] h-[250px] xl:w-[350px] xl:h-[350px] pointer-events-none">
+            
+            {/* Deep Background Glow */}
+            <motion.div 
+                animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute inset-0 bg-[#ff1744]/20 blur-[80px] rounded-full" 
+            />
+
+            {/* Crosshairs (Static) */}
+            <div className="absolute inset-[10%] flex items-center justify-center">
+                <div className="w-full h-[1px] bg-white/5" />
+                <div className="h-full w-[1px] bg-white/5 absolute" />
+            </div>
+
+            {/* Outer Containment Ring */}
+            <div className="absolute inset-[5%] rounded-full border-2 border-white/5 shadow-[inset_0_0_30px_rgba(255,23,68,0.1)]" />
+
+            {/* Tech Ring 1 (Dashed thin) - Rotates Clockwise */}
+            <motion.div 
+                animate={{ rotate: 360 }}
+                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-[8%]"
+            >
+                <svg className="w-full h-full" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="48" fill="none" stroke="rgba(255,23,68,0.4)" strokeWidth="0.5" strokeDasharray="4 2 8 2" />
+                </svg>
+            </motion.div>
+
+            {/* Turbine Blades (Thick white accents) - Rotates Clockwise */}
+            <motion.div 
+                animate={{ rotate: 360 }}
+                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-[15%] rounded-full"
+            >
+                {Array.from({ length: 12 }).map((_, i) => (
+                    <div 
+                        key={i} 
+                        className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full"
+                        style={{ transform: `rotate(${i * 30}deg)` }}
+                    >
+                        <div className="w-[3px] xl:w-[4px] h-6 xl:h-10 bg-gradient-to-b from-white/30 to-transparent mx-auto rounded-full" />
+                    </div>
+                ))}
+            </motion.div>
+
+            {/* Accelerator Ring (Red bold dashed) - Rotates Clockwise like outer ring */}
+            <motion.div 
+                animate={{ rotate: 360 }}
+                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-[25%]"
+            >
+                <svg className="w-full h-full" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="48" fill="none" stroke="#ff1744" strokeWidth="2" strokeDasharray="30 15 5 15" />
+                    <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="1" strokeDasharray="2 4" />
+                </svg>
+            </motion.div>
+
+            {/* Inner Custom Alloy Rim Shape (Twin-Spoke) */}
+            <motion.div 
+                animate={{ rotate: 360 }}
+                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-[28%] flex items-center justify-center rounded-full"
+            >
+                {/* Outer Lip of the Rim */}
+                <div className="absolute inset-0 rounded-full border-[4px] border-[#ff1744]/70 shadow-[0_0_20px_rgba(255,23,68,0.5)]" />
+                {/* Inner Step Lip */}
+                <div className="absolute inset-[6%] rounded-full border border-white/20" />
+                
+                {/* 5 Twin-Spokes */}
+                {Array.from({ length: 5 }).map((_, i) => (
+                    <div 
+                        key={i} 
+                        className="absolute top-1/2 left-1/2 w-10 xl:w-14 h-[48%] origin-top -translate-x-1/2 flex justify-between"
+                        style={{ transform: `rotate(${i * 72}deg) translateX(-50%)` }}
+                    >
+                        <div className="w-[35%] h-full bg-gradient-to-b from-[#ff1744]/90 to-[#ff1744]/10 rounded-b-full shadow-[0_0_15px_rgba(255,23,68,0.4)]" />
+                        <div className="w-[35%] h-full bg-gradient-to-b from-[#ff1744]/90 to-[#ff1744]/10 rounded-b-full shadow-[0_0_15px_rgba(255,23,68,0.4)]" />
+                    </div>
+                ))}
+
+                {/* Inner Hub Ring */}
+                <div className="absolute inset-[35%] rounded-full border-[3px] border-[#ff1744]/60 z-10" />
+            </motion.div>
+
+            {/* Pulsating Logo Core */}
+            <div className="absolute inset-[39%] bg-black rounded-full border border-[#ff1744]/40 shadow-[0_0_15px_rgba(255,23,68,0.4)] flex items-center justify-center overflow-hidden z-20">
+                {/* Pulsating background glow */}
+                <motion.div 
+                    animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.3, 0.1] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute inset-0 bg-[#ff1744] rounded-full blur-[8px]"
+                />
+                
+                {/* Project Logo */}
+                <img 
+                    src="/images/lustomotive_small_logo.png" 
+                    alt="Lustomotive Logo" 
+                    className="relative z-10 w-[75%] h-[75%] object-contain"
+                />
+            </div>
+            
+        </motion.div>
+    );
+});
+
 export default function AboutAnimation() {
     const wrapperRef = useRef<HTMLDivElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -89,6 +199,12 @@ export default function AboutAnimation() {
     const desc2Opacity = useTransform(scrollYProgress, [0.38, 0.48, 0.58, 0.91, 0.97], [0, 1, 1, 1, 0]);
     const desc2Y = useTransform(scrollYProgress, [0.38, 0.50], [35, 0]);
     const overlayOpacity = useTransform(scrollYProgress, [0, 0.04, 0.94, 1.0], [1, 0, 0, 1]);
+    
+    // HUD Rings opacity and scale
+    const hudOpacity = useTransform(scrollYProgress, [0.1, 0.2, 0.85, 0.95], [0, 1, 1, 0]);
+    
+    // Using springProgress makes the scale incredibly smooth and adds a natural physics delay
+    const hudScale = useTransform(springProgress, [0.15, 0.45, 0.85, 0.95], [0.1, 1, 1, 0.85]);
 
     const [playDesc1, setPlayDesc1] = useState(false);
     useMotionValueEvent(desc1Opacity, "change", (latest) => {
@@ -180,53 +296,69 @@ export default function AboutAnimation() {
                     {/* Seamless crossfade */}
                     <motion.div className="absolute inset-0 bg-black pointer-events-none z-20" style={{ opacity: overlayOpacity }} />
 
-                    {/* Left text column — constrained to left half on desktop */}
-                    <div className="absolute inset-y-0 left-0 w-full lg:w-[55%] flex flex-col justify-center px-6 sm:px-14 lg:px-20 z-10">
+                    {/* Desktop Content Layout (Title Top, 3 Columns Below) */}
+                    <div className="absolute inset-0 z-10 flex flex-col pointer-events-none">
+                        
+                        {/* Top Center Title */}
+                        <div className="flex-none pt-[12vh] flex flex-col items-center justify-center">
+                            <motion.h2
+                                style={{ opacity: titleOpacity, y: titleY, fontSize: "clamp(1.8rem, 4.5vw, 4.5rem)" }}
+                                className="font-orbitron font-bold tracking-widest text-white leading-tight drop-shadow-[0_0_20px_rgba(255,23,68,0.5)] mb-3 text-center"
+                            >
+                                About <span className="text-[#ff1744]">Lustomotive</span>
+                            </motion.h2>
 
-                        {/* Title */}
-                        <motion.h2
-                            style={{ opacity: titleOpacity, y: titleY, fontSize: "clamp(1.8rem, 4.5vw, 4.5rem)" }}
-                            className="font-orbitron font-bold tracking-widest text-white leading-tight drop-shadow-[0_0_20px_rgba(255,23,68,0.5)] mb-3"
-                        >
-                            About <span className="text-[#ff1744]">Lustomotive</span>
-                        </motion.h2>
+                            {/* Red accent line (Centered gradient) */}
+                            <motion.div style={{ opacity: lineOpacity }} className="overflow-hidden h-[2px] mb-6 w-40">
+                                <motion.div style={{ width: lineWidth }} className="h-full bg-gradient-to-r from-transparent via-[#ff1744] to-transparent mx-auto" />
+                            </motion.div>
+                        </div>
 
-                        {/* Red accent line */}
-                        <motion.div style={{ opacity: lineOpacity }} className="overflow-hidden h-[2px] mb-6 w-40">
-                            <motion.div style={{ width: lineWidth }} className="h-full bg-gradient-to-r from-[#ff1744] to-transparent" />
-                        </motion.div>
-
-                        {/* Description */}
-                        <motion.div
-                            style={{ opacity: desc1Opacity, y: desc1Y, fontSize: "clamp(0.8rem, 1.4vw, 1.05rem)" }}
-                            className="text-gray-200 font-light leading-relaxed mb-6 text-justify"
-                        >
-                            <p className="text-white font-orbitron uppercase tracking-widest font-bold mb-3" style={{ fontSize: "0.95rem" }}>More Than Just an Auto Workshop.</p>
-                            <BlurText
-                                text="Lustomotive is a complete automotive solution dedicated to keeping your vehicle looking great and performing at its best. From professional detailing and maintenance to mechanical repairs, diagnostics, and customization, we bring everything your vehicle needs under one roof. With quality workmanship and customer-focused service, we aim to make every visit reliable and hassle-free."
-                                delay={15}
-                                stepDuration={0.15}
-                                animateBy="words"
-                                direction="bottom"
-                                play={playDesc1}
-                            />
-                        </motion.div>
-
-                        {/* Mission */}
-                        <motion.div style={{ opacity: desc2Opacity, y: desc2Y }}>
-                            <p className="text-[#ff1744] font-orbitron uppercase tracking-widest font-bold mb-2" style={{ fontSize: "0.75rem" }}>Our Mission</p>
-                            <p className="text-white font-orbitron uppercase tracking-widest font-bold mb-3" style={{ fontSize: "0.95rem" }}>Driven by Quality. Built on Trust.</p>
-                            <div className="text-gray-300 font-light leading-relaxed text-justify" style={{ fontSize: "clamp(0.8rem, 1.4vw, 1.05rem)" }}>
-                                <BlurText
-                                    text="Our mission is to deliver reliable, professional, and transparent automotive services that our customers can trust. We strive to combine skilled expertise, modern solutions, and quality products to provide the right care for every vehicle. At Lustomotive, we're committed to making vehicle ownership easier, safer, and better—one vehicle at a time."
-                                    delay={15}
-                                    stepDuration={0.15}
-                                    animateBy="words"
-                                    direction="bottom"
-                                    play={playDesc2}
-                                />
+                        {/* Three Column Content Area */}
+                        <div className="flex-1 flex flex-row items-center justify-center px-10 lg:px-14 xl:px-20 gap-8 xl:gap-16 pb-[10vh]">
+                            
+                            {/* LEFT: Description */}
+                            <div className="flex-1 max-w-[450px] pointer-events-auto">
+                                <motion.div
+                                    style={{ opacity: desc1Opacity, y: desc1Y, fontSize: "clamp(0.8rem, 1.4vw, 1.05rem)" }}
+                                    className="text-gray-200 font-light leading-relaxed text-justify"
+                                >
+                                    <p className="text-white font-orbitron uppercase tracking-widest font-bold mb-3" style={{ fontSize: "0.95rem" }}>More Than Just an Auto Workshop.</p>
+                                    <BlurText
+                                        text="Lustomotive is a complete automotive solution dedicated to keeping your vehicle looking great and performing at its best. From professional detailing and maintenance to mechanical repairs, diagnostics, and customization, we bring everything your vehicle needs under one roof. With quality workmanship and customer-focused service, we aim to make every visit reliable and hassle-free."
+                                        delay={15}
+                                        stepDuration={0.15}
+                                        animateBy="words"
+                                        direction="bottom"
+                                        play={playDesc1}
+                                    />
+                                </motion.div>
                             </div>
-                        </motion.div>
+
+                            {/* CENTER: HyperReactor */}
+                            <div className="flex-shrink-0">
+                                <HyperReactor opacity={hudOpacity} scale={hudScale} />
+                            </div>
+
+                            {/* RIGHT: Our Mission */}
+                            <div className="flex-1 max-w-[450px] pointer-events-auto">
+                                <motion.div style={{ opacity: desc2Opacity, y: desc2Y }}>
+                                    <p className="text-[#ff1744] font-orbitron uppercase tracking-widest font-bold mb-2 text-right" style={{ fontSize: "0.75rem" }}>Our Mission</p>
+                                    <p className="text-white font-orbitron uppercase tracking-widest font-bold mb-3 text-right" style={{ fontSize: "0.95rem" }}>Driven by Quality. Built on Trust.</p>
+                                    <div className="text-gray-300 font-light leading-relaxed text-justify" style={{ fontSize: "clamp(0.8rem, 1.4vw, 1.05rem)" }}>
+                                        <BlurText
+                                            text="Our mission is to deliver reliable, professional, and transparent automotive services that our customers can trust. We strive to combine skilled expertise, modern solutions, and quality products to provide the right care for every vehicle. At Lustomotive, we're committed to making vehicle ownership easier, safer, and better—one vehicle at a time."
+                                            delay={15}
+                                            stepDuration={0.15}
+                                            animateBy="words"
+                                            direction="bottom"
+                                            play={playDesc2}
+                                        />
+                                    </div>
+                                </motion.div>
+                            </div>
+
+                        </div>
                     </div>
 
                 </div>
