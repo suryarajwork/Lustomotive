@@ -111,11 +111,11 @@ export default function ImageBanner() {
 
                                 {/* Text Content */}
                                 {!item.isBrand && (
-                                    <div className={`absolute bottom-0 left-0 p-6 md:p-8 w-full flex flex-col justify-end h-full transition-all duration-700 z-20 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0 pointer-events-none'}`}>
-                                        <h3 className="font-orbitron font-bold text-white mb-2 uppercase whitespace-nowrap drop-shadow-[0_4px_10px_rgba(0,0,0,1)] text-2xl md:text-3xl">
+                                    <div className={`absolute bottom-0 left-0 p-4 md:p-8 w-full flex flex-col justify-end h-full transition-all duration-700 z-20 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0 pointer-events-none'}`}>
+                                        <h3 className="font-orbitron font-bold text-white mb-1 md:mb-2 uppercase whitespace-normal md:whitespace-nowrap break-words drop-shadow-[0_4px_10px_rgba(0,0,0,1)] text-[1.1rem] leading-tight sm:text-2xl md:text-3xl">
                                             {item.title}
                                         </h3>
-                                        <p className="text-zinc-200 text-sm md:text-base font-medium w-full max-w-lg md:whitespace-nowrap overflow-hidden text-ellipsis drop-shadow-[0_2px_8px_rgba(0,0,0,1)]">
+                                        <p className="text-zinc-200 text-xs sm:text-sm md:text-base font-medium w-full max-w-lg whitespace-normal md:whitespace-nowrap overflow-hidden text-ellipsis drop-shadow-[0_2px_8px_rgba(0,0,0,1)]">
                                             {item.subtitle}
                                         </p>
                                     </div>
