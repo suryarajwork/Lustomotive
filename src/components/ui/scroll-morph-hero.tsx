@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { motion, useTransform, useSpring, useMotionValue, useScroll } from "framer-motion";
+import Image from "next/image";
 
 // --- Types ---
 export type AnimationPhase = "scatter" | "line" | "circle" | "bottom-strip";
@@ -59,10 +60,12 @@ function FlipCard({
                     className="absolute inset-0 h-full w-full overflow-hidden rounded-xl shadow-lg bg-gray-200"
                     style={{ backfaceVisibility: "hidden" }}
                 >
-                    <img
+                    <Image
                         src={src}
                         alt={`hero-${index}`}
-                        className="h-full w-full object-cover"
+                        fill
+                        sizes={`${IMG_WIDTH}px`}
+                        className="object-cover"
                     />
                     <div className="absolute inset-0 bg-black/30 transition-colors group-hover:bg-transparent" />
                 </div>

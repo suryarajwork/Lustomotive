@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, memo } from "react";
 import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from "framer-motion";
 import { BlurText } from "@/components/ui/blur-text";
+import NextImage from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Shield, Zap, Settings, Crosshair } from "lucide-react";
@@ -28,7 +29,7 @@ const CinematicText = memo(function CinematicText({
 }) {
     const [inView, setInView] = useState(false);
     const [isExpanded, setIsExpanded] = useState(false);
-
+    
     // Calculate short text
     const maxLength = 180;
     const isLongText = text.length > maxLength;
@@ -70,10 +71,10 @@ const CinematicText = memo(function CinematicText({
                     direction="bottom"
                     play={inView}
                 />
-
+                
                 {isLongText && (
                     <div className="mt-4 text-center">
-                        <a
+                        <a 
                             onClick={(e) => { e.preventDefault(); setIsExpanded(!isExpanded); }}
                             className="text-[#ff1744] hover:text-white transition-colors duration-300 font-orbitron text-[0.7rem] uppercase tracking-widest font-bold cursor-pointer inline-flex items-center gap-1"
                         >
@@ -89,7 +90,7 @@ const CinematicText = memo(function CinematicText({
 // ── Hyper-Engine Reactor Component ───────────────────────────────────────
 const HyperReactor = memo(function HyperReactor({ opacity, scale }: { opacity: any, scale: any }) {
     return (
-        <motion.div style={{ opacity, scale }} className="relative flex items-center justify-center w-[150px] h-[150px] xl:w-[350px] xl:h-[350px] pointer-events-none">
+        <motion.div style={{ opacity, scale }} className="relative flex items-center justify-center w-[250px] h-[250px] xl:w-[350px] xl:h-[350px] pointer-events-none">
 
             {/* Deep Background Glow */}
             <motion.div
@@ -184,11 +185,15 @@ const HyperReactor = memo(function HyperReactor({ opacity, scale }: { opacity: a
                 />
 
                 {/* Project Logo */}
-                <img
-                    src="/images/lustomotive_small_logo.png"
-                    alt="Lustomotive Logo"
-                    className="relative z-10 w-[75%] h-[75%] object-contain"
-                />
+                <div className="relative z-10 w-[75%] h-[75%]">
+                    <NextImage
+                        src="/images/lustomotive_small_logo.png"
+                        alt="Lustomotive Logo"
+                        fill
+                        sizes="100px"
+                        className="object-contain"
+                    />
+                </div>
             </div>
 
         </motion.div>
