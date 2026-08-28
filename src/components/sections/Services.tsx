@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Gauge, Car, Droplets, Shield, SprayCan, Wrench, X } from "lucide-react";
+import Image from "next/image";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 
 export default function Services() {
@@ -126,10 +127,12 @@ export default function Services() {
 
                                     {/* Image Layer (Fades In via CSS) */}
                                     <div className="service-image absolute inset-0 z-30 pointer-events-none overflow-hidden rounded-xl">
-                                        <img
+                                        <Image
                                             src={service.image}
                                             alt={service.title}
-                                            className="absolute inset-0 w-full h-full object-cover"
+                                            fill
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                            className="object-cover"
                                         />
                                         {/* Gradient and Title overlay on image */}
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-6 md:p-8">
@@ -187,10 +190,12 @@ export default function Services() {
                             </button>
 
                             <div className="w-full md:w-3/5 h-[35vh] md:h-[60vh] relative overflow-hidden bg-black">
-                                <img
+                                <Image
                                     src={selectedService.image}
                                     alt={selectedService.title}
-                                    className="absolute inset-0 w-full h-full object-cover"
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, 60vw"
+                                    className="object-cover"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent md:hidden"></div>
                                 <div className="absolute inset-0 bg-gradient-to-l from-[#050505] to-transparent hidden md:block"></div>

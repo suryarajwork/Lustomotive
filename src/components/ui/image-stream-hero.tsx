@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 export type CorridorPath = {
   perspective?: number;
@@ -143,12 +144,14 @@ export function ImageStreamHero({
                         className="h-full w-full object-cover"
                       />
                     ) : (
-                      <img
+                      <Image
                         src={img.src}
                         alt={img.alt ?? ""}
                         loading="lazy"
                         decoding="async"
-                        className="h-full w-full object-cover"
+                        className="object-cover"
+                        fill
+                        sizes={`${p.cardWidth}cqw`}
                         draggable={false}
                       />
                     )

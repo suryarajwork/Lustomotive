@@ -2,8 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Award, Target, Users, ShieldCheck, Brush, Lightbulb, Heart, Leaf } from "lucide-react";
-
-
+import Image from "next/image";
 
 export default function Features() {
     const features = [
@@ -182,10 +181,12 @@ export default function Features() {
                                                 : "bg-gradient-to-br from-white via-red-900 to-black"
                                                 }`}
                                         >
-                                            <img
+                                            <Image
                                                 src={partner.src}
                                                 alt={partner.name}
-                                                className="max-h-full max-w-full object-contain transition-all duration-500 opacity-90 group-hover:opacity-100 group-hover:scale-110"
+                                                fill
+                                                sizes="(max-width: 768px) 140px, 200px"
+                                                className="object-contain transition-all duration-500 opacity-90 group-hover:opacity-100 group-hover:scale-110 p-2"
                                             />
                                         </div>
                                     </div>

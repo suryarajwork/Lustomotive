@@ -149,9 +149,9 @@ export default function Hero() {
         `}</style>
 
         <div className="relative mb-4 sm:mb-6 mt-10 sm:mt-0">
-          <span className="text-[#ff1744] font-orbitron font-bold tracking-[0.15em] sm:tracking-[0.3em] uppercase text-xs sm:text-sm md:text-lg drop-shadow-lg">
+          <h2 className="text-[#ff1744] font-orbitron font-bold tracking-[0.15em] sm:tracking-[0.3em] uppercase text-xs sm:text-sm md:text-lg drop-shadow-lg">
             West Bengal's #1 Auto Solution
-          </span>
+          </h2>
           <div className="absolute -bottom-1.5 sm:-bottom-2.5 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#d4af37] to-transparent overflow-hidden">
             <div
               className="w-full h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-80"
@@ -161,11 +161,12 @@ export default function Hero() {
         </div>
 
         <h1 className="font-orbitron text-[clamp(1.5rem,8vw,3rem)] min-[600px]:text-5xl sm:text-6xl md:text-8xl lg:text-[10rem] font-black text-white uppercase tracking-wider sm:tracking-widest drop-shadow-[0_0_30px_rgba(255,23,68,0.7)] leading-tight sm:leading-none max-w-full w-full">
-          Lustomotive
+          <span className="sr-only">Lustomotive - West Bengal's #1 Auto Solution</span>
+          <span aria-hidden="true">Lustomotive</span>
         </h1>
-        <h2 className="text-gray-100 mt-2 sm:mt-5 tracking-widest sm:tracking-[0.4em] md:tracking-[0.6em] text-xs sm:text-sm md:text-xl lg:text-2xl uppercase font-semibold drop-shadow-lg text-balance">
+        <p className="text-gray-100 mt-2 sm:mt-5 tracking-widest sm:tracking-[0.4em] md:tracking-[0.6em] text-xs sm:text-sm md:text-xl lg:text-2xl uppercase font-semibold drop-shadow-lg text-balance">
           Lust for your Automotive
-        </h2>
+        </p>
       </div>
 
       {/* Bottom Description & Scroll Indicator */}
