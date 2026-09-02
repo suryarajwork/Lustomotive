@@ -8,48 +8,35 @@ import AdmitOneTicket from "@/components/ui/admit-one-ticket";
 export default function Offers() {
     const packages = [
         {
-            name: "Complete Detailing Package",
-            badge: "Popular",
-            oldPrice: "15,000",
-            price: "12,500",
-            description: "Complete interior and exterior rejuvenation.",
-            features: [
-                "Full exterior wash and wax",
-                "Interior deep cleaning",
-                "Paint decontamination",
-                "Leather conditioning",
-                // "Engine bay cleaning",
+            name: "PPF PROTECTION SPECIAL",
+            badge: "LIMITED TIME",
+            badgeExtra: "5 Years Warranty",
+            prices: [
+                { name: "CAR PPF", price: "₹59,999/-" },
+                { name: "BIKE PPF", price: "₹9,999/-" },
             ],
+            features: [],
             popular: false,
         },
         {
-            name: "Ceramic Coating Special",
-            badge: "Best Value",
-            oldPrice: "35,000",
-            price: "29,999",
-            description: "Ultimate scratch protection and ceramic finish.",
-            features: [
-                "3-year ceramic coating",
-                "Paint correction (2-step)",
-                "Glass treatment",
-                "Wheel protection",
-                // "Interior protection",
+            name: "CERAMIC COATING SPECIAL",
+            badge: "LIMITED TIME",
+            badgeExtra: "1 Year Warranty",
+            prices: [
+                { name: "CAR CC", price: "₹7,999/-" },
+                { name: "BIKE CC", price: "₹4,499/-" },
             ],
+            features: [],
             popular: true,
         },
         {
-            name: "Maintenance Package",
-            badge: "New",
-            oldPrice: "8,000",
-            price: "6,500",
-            description: "Regular protection to maintain your vehicle.",
-            features: [
-                "Full exterior wash",
-                "Interior vacuum & wipe down",
-                "Tire dressing",
-                "Window cleaning",
-                // "Dashboard polishing",
+            name: "PREMIUM WASH SPECIAL",
+            badge: "LIMITED TIME",
+            prices: [
+                { name: "CAR WASH", price: "₹499/-" },
+                { name: "BIKE WASH", price: "₹399/-" },
             ],
+            features: [],
             popular: false,
         },
     ];
@@ -129,31 +116,46 @@ export default function Offers() {
                                     <div className="absolute inset-0 bg-[#ff1744]/20 blur-[40px] -z-10 rounded-full group-hover:bg-[#ff1744]/40 transition-colors duration-500" />
                                 )} */}
 
-                                    <AdmitOneTicket
-                                        name={pkg.name}
-                                        event={pkg.badge}
-                                        // stubText="ENQUIRE NOW"
-                                        watermark="LUSTOMOTIVE"
-                                        width={ticketWidth}
-                                        tilt={isMobile ? false : { scale: 1.05, maxTilt: 12, glare: 0.2 }}
-                                        disableShader={isMobile}
-                                    >
+                                <AdmitOneTicket
+                                    name={pkg.name}
+                                    event={pkg.badge}
+                                    badgeExtra={pkg.badgeExtra}
+                                    // stubText="ENQUIRE NOW"
+                                    watermark="LUSTOMOTIVE"
+                                    width={ticketWidth}
+                                    tilt={isMobile ? false : { scale: 1.05, maxTilt: 12, glare: 0.2 }}
+                                    disableShader={isMobile}
+                                >
                                     <div className="flex flex-col gap-1.5 md:gap-2" style={{ width: '100%', paddingRight: '20px' }}>
                                         {/* Price Section directly below header */}
-                                        <div className="flex items-baseline gap-2 mb-1 md:mb-5">
-                                            <span className="text-lg sm:text-xl md:text-2xl font-bold text-[#ff1744] drop-shadow-md" style={{ textShadow: "0px 1px 3px rgba(0,0,0,0.8)" }}>₹{pkg.price}</span>
-                                            <span className="text-[10px] sm:text-xs text-gray-300 line-through drop-shadow-sm" style={{ textShadow: "0px 1px 2px rgba(0,0,0,0.8)" }}>₹{pkg.oldPrice}</span>
+                                        <div className="flex flex-col gap-0.5 md:gap-1 mt-4 md:mt-6 mb-1.5 md:mb-4">
+                                            <span className="text-[10px] sm:text-xs md:text-sm font-semibold text-gray-300 tracking-wide drop-shadow-md pl-1.5 md:pl-2" style={{ textShadow: "0px 1px 3px rgba(0,0,0,0.8)" }}>
+                                                Starting at
+                                            </span>
+                                            <div className="flex flex-col gap-1.5 md:gap-2">
+                                                {pkg.prices.map((item, i) => (
+                                                    <div key={i} className="flex items-center justify-between bg-black/40 border border-white/10 rounded-full pl-1 pr-2.5 py-1 md:pl-1.5 md:pr-4 md:py-1.5 hover:border-[#ff1744]/50 hover:bg-[#ff1744]/10 transition-all duration-300 group shadow-[0_4px_12px_rgba(0,0,0,0.5)] cursor-default">
+                                                        <div className="bg-white/10 group-hover:bg-[#ff1744] text-gray-300 group-hover:text-white font-bold text-[7.5px] sm:text-[9px] md:text-[11px] uppercase tracking-wider px-2.5 py-1 md:px-3 md:py-1.5 rounded-full transition-colors drop-shadow-sm truncate mr-1.5 md:mr-2 max-w-[60%]">
+                                                            {item.name}
+                                                        </div>
+                                                        <span className="text-green-400 group-hover:text-green-300 font-bold text-[11px] sm:text-[13px] md:text-[16px] transition-colors drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] whitespace-nowrap">
+                                                            {item.price}
+                                                        </span>
+                                                    </div>
+                                                ))}
+                                            </div>
                                         </div>
 
-                                        <p className="text-gray-300 font-medium text-[11px] sm:text-[12px] md:text-sm mb-2 md:mb-3 line-clamp-1 drop-shadow-md">{pkg.description}</p>
-                                        <ul className="grid grid-cols-2 gap-x-3 gap-y-1.5 md:gap-y-2">
-                                            {pkg.features.map((feature, i) => (
-                                                <li key={i} className="flex items-center text-white overflow-hidden">
-                                                    <CheckCircle2 className="w-3 h-3 md:w-3.5 md:h-3.5 text-[#ff1744] shrink-0 mr-1.5 drop-shadow-sm" />
-                                                    <span className="font-medium text-[9px] sm:text-[10px] md:text-[11.5px] truncate leading-none drop-shadow-md" style={{ textShadow: "0px 1px 3px rgba(0,0,0,0.8)" }}>{feature}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
+                                        {pkg.features && pkg.features.length > 0 && (
+                                            <ul className="flex flex-col gap-y-1.5 md:gap-y-2 mb-2 md:mb-3">
+                                                {pkg.features.map((feature, i) => (
+                                                    <li key={i} className="flex items-center text-white overflow-hidden">
+                                                        <CheckCircle2 className="w-3 h-3 md:w-3.5 md:h-3.5 text-[#ff1744] shrink-0 mr-1.5 drop-shadow-sm" />
+                                                        <span className="font-medium text-[10px] sm:text-[11px] md:text-[13px] truncate leading-none drop-shadow-md" style={{ textShadow: "0px 1px 3px rgba(0,0,0,0.8)" }}>{feature}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        )}
                                     </div>
                                 </AdmitOneTicket>
                             </motion.a>
@@ -181,9 +183,10 @@ export default function Offers() {
                         href="https://wa.me/919475414545?text=Hi%20Lustomotive%20Team!%0A%0AI%E2%80%99d%20like%20to%20book%20an%20appointment%20for%20my%20vehicle.%0A%0APlease%20let%20me%20know%20the%20available%20slots%20and%20the%20details%20you%20need%20from%20me.%0A%0AThank%20you!"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center text-white border border-[#ff1744] bg-[#ff1744]/5 hover:bg-[#ff1744]/20 uppercase font-bold text-sm tracking-[0.2em] py-4 px-10 rounded-full transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,23,68,0.3)] hover:shadow-[0_0_30px_rgba(255,23,68,0.6)] group"
+                        className="inline-flex justify-center items-center w-[90%] sm:w-auto max-w-sm sm:max-w-none text-white border border-[#ff1744] bg-[#ff1744]/5 hover:bg-[#ff1744]/20 uppercase font-bold text-[11px] sm:text-xs md:text-sm tracking-[0.15em] sm:tracking-[0.2em] py-3 sm:py-3.5 md:py-4 px-4 sm:px-8 md:px-10 rounded-full transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,23,68,0.3)] hover:shadow-[0_0_30px_rgba(255,23,68,0.6)] group"
                     >
-                        <Tag className="w-5 h-5 mr-3 group-hover:-rotate-12 transition-transform" /> Unlock Exclusive Deals
+                        <Tag className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 group-hover:-rotate-12 transition-transform shrink-0" />
+                        <span className="whitespace-nowrap">Unlock Exclusive Deals</span>
                     </a>
                 </motion.div>
             </div>

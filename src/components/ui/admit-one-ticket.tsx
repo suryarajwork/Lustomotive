@@ -1861,6 +1861,7 @@ function TicketCard({
   name,
   presenter,
   event,
+  badgeExtra,
   venue,
   dates,
   stubText,
@@ -1992,16 +1993,23 @@ function TicketCard({
               </span>
             )}
             {event && (
-              <span 
-                className="bg-[#ff1744] text-white px-2 py-[2px] rounded-sm uppercase font-bold"
-                style={{
-                  fontSize: layout.labelSize * width * 0.9,
-                  letterSpacing: "0.05em",
-                  boxShadow: "0 2px 8px rgba(255,23,68,0.4)"
-                }}
-              >
-                {event}
-              </span>
+              <div className="flex items-center gap-2">
+                <span 
+                  className="bg-[#ff1744] text-white px-2 py-[2px] rounded-sm uppercase font-bold"
+                  style={{
+                    fontSize: layout.labelSize * width * 0.9,
+                    letterSpacing: "0.05em",
+                    boxShadow: "0 2px 8px rgba(255,23,68,0.4)"
+                  }}
+                >
+                  {event}
+                </span>
+                {badgeExtra && (
+                  <span className="text-gray-200 font-bold uppercase tracking-wider bg-black/40 border border-white/20 px-2 py-[2px] rounded-sm backdrop-blur-sm" style={{ fontSize: layout.labelSize * width * 0.8, letterSpacing: "0.05em", boxShadow: "0 2px 5px rgba(0,0,0,0.5)" }}>
+                    {badgeExtra}
+                  </span>
+                )}
+              </div>
             )}
         </div>
         <div
