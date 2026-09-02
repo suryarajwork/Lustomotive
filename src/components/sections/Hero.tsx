@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const VIDEOS = [
@@ -63,11 +62,6 @@ export default function Hero() {
     startTimer();
   };
 
-  const handleDotClick = (index: number) => {
-    setCurrentIndex(index);
-    startTimer();
-  };
-
   const getVariant = (index: number) => {
     const length = VIDEOS.length;
     let diff = index - currentIndex;
@@ -105,8 +99,6 @@ export default function Hero() {
       {/* Full Screen Slider Container */}
       <div className="absolute inset-0 w-full h-full">
         {VIDEOS.map((video, index) => {
-          const isActive = currentIndex === index;
-
           return (
             <motion.div
               key={video}
@@ -150,7 +142,7 @@ export default function Hero() {
 
         <div className="relative mb-4 sm:mb-6 mt-10 sm:mt-0">
           <h2 className="text-[#ff1744] font-orbitron font-bold tracking-[0.15em] sm:tracking-[0.3em] uppercase text-xs sm:text-sm md:text-lg drop-shadow-lg">
-            West Bengal's #1 Auto Solution
+            West Bengal&apos;s #1 Auto Solution
           </h2>
           <div className="absolute -bottom-1.5 sm:-bottom-2.5 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#d4af37] to-transparent overflow-hidden">
             <div
@@ -161,7 +153,7 @@ export default function Hero() {
         </div>
 
         <h1 className="font-orbitron text-[clamp(1.5rem,8vw,3rem)] min-[600px]:text-5xl sm:text-6xl md:text-8xl lg:text-[10rem] font-black text-white uppercase tracking-wider sm:tracking-widest drop-shadow-[0_0_30px_rgba(255,23,68,0.7)] leading-tight sm:leading-none max-w-full w-full">
-          <span className="sr-only">Lustomotive - West Bengal's #1 Auto Solution</span>
+          <span className="sr-only">Lustomotive - West Bengal&apos;s #1 Auto Solution</span>
           <span aria-hidden="true">Lustomotive</span>
         </h1>
         <p className="text-gray-100 mt-2 sm:mt-5 tracking-widest sm:tracking-[0.4em] md:tracking-[0.6em] text-xs sm:text-sm md:text-xl lg:text-2xl uppercase font-semibold drop-shadow-lg text-balance">
