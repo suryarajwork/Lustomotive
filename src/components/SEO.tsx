@@ -168,13 +168,13 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/images/lustomotive_small_logo.png",
+        url: "/images/lustomotive_small_logo3.png?v=2",
       },
     ],
 
     apple: [
       {
-        url: "/images/lustomotive_small_logo.png",
+        url: "/images/lustomotive_small_logo3.png?v=2",
       },
     ],
   },

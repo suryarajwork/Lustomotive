@@ -2,6 +2,7 @@
 
 
 import Link from "next/link";
+import Image from "next/image";
 import { Facebook, Instagram, MapPin, Mail, Phone, ChevronRight, Clock, Globe } from "lucide-react";
 
 export default function Footer() {
@@ -20,10 +21,15 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-12 text-center lg:text-left">
                     {/* Brand Info */}
                     <div className="lg:col-span-1 flex flex-col items-center lg:items-start">
-                        <Link href="/" className="text-2xl font-orbitron font-bold tracking-widest text-white mb-2 block drop-shadow-[0_0_15px_rgba(255,23,68,0.5)]">
-                            Lusto<span className="text-[#ff1744]">Motive</span>
+                        <Link href="/" className="mb-4 block drop-shadow-[0_0_15px_rgba(255,23,68,0.5)]">
+                            <Image
+                                src="/images/lustomotive_small_logo.png"
+                                alt="Lustomotive"
+                                width={320}
+                                height={80}
+                                className="h-12 md:h-14 lg:h-16 w-auto object-contain"
+                            />
                         </Link>
-                        <div className="w-10 h-0.5 bg-gradient-to-r from-red-500 to-transparent mb-5 mx-auto lg:mx-0"></div>
                         <p className="text-gray-400 font-light text-[0.85rem] leading-relaxed mb-6 max-w-sm lg:max-w-none">
                             Complete automotive solutions under one roof. From detailing and maintenance to mechanical services and customization, we keep your vehicle looking great and performing at its best.
                         </p>

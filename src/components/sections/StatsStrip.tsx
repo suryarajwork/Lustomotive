@@ -50,10 +50,10 @@ export default function StatsStrip() {
                 viewport={{ once: false, margin: "-50px" }}
                 transition={{ duration: 0.8 }}
             >
-                <AnimatedStat value={799} suffix="+" label="Vehicles Detailed" />
+                <AnimatedStat value={1279} suffix="+" label="Vehicles Handled" />
                 <AnimatedStat value={3} suffix="+" label="Years Of Excellence" />
                 <AnimatedStat value={96} suffix="%" label="Customer Satisfaction" />
-                <AnimatedStat value={60} suffix="+" label="Cashless Claims" />
+                <AnimatedStat value={137} suffix="+" label="Cashless Claims" />
             </motion.div>
         </div>
     );
