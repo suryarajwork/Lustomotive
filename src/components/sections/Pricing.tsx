@@ -44,10 +44,8 @@ export default function Offers() {
 
     const [ticketWidth, setTicketWidth] = useState(400);
     const [isMobile, setIsMobile] = useState(false);
-    const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
-        setIsClient(true);
         const handleResize = () => {
             let screenW = window.innerWidth;
             setIsMobile(screenW < 768);
@@ -92,7 +90,6 @@ export default function Offers() {
             <div className="w-full">
                 <div className="flex flex-col md:flex-row flex-wrap gap-8 md:gap-12 pb-12 pt-4 px-4 sm:px-6 lg:px-8 items-center justify-center mx-auto max-w-[1920px]">
                     {packages.map((pkg, idx) => {
-                        const scale = ticketWidth / 741;
 
                         return (
                             <motion.a

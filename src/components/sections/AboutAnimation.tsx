@@ -6,7 +6,6 @@ import { BlurText } from "@/components/ui/blur-text";
 import NextImage from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Shield, Zap, Settings, Crosshair } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -185,9 +184,9 @@ const HyperReactor = memo(function HyperReactor({ opacity, scale }: { opacity: a
                 />
 
                 {/* Project Logo */}
-                <div className="relative z-10 w-[75%] h-[75%]">
+                <div className="relative z-10 w-[90%] h-[90%]">
                     <NextImage
-                        src="/images/lustomotive_small_logo.png"
+                        src="/images/apple-touch-icon.png"
                         alt="Lustomotive Logo"
                         fill
                         sizes="100px"

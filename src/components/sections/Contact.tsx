@@ -2,7 +2,7 @@
 
 import { useState, MouseEvent } from "react";
 import { motion } from "framer-motion";
-import { Phone, Mail, Clock, ShieldCheck, MapPin } from "lucide-react";
+import { Phone, Mail, Clock, MapPin } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
 
 export default function Contact() {
