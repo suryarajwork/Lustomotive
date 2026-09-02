@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Gauge, Car, Droplets, Shield, SprayCan, Wrench, X } from "lucide-react";
 import Image from "next/image";
+import SectionHeader from "@/components/ui/SectionHeader";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 
 export default function Services() {
@@ -86,20 +87,12 @@ export default function Services() {
                 }
             `}</style>
             <div className="max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12">
-                <motion.div
-                    className="text-center mb-16"
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, margin: "-50px" }}
-                    transition={{ duration: 0.8 }}
-                >
-                    <h2 className="text-3xl md:text-5xl font-orbitron font-bold tracking-widest text-white mb-4 drop-shadow-[0_0_15px_rgba(255,23,68,0.5)]">
-                        Our <span className="text-[#ff1744]">Services</span>
-                    </h2>
-                    <p className="text-gray-400 max-w-2xl mx-auto uppercase tracking-widest text-sm">
-                        Premium automotive detailing solutions for your vehicle
-                    </p>
-                </motion.div>
+                <SectionHeader
+                    tag="What We Do"
+                    titlePart1="Our"
+                    titlePart2="Services"
+                    description="Premium automotive solutions for your vehicle"
+                />
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 lg:gap-16">
                     {services.map((service, idx) => (

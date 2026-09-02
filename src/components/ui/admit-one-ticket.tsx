@@ -1692,11 +1692,11 @@ var TICKET_GEOMETRY = {
 };
 var TICKET_LAYOUT = {
   padding: 57 / REF,
-  labelTop: 15 / REF,
+  labelTop: 45 / REF,
   labelSize: 19.72 / REF,
   labelLead: 28 / REF,
   labelTracking: 0.016,
-  nameTop: 90 / REF,
+  nameTop: 110 / REF,
   nameSize: 36 / REF,
   nameLead: 40 / REF,
   nameTracking: -0.01,
@@ -1993,9 +1993,9 @@ function TicketCard({
               </span>
             )}
             {event && (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1 md:gap-2">
                 <span 
-                  className="bg-[#ff1744] text-white px-2 py-[2px] rounded-sm uppercase font-bold"
+                  className="bg-[#ff1744] text-white px-1.5 md:px-2 py-[1px] md:py-[2px] rounded-sm uppercase font-bold"
                   style={{
                     fontSize: layout.labelSize * width * 0.9,
                     letterSpacing: "0.05em",
@@ -2005,7 +2005,7 @@ function TicketCard({
                   {event}
                 </span>
                 {badgeExtra && (
-                  <span className="text-gray-200 font-bold uppercase tracking-wider bg-black/40 border border-white/20 px-2 py-[2px] rounded-sm backdrop-blur-sm" style={{ fontSize: layout.labelSize * width * 0.8, letterSpacing: "0.05em", boxShadow: "0 2px 5px rgba(0,0,0,0.5)" }}>
+                  <span className="text-gray-200 font-bold uppercase tracking-wider bg-black/40 border border-white/20 px-1.5 md:px-2 py-[1px] md:py-[2px] rounded-sm backdrop-blur-sm" style={{ fontSize: layout.labelSize * width * 0.8, letterSpacing: "0.05em", boxShadow: "0 2px 5px rgba(0,0,0,0.5)" }}>
                     {badgeExtra}
                   </span>
                 )}

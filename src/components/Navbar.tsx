@@ -136,7 +136,7 @@ export default function Navbar() {
                                 <div className="flex items-center gap-4">
                                     {/* Instagram Brand Logo */}
                                     <a href="https://www.instagram.com/lustomotive" target="_blank" rel="noopener noreferrer"
-                                        className="text-white hover:text-[#E1306C] transition-colors relative group"
+                                        className="text-[#E1306C] hover:drop-shadow-[0_0_8px_rgba(225,48,108,0.8)] transition-all relative group"
                                         title="Instagram">
                                         <div className="absolute inset-0 bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] opacity-0 group-hover:opacity-20 blur-md transition-opacity rounded-full"></div>
                                         <FaInstagram className="w-5 h-5 relative z-10" />
@@ -146,7 +146,7 @@ export default function Navbar() {
                                     <a href="https://wa.me/919475414545?text=Hi%20Lustomotive%20Team!%0A%0AI%E2%80%99d%20like%20to%20book%20an%20appointment%20for%20my%20vehicle.%0A%0APlease%20let%20me%20know%20the%20available%20slots%20and%20the%20details%20you%20need%20from%20me.%0A%0AThank%20you!"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="text-white hover:text-[#25D366] transition-colors relative group"
+                                        className="text-[#25D366] hover:drop-shadow-[0_0_8px_rgba(37,211,102,0.8)] transition-all relative group"
                                         title="WhatsApp">
                                         <div className="absolute inset-0 bg-[#25D366] opacity-0 group-hover:opacity-20 blur-md transition-opacity rounded-full"></div>
                                         <FaWhatsapp className="w-5 h-5 relative z-10" />
@@ -154,10 +154,10 @@ export default function Navbar() {
 
                                     {/* Google Maps Style Pin Logo */}
                                     <a href="https://maps.app.goo.gl/QEgLTb45cyx8QbW58" target="_blank" rel="noopener noreferrer"
-                                        className="text-white hover:text-red-600 transition-colors relative group"
+                                        className="text-[#EA4335] hover:drop-shadow-[0_0_8px_rgba(234,67,53,0.8)] transition-all relative group"
                                         title="Location">
-                                        <div className="absolute inset-0 bg-red-600 opacity-0 group-hover:opacity-20 blur-md transition-opacity rounded-full"></div>
-                                        <FaLocationDot className="w-[1.15rem] h-[1.15rem] relative z-10 text-red-600 group-hover:drop-shadow-[0_0_8px_rgba(255,23,68,0.8)]" />
+                                        <div className="absolute inset-0 bg-[#EA4335] opacity-0 group-hover:opacity-20 blur-md transition-opacity rounded-full"></div>
+                                        <FaLocationDot className="w-[1.15rem] h-[1.15rem] relative z-10" />
                                     </a>
                                 </div>
                             </div>
@@ -277,18 +277,18 @@ export default function Navbar() {
                             transition={{ duration: 0.4, delay: 0.4 }}
                         >
                             <div className="flex items-center gap-6 sm:gap-10">
-                                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#ff1744] hover:drop-shadow-[0_0_10px_rgba(255,23,68,0.8)] transition-all hover:-translate-y-2">
+                                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-[#E1306C] hover:drop-shadow-[0_0_10px_rgba(225,48,108,0.8)] transition-all hover:-translate-y-2">
                                     <FaInstagram className="w-6 h-6 sm:w-8 sm:h-8" />
                                 </a>
-                                <a href="https://wa.me/919475414545?text=Hi%20Lustomotive%20Team!%0A%0AI%E2%80%99d%20like%20to%20book%20an%20appointment%20for%20my%20vehicle.%0A%0APlease%20let%20me%20know%20the%20available%20slots%20and%20the%20details%20you%20need%20from%20me.%0A%0AThank%20you!" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#ff1744] hover:drop-shadow-[0_0_10px_rgba(255,23,68,0.8)] transition-all hover:-translate-y-2">
+                                <a href="https://wa.me/919475414545?text=Hi%20Lustomotive%20Team!%0A%0AI%E2%80%99d%20like%20to%20book%20an%20appointment%20for%20my%20vehicle.%0A%0APlease%20let%20me%20know%20the%20available%20slots%20and%20the%20details%20you%20need%20from%20me.%0A%0AThank%20you!" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:drop-shadow-[0_0_10px_rgba(37,211,102,0.8)] transition-all hover:-translate-y-2">
                                     <FaWhatsapp className="w-6 h-6 sm:w-8 sm:h-8" />
                                 </a>
-                                <a href="https://maps.app.goo.gl/QEgLTb45cyx8QbW58" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#ff1744] hover:drop-shadow-[0_0_10px_rgba(255,23,68,0.8)] transition-all hover:-translate-y-2">
+                                <a href="https://maps.app.goo.gl/QEgLTb45cyx8QbW58" target="_blank" rel="noopener noreferrer" className="text-[#EA4335] hover:drop-shadow-[0_0_10px_rgba(234,67,53,0.8)] transition-all hover:-translate-y-2">
                                     <FaLocationDot className="w-[1.4rem] h-[1.4rem] sm:w-[1.8rem] sm:h-[1.8rem]" />
                                 </a>
                             </div>
                             <div className="flex flex-col items-center gap-2">
-                                <div className="w-12 h-[1px] bg-red-600/50"></div>
+                                <div className="w-16 h-[2px] rounded-full mx-auto bg-gradient-to-r from-transparent via-red-600 to-transparent"></div>
                                 <div className="text-gray-600 font-orbitron text-[0.65rem] sm:text-xs tracking-[0.3em] uppercase">Lustomotive © {new Date().getFullYear()}</div>
                             </div>
                         </motion.div>
