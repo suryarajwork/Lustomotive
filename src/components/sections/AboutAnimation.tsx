@@ -29,7 +29,7 @@ const CinematicText = memo(function CinematicText({
 }) {
     const [inView, setInView] = useState(false);
     const [isExpanded, setIsExpanded] = useState(false);
-    
+
     // Calculate short text
     const maxLength = 180;
     const isLongText = text.length > maxLength;
@@ -71,10 +71,10 @@ const CinematicText = memo(function CinematicText({
                     direction="bottom"
                     play={inView}
                 />
-                
+
                 {isLongText && (
                     <div className="mt-4 text-center">
-                        <a 
+                        <a
                             onClick={(e) => { e.preventDefault(); setIsExpanded(!isExpanded); }}
                             className="text-[#ff1744] hover:text-white transition-colors duration-300 font-orbitron text-[0.7rem] uppercase tracking-widest font-bold cursor-pointer inline-flex items-center gap-1"
                         >

@@ -20,7 +20,7 @@ const galleryItems = [
     },
     {
         id: 3,
-        src: "/images/footerX.jpg",
+        src: "/images/footerX.png",
         title: "The Finish",
         subtitle: "Experience the ultimate perfection in automotive detailing.",
         isBrand: true,
@@ -83,12 +83,12 @@ export default function ImageBanner() {
                                     setHoveredIndex(index);
                                 }}
                             >
-                                {/* Background Image */}
                                 <Image
                                     src={item.src}
                                     alt={item.title}
                                     fill
-                                    sizes="(max-width: 768px) 100vw, 33vw"
+                                    quality={100}
+                                    sizes="(max-width: 768px) 100vw, 100vw"
                                     priority
                                     className={`object-cover transition-transform duration-1000 ${isActive ? 'scale-105' : 'scale-100'}`}
                                 />
