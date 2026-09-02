@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2, Tag } from "lucide-react";
 import AdmitOneTicket from "@/components/ui/admit-one-ticket";
+import SectionHeader from "@/components/ui/SectionHeader";
 
 export default function Offers() {
     const packages = [
@@ -12,8 +13,8 @@ export default function Offers() {
             badge: "LIMITED TIME",
             badgeExtra: "5 Years Warranty",
             prices: [
-                { name: "CAR PPF", price: "₹59,999/-" },
-                { name: "BIKE PPF", price: "₹9,999/-" },
+                { name: "CAR Paint Protection Film", price: "₹59,999/-" },
+                { name: "BIKE Paint Protection Film", price: "₹9,999/-" },
             ],
             features: [],
             popular: false,
@@ -23,8 +24,8 @@ export default function Offers() {
             badge: "LIMITED TIME",
             badgeExtra: "1 Year Warranty",
             prices: [
-                { name: "CAR CC", price: "₹7,999/-" },
-                { name: "BIKE CC", price: "₹4,499/-" },
+                { name: "CAR Ceramic Coating", price: "₹7,999/-" },
+                { name: "BIKE Ceramic Coating", price: "₹4,499/-" },
             ],
             features: [],
             popular: true,
@@ -78,19 +79,13 @@ export default function Offers() {
 
     return (
         <section id="offers" className="py-12 md:py-16 bg-[#050505] relative z-20 border-y border-neutral-900 overflow-hidden">
-            <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8">
-                <motion.div
-                    className="text-center mb-12 md:mb-16"
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, margin: "-50px" }}
-                    transition={{ duration: 0.8 }}
-                >
-                    <h2 className="text-3xl md:text-5xl font-orbitron font-bold tracking-widest text-white mb-4 drop-shadow-[0_0_15px_rgba(255,23,68,0.5)]">
-                        Special <span className="text-[#ff1744]">Offers</span>
-                    </h2>
-                    <p className="text-gray-400 font-light text-sm">Exclusive deals and packages for your vehicle care needs</p>
-                </motion.div>
+            <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 mt-12 md:mt-16">
+                <SectionHeader
+                    tag="Pricing"
+                    titlePart1="Special"
+                    titlePart2="Offers"
+                    description="Exclusive deals and packages for your vehicle care needs"
+                />
             </div>
 
             {/* Responsive cards container */}
@@ -128,13 +123,13 @@ export default function Offers() {
                                 >
                                     <div className="flex flex-col gap-1.5 md:gap-2" style={{ width: '100%', paddingRight: '20px' }}>
                                         {/* Price Section directly below header */}
-                                        <div className="flex flex-col gap-0.5 md:gap-1 mt-4 md:mt-6 mb-1.5 md:mb-4">
+                                        <div className="flex flex-col gap-0.5 md:gap-1 mt-2 md:mt-6 mb-1.5 md:mb-4">
                                             <span className="text-[10px] sm:text-xs md:text-sm font-semibold text-gray-300 tracking-wide drop-shadow-md pl-1.5 md:pl-2" style={{ textShadow: "0px 1px 3px rgba(0,0,0,0.8)" }}>
                                                 Starting at
                                             </span>
                                             <div className="flex flex-col gap-1.5 md:gap-2">
                                                 {pkg.prices.map((item, i) => (
-                                                    <div key={i} className="flex items-center justify-between bg-black/40 border border-white/10 rounded-full pl-1 pr-2.5 py-1 md:pl-1.5 md:pr-4 md:py-1.5 hover:border-[#ff1744]/50 hover:bg-[#ff1744]/10 transition-all duration-300 group shadow-[0_4px_12px_rgba(0,0,0,0.5)] cursor-default">
+                                                    <div key={i} className="flex items-center justify-between bg-black/40 border border-white/10 rounded-full pl-1 pr-2.5 py-1 md:pl-1.5 md:pr-4 md:py-1.5 hover:border-[#ff1744]/50 hover:bg-[#ff1744]/10 transition-all duration-300 group shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
                                                         <div className="bg-white/10 group-hover:bg-[#ff1744] text-gray-300 group-hover:text-white font-bold text-[7.5px] sm:text-[9px] md:text-[11px] uppercase tracking-wider px-2.5 py-1 md:px-3 md:py-1.5 rounded-full transition-colors drop-shadow-sm truncate mr-1.5 md:mr-2 max-w-[60%]">
                                                             {item.name}
                                                         </div>

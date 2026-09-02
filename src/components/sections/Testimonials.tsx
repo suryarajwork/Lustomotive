@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Star } from "lucide-react";
+import { Star, Quote } from "lucide-react";
+import SectionHeader from "@/components/ui/SectionHeader";
 
 export default function Testimonials() {
     const reviews = [
@@ -73,19 +74,12 @@ export default function Testimonials() {
                 }}
             ></div>
             <div className="w-full mx-auto relative z-10">
-                <motion.div
-                    className="text-center mb-16 relative px-4 sm:px-6 lg:px-8"
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, margin: "-50px" }}
-                    transition={{ duration: 0.8 }}
-                >
-                    <p className="text-red-600 text-[0.72rem] tracking-[0.4em] uppercase font-bold mb-3">Real Stories</p>
-                    <h2 className="text-3xl md:text-5xl font-orbitron font-bold tracking-widest text-white mb-4 drop-shadow-[0_0_15px_rgba(255,23,68,0.5)]">
-                        What Our <span className="text-[#ff1744]">Clients Say</span>
-                    </h2>
-                    <p className="text-gray-400 font-light text-sm text-center">Hear from our satisfied customers about their experience</p>
-                </motion.div>
+                <SectionHeader
+                    tag="Real Stories"
+                    titlePart1="What Our"
+                    titlePart2="Clients Say"
+                    description="Hear from our satisfied customers about their experience"
+                />
 
                 <div className="flex overflow-hidden pt-12 pb-16 relative w-full">
                     <style>{`

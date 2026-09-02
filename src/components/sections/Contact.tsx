@@ -2,7 +2,8 @@
 
 import { useState, MouseEvent } from "react";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Phone, Clock } from "lucide-react";
+import { Phone, Mail, Clock, ShieldCheck, MapPin } from "lucide-react";
+import SectionHeader from "@/components/ui/SectionHeader";
 
 export default function Contact() {
     const [isWaHovered, setIsWaHovered] = useState(false);
@@ -30,20 +31,12 @@ export default function Contact() {
                 }}
             ></div>
             <div className="max-w-[1920px] mx-auto px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 relative z-10">
-                <motion.div
-                    className="text-center mb-16"
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, margin: "-50px" }}
-                    transition={{ duration: 0.8 }}
-                >
-                    <p className="text-red-600 text-[0.72rem] tracking-[0.4em] uppercase font-bold mb-3">Find Us</p>
-                    <h2 className="text-4xl md:text-5xl font-orbitron font-bold tracking-widest text-white mb-4 drop-shadow-[0_0_15px_rgba(255,23,68,0.5)]">
-                        Contact <span className="text-[#ff1744]">&amp; Location</span>
-                    </h2>
-                    <div className="w-[60px] h-[2px] bg-gradient-to-r from-transparent via-red-600 to-transparent mx-auto mt-3 mb-4"></div>
-                    <p className="text-gray-400 font-light text-sm text-center">Get in touch with Lustomotive and discover complete automotive solutions, all under one roof.</p>
-                </motion.div>
+                <SectionHeader
+                    tag="Find Us"
+                    titlePart1="Contact"
+                    titlePart2="& Location"
+                    description="Get in touch with Lustomotive and discover complete automotive solutions, all under one roof."
+                />
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
                     {/* Contact Details */}
@@ -197,7 +190,7 @@ export default function Contact() {
 
                         <div className="rounded-[2rem] overflow-hidden w-full h-full relative z-0 relative isolate border border-white/5">
                             <iframe
-                                className="w-full h-full border-0 filter grayscale-[20%] contrast-[1.05] opacity-90 group-hover:opacity-100 transition-all duration-700"
+                                className="w-full h-full border-0 transition-all duration-700 filter grayscale-[40%] brightness-75 contrast-125 opacity-80 group-hover:opacity-100 group-hover:grayscale-0 group-hover:brightness-100"
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3660.5169063973126!2d87.46448067592092!3d23.441812100552156!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f77fc54fe62d4d%3A0x7fac5b12dbdacecd!2sLustomotive%20By%20AmarBharatCompany!5e0!3m2!1sen!2sin!4v1755325054463!5m2!1sen!2sin"
                                 allowFullScreen={true}
                                 loading="lazy"

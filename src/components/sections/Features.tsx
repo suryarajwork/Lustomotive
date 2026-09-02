@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Award, Target, Users, ShieldCheck, Brush, Lightbulb, Heart, Leaf } from "lucide-react";
 import Image from "next/image";
+import SectionHeader from "@/components/ui/SectionHeader";
 
 export default function Features() {
     const features = [
@@ -37,23 +38,15 @@ export default function Features() {
                 <div className="flex flex-col lg:flex-row lg:items-start gap-12 lg:gap-16 xl:gap-24">
 
                     {/* Left Side: Sticky Header */}
-                    <motion.div
-                        className="w-full lg:w-1/2 xl:w-[45%] text-center lg:text-left lg:sticky lg:top-32 shrink-0"
-                        initial={{ opacity: 0, y: 50 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: false, margin: "-50px" }}
-                        transition={{ duration: 0.8 }}
-                    >
-                        <p className="text-red-600 text-xs font-semibold tracking-[0.4em] uppercase mb-3">The Lustomotive Edge</p>
-                        <h2 className="text-[2.5rem] sm:text-5xl md:text-6xl lg:text-5xl xl:text-[4rem] font-orbitron font-bold tracking-widest text-white leading-none drop-shadow-[0_0_15px_rgba(255,23,68,0.5)] mb-2 flex flex-col gap-2">
-                            <span className="whitespace-nowrap">Why Choose</span>
-                            <span className="text-[#ff1744]">Us?</span>
-                        </h2>
-                        <div className="mx-auto lg:mx-0 mt-5 mb-5 w-16 h-[2px] bg-gradient-to-r from-transparent via-red-600 to-transparent lg:bg-gradient-to-r lg:from-red-600 lg:to-transparent rounded-full"></div>
-                        <p className="text-gray-500 text-sm md:text-base max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                            Complete automotive care, built around your vehicle.
-                        </p>
-                    </motion.div>
+                    <div className="w-full lg:w-1/2 xl:w-[45%] lg:sticky lg:top-32 shrink-0 flex flex-col justify-center">
+                        <SectionHeader
+                            tag="The Lustomotive Edge"
+                            titlePart1="Why Choose"
+                            titlePart2="Us?"
+                            description="Complete automotive care, built around your vehicle."
+                            align="left"
+                        />
+                    </div>
 
                     {/* Right Side: Features List */}
                     <div className="w-full lg:w-1/2 xl:w-[55%] flex flex-col">
@@ -115,22 +108,12 @@ export default function Features() {
                     }}
                 ></div>
 
-                <motion.div
-                    className="text-center mb-12 md:mb-16 px-4 relative z-10"
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, margin: "-50px" }}
-                    transition={{ duration: 0.8 }}
-                >
-                    <p className="text-red-600 text-xs font-semibold tracking-[0.4em] uppercase mb-3">Premium Alliances</p>
-                    <h2 className="text-3xl md:text-5xl font-orbitron font-bold tracking-widest text-white leading-tight drop-shadow-[0_0_15px_rgba(255,23,68,0.5)] mb-2">
-                        Our Valued <span className="text-[#ff1744]">Partners</span>
-                    </h2>
-                    <div className="mx-auto mt-5 mb-5 w-16 h-[2px] bg-gradient-to-r from-transparent via-red-600 to-transparent rounded-full"></div>
-                    <p className="text-gray-500 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-                        We collaborate with industry-leading brands to bring you the finest automotive care products and services available.
-                    </p>
-                </motion.div>
+                <SectionHeader
+                    tag="Premium Alliances"
+                    titlePart1="Our Valued"
+                    titlePart2="Partners"
+                    description="We collaborate with industry-leading brands to bring you the finest automotive care products and services available."
+                />
 
                 <div className="relative w-full overflow-hidden group bg-transparent py-8 md:py-12 z-10">
                     <style>{`
@@ -199,22 +182,12 @@ export default function Features() {
 
             {/* Our Vision */}
             <div id="vision" className="scroll-mt-28 w-full max-w-[1920px] mx-auto px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 pt-12 md:pt-16">
-                <motion.div
-                    className="text-center mb-16"
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, margin: "-50px" }}
-                    transition={{ duration: 0.8 }}
-                >
-                    <p className="text-red-600 text-xs font-semibold tracking-[0.4em] uppercase mb-3">Our Vision</p>
-                    <h2 className="text-4xl md:text-6xl font-orbitron font-bold tracking-widest text-white leading-tight drop-shadow-[0_0_15px_rgba(255,23,68,0.5)] mb-2">
-                        What Do We <span className="text-[#ff1744]">Strive For?</span>
-                    </h2>
-                    <div className="mx-auto mt-5 mb-5 w-16 h-[2px] bg-gradient-to-r from-transparent via-red-600 to-transparent rounded-full"></div>
-                    <p className="text-gray-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
-                        Our commitment to excellence and customer satisfaction
-                    </p>
-                </motion.div>
+                    <SectionHeader
+                        tag="Our Vision"
+                        titlePart1="What Do We"
+                        titlePart2="Strive For?"
+                        description="Our commitment to excellence and customer satisfaction"
+                    />
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-12 mt-8">
                     {[

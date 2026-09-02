@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import SectionHeader from "@/components/ui/SectionHeader";
 
 const galleryItems = [
     {
@@ -55,26 +56,12 @@ export default function ImageBanner() {
             onClick={() => setHoveredIndex(2)}
         >
             <div className="max-w-[1600px] mx-auto px-4 md:px-8">
-                <div className="text-center mb-10 md:mb-16">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                        viewport={{ once: true }}
-                        className="font-orbitron text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-wider uppercase"
-                    >
-                        Our <span className="text-[#ff1744]">Masterpieces</span>
-                    </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        viewport={{ once: true }}
-                        className="text-zinc-400 max-w-2xl mx-auto text-lg"
-                    >
-                        Interact with our curated gallery of automotive excellence.
-                    </motion.p>
-                </div>
+                <SectionHeader
+                    tag="Gallery"
+                    titlePart1="Our"
+                    titlePart2="Masterpieces"
+                    description="Interact with our curated gallery of automotive excellence."
+                />
 
                 <div
                     className="flex flex-col md:flex-row gap-2 md:gap-4 h-[75vh] md:h-[65vh] w-full"
