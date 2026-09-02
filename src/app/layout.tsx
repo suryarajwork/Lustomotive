@@ -8,6 +8,7 @@ import ScrollRestoration from "@/components/ScrollRestoration";
 import Preloader from "@/components/Preloader";
 
 import { StructuredData, metadata as seoMetadata } from "@/components/SEO";
+import TabTitleChanger from "@/components/ui/TabTitleChanger";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -32,6 +33,7 @@ export default function RootLayout({
       <body suppressHydrationWarning className={`${roboto.variable} ${orbitron.variable} antialiased bg-black text-white min-h-screen flex flex-col font-sans overflow-x-hidden hide-scrollbar`}>
         <StructuredData />
         <Preloader />
+        <TabTitleChanger />
         <Navbar />
         <main className="flex-1">
           {children}

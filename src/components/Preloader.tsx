@@ -55,15 +55,8 @@ export default function Preloader() {
             {/* Loading Text */}
             <div className="mt-14 flex flex-col items-center">
               <div className="text-white font-orbitron font-bold tracking-[0.3em] sm:tracking-[0.5em] text-xs sm:text-sm uppercase flex items-center">
-                <span className="text-[#ff1744] drop-shadow-[0_0_8px_rgba(255,23,68,0.8)] text-sm sm:text-base mr-1">L</span>
-                <span className="text-gray-300">USTOMOTIVE</span>
-
-                {/* Pulsing dots */}
-                <span className="flex gap-1 ml-2 text-[#ff1744]">
-                  <span className="animate-pulse" style={{ animationDelay: '0ms' }}>.</span>
-                  <span className="animate-pulse" style={{ animationDelay: '200ms' }}>.</span>
-                  <span className="animate-pulse" style={{ animationDelay: '400ms' }}>.</span>
-                </span>
+                <span className="text-[#ff1744] drop-shadow-[0_0_8px_rgba(255,23,68,0.8)] text-sm sm:text-base mr-1">LUST </span>
+                <span className="text-gray-300">For Your Automotive</span>
               </div>
 
               {/* Progress line */}
